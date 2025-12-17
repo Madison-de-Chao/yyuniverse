@@ -1,12 +1,12 @@
 
 import React from 'react';
-import { Theme, PageId } from '../types';
+import { useNavigate } from 'react-router-dom';
+import { Theme } from '../types';
 import { Star, Activity, Map, Flame, Zap, Filter, Power } from 'lucide-react';
 import { CityAbstract } from '../components/Visuals';
 
 interface SanctuaryProps {
   theme: Theme;
-  onNavigate?: (page: PageId) => void;
 }
 
 // --- ACTION TRIAD (Awaken, Filter, Empower) ---
@@ -31,8 +31,9 @@ const ACTION_TRIAD = [
   }
 ];
 
-export const Sanctuary: React.FC<SanctuaryProps> = ({ theme, onNavigate }) => {
+export const Sanctuary: React.FC<SanctuaryProps> = ({ theme }) => {
   const isDark = theme === 'dark';
+  const navigate = useNavigate();
   const textColor = isDark ? 'text-slate-200' : 'text-ink';
   const cardBg = isDark ? 'bg-slate-900/50 border-slate-800' : 'bg-white border-gray-200 shadow-sm';
   const mutedText = isDark ? 'text-slate-400' : 'text-gray-600';
@@ -140,7 +141,7 @@ export const Sanctuary: React.FC<SanctuaryProps> = ({ theme, onNavigate }) => {
             提醒你每一個選擇是在畫人生的圓。
           </p>
           <button 
-            onClick={() => onNavigate && onNavigate('script')}
+            onClick={() => navigate('/script')}
             className={`w-full py-2 rounded-lg border transition-colors font-mono text-sm relative z-10 ${
             isDark ? 'border-blue-500/50 text-blue-400 hover:bg-blue-500/10' : 'border-blue-300 text-blue-800 hover:bg-blue-50'
           }`}>
@@ -159,7 +160,7 @@ export const Sanctuary: React.FC<SanctuaryProps> = ({ theme, onNavigate }) => {
             把 AI 納入協作流程，讓它成為夥伴。
           </p>
           <button 
-            onClick={() => onNavigate && onNavigate('system')}
+            onClick={() => navigate('/system')}
             className={`w-full py-2 rounded-lg border transition-colors font-mono text-sm ${
             isDark ? 'border-gold/50 text-gold hover:bg-gold/10' : 'border-muted-gold text-muted-gold hover:bg-amber-50'
           }`}>

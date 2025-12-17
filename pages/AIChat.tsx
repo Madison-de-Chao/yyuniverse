@@ -68,7 +68,7 @@ export const AIChat: React.FC<AIChatProps> = ({ theme }) => {
         <span className={`text-xs font-mono ml-auto border px-2 py-1 rounded ${
           isDark ? 'text-slate-500 border-slate-800' : 'text-gray-400 border-gray-200'
         }`}>
-          Protocol: TRUTH > CARE
+          Protocol: TRUTH &gt; CARE
         </span>
       </div>
 

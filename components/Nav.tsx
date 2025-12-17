@@ -1,19 +1,20 @@
 
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Compass, Brain, MessageSquare, Home, Map as MapIcon, Star, BookOpen, X, User, Layers, FileText, Ghost } from 'lucide-react';
 import { PageId } from '../types';
 
 interface NavProps {
-  activePage: PageId;
-  onNavigate: (page: PageId) => void;
   theme: 'light' | 'dark';
 }
 
-export const Nav: React.FC<NavProps> = ({ activePage, onNavigate, theme }) => {
+export const Nav: React.FC<NavProps> = ({ theme }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const openButtonRef = useRef<HTMLButtonElement>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     if (isOpen) {
@@ -32,21 +33,23 @@ export const Nav: React.FC<NavProps> = ({ activePage, onNavigate, theme }) => {
   }, [isOpen]);
 
   const menuItems = [
-    { id: 'home', icon: Home, label: '首頁大廳', desc: 'Entrance' },
-    { id: 'about', icon: User, label: '關於默默超', desc: 'Who is MOMO?' },
-    { id: 'system', icon: Layers, label: '系統詳解', desc: 'System Blueprint' },
-    { id: 'system-05', icon: Ghost, label: '0.5章：伊', desc: 'The Another' },
-    { id: 'whitepaper', icon: FileText, label: '完整白皮書', desc: 'Full Documentation v2.2' },
-    { id: 'guide', icon: BookOpen, label: '跟著默默超一起想', desc: 'Linear Guide' },
-    { id: 'logic', icon: Brain, label: '八階思維系統', desc: 'Cognitive Tool' },
-    { id: 'sanctuary', icon: Star, label: '虹靈御所', desc: 'Sanctuary' },
-    { id: 'chat', icon: MessageSquare, label: '誠實 AI', desc: 'Integrity Companion' },
+    { id: 'home', path: '/', icon: Home, label: '首頁大廳', desc: 'Entrance' },
+    { id: 'about', path: '/about', icon: User, label: '關於默默超', desc: 'Who is MOMO?' },
+    { id: 'system', path: '/system', icon: Layers, label: '系統詳解', desc: 'System Blueprint' },
+    { id: 'system-05', path: '/system-05', icon: Ghost, label: '0.5章：伊', desc: 'The Another' },
+    { id: 'whitepaper', path: '/whitepaper', icon: FileText, label: '完整白皮書', desc: 'Full Documentation v2.2' },
+    { id: 'guide', path: '/guide', icon: BookOpen, label: '跟著默默超一起想', desc: 'Linear Guide' },
+    { id: 'logic', path: '/logic', icon: Brain, label: '八階思維系統', desc: 'Cognitive Tool' },
+    { id: 'sanctuary', path: '/sanctuary', icon: Star, label: '虹靈御所', desc: 'Sanctuary' },
+    { id: 'chat', path: '/chat', icon: MessageSquare, label: '誠實 AI', desc: 'Integrity Companion' },
   ];
 
-  const handleNavigate = (id: string) => {
-    onNavigate(id as PageId);
+  const handleNavigate = (path: string) => {
+    navigate(path);
     setIsOpen(false);
   };
+
+  const activePage = location.pathname;
 
   return (
     <>
@@ -101,11 +104,11 @@ export const Nav: React.FC<NavProps> = ({ activePage, onNavigate, theme }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl w-full px-6 max-h-[70vh] overflow-y-auto custom-scrollbar p-2">
           {menuItems.map((item, index) => {
             const Icon = item.icon;
-            const isActive = activePage === item.id;
+            const isActive = activePage === item.path;
             return (
               <button
                 key={item.id}
-                onClick={() => handleNavigate(item.id)}
+                onClick={() => handleNavigate(item.path)}
                 aria-label={`Navigate to ${item.label}`}
                 aria-current={isActive ? 'page' : undefined}
                 className={`group relative p-6 rounded-xl border text-left transition-all duration-500 transform ${

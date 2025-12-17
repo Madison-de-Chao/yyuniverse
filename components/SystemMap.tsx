@@ -1,16 +1,16 @@
 
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Theme, PageId } from '../types';
-import { useNavigate } from 'react-router-dom'; // Assuming React Router, but sticking to props based on current architecture
 
 interface SystemMapProps {
   theme: Theme;
-  onNavigate: (page: PageId) => void;
 }
 
-export const SystemMap: React.FC<SystemMapProps> = ({ theme, onNavigate }) => {
+export const SystemMap: React.FC<SystemMapProps> = ({ theme }) => {
   const isDark = theme === 'dark';
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   // Node Configuration
   const nodes = [
@@ -96,7 +96,7 @@ export const SystemMap: React.FC<SystemMapProps> = ({ theme, onNavigate }) => {
           return (
             <g 
               key={node.id} 
-              onClick={() => onNavigate(node.page as PageId)}
+              onClick={() => navigate(`/${node.page}`)}
               onMouseEnter={() => setHoveredNode(node.id)}
               onMouseLeave={() => setHoveredNode(null)}
               className="cursor-pointer transition-all duration-300"
