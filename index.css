@@ -20,9 +20,31 @@ body {
   inset: 0;
   background-image: linear-gradient(rgba(255, 215, 0, 0.05) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 215, 0, 0.05) 1px, transparent 1px);
-  background-size: 240px 240px, 240px 240px;
+  background-size: 15vw 15vw, 15vw 15vw;
   pointer-events: none;
   z-index: 0;
+}
+
+/* Responsive grid sizing for different viewport sizes */
+@media (min-width: 1600px) {
+  .museum-grid::before,
+  .museum-grid::after {
+    background-size: 240px 240px, 240px 240px;
+  }
+}
+
+@media (max-width: 768px) {
+  .museum-grid::before,
+  .museum-grid::after {
+    background-size: 20vw 20vw, 20vw 20vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .museum-grid::before,
+  .museum-grid::after {
+    background-size: 25vw 25vw, 25vw 25vw;
+  }
 }
 
 .museum-grid::after {
