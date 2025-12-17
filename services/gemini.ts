@@ -1,18 +1,32 @@
 import { GoogleGenAI, GenerateContentResponse } from "@google/genai";
 import { GEMINI_SYSTEM_INSTRUCTION } from "../constants";
 
-// Initialize API client only if key exists to prevent immediate crash, 
-// though standard practice assumes it's there.
-const apiKey = process.env.API_KEY || '';
-const ai = new GoogleGenAI({ apiKey });
+const getApiKey = (): string | null => {
+  const apiKey = process.env.GEMINI_API_KEY?.trim();
+
+  if (!apiKey) {
+    console.error("Gemini API key is missing. Set GEMINI_API_KEY in .env.local.");
+    return null;
+  }
+
+  return apiKey;
+};
 
 export const sendMessageToMOMO = async (
   history: { role: 'user' | 'model'; text: string }[],
   message: string
 ): Promise<string> => {
+  const apiKey = getApiKey();
+
+  if (!apiKey) {
+    return "系統偵測到缺少必要設定：請先於 .env.local 配置 GEMINI_API_KEY 後再試。";
+  }
+
+  const ai = new GoogleGenAI({ apiKey });
+
   try {
     // Use a model capable of complex reasoning
-    const modelId = 'gemini-2.5-flash'; 
+    const modelId = 'gemini-2.5-flash';
 
     const chat = ai.chats.create({
       model: modelId,

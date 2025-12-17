@@ -1,8 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { Nav } from './components/Nav';
-import { ScrollToTop } from './components/ScrollToTop';
 import { Home } from './pages/Home';
 import { LogicLoop } from './pages/LogicLoop';
 import { AIChat } from './pages/AIChat';
@@ -18,14 +16,14 @@ import { Whitepaper } from './pages/Whitepaper';
 import { NineOrigins } from './pages/NineOrigins';
 import { SevenPrinciples } from './pages/SevenPrinciples';
 import { UniverseScript } from './pages/UniverseScript';
-import { NotFound } from './pages/NotFound';
-import { Theme } from './types';
+import { PageId, Theme } from './types';
 import { ChevronLeft } from 'lucide-react';
 
 function App() {
+  const [activePage, setActivePage] = useState<PageId>('home');
   const [theme, setTheme] = useState<Theme>('dark');
-  const navigate = useNavigate();
-  const location = useLocation();
+  // History stack for navigation
+  const [history, setHistory] = useState<PageId[]>([]);
 
   // Initialize theme from local storage if available, or default to dark
   useEffect(() => {
@@ -36,19 +34,64 @@ function App() {
     setTheme(prev => prev === 'dark' ? 'light' : 'dark');
   };
 
-  const handleBack = () => {
-    navigate(-1);
+  const handleNavigate = (page: PageId) => {
+    if (page === activePage) return;
+    // Push current page to history before navigating
+    setHistory(prev => [...prev, activePage]);
+    setActivePage(page);
+    window.scrollTo(0, 0);
   };
 
-  const isHomePage = location.pathname === '/';
+  const handleBack = () => {
+    const newHistory = [...history];
+    const prevPage = newHistory.pop(); // Get the last page
+    setHistory(newHistory);
+    setActivePage(prevPage || 'home'); // Fallback to home if history empty
+    window.scrollTo(0, 0);
+  };
+
+  const renderPage = () => {
+    switch (activePage) {
+      case 'home':
+        return <Home onNavigate={handleNavigate} theme={theme} toggleTheme={toggleTheme} />;
+      case 'logic':
+        return <LogicLoop theme={theme} />;
+      case 'chat':
+        return <AIChat theme={theme} />;
+      case 'guide':
+        return <LinearGuide theme={theme} onNavigate={handleNavigate} />;
+      case 'sanctuary':
+        return <Sanctuary theme={theme} onNavigate={handleNavigate} />;
+      case 'about':
+        return <AboutMomo theme={theme} />;
+      case 'system':
+        return <SystemDetail theme={theme} onNavigate={handleNavigate} />;
+      case 'system-a':
+        return <SystemZoneA theme={theme} />;
+      case 'system-b':
+        return <SystemZoneB theme={theme} />;
+      case 'system-c':
+        return <SystemZoneC theme={theme} onNavigate={handleNavigate} />;
+      case 'system-05':
+        return <SystemZone05 theme={theme} />;
+      case 'whitepaper':
+        return <Whitepaper theme={theme} />;
+      case 'origins':
+        return <NineOrigins theme={theme} />;
+      case 'principles':
+        return <SevenPrinciples theme={theme} />;
+      case 'script':
+        return <UniverseScript theme={theme} />;
+      default:
+        return <Home onNavigate={handleNavigate} theme={theme} toggleTheme={toggleTheme} />;
+    }
+  };
 
   return (
     <div className={`min-h-screen transition-colors duration-1000 ease-in-out ${
       theme === 'dark' ? 'bg-void text-cyber-text' : 'bg-paper text-ink'
     } selection:bg-gold/30 selection:text-gold`}>
       
-      <ScrollToTop />
-
       {/* Ambient Background Noise/Gradient - Alive & Breathing */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden transition-opacity duration-1000">
         {theme === 'dark' ? (
@@ -69,8 +112,8 @@ function App() {
         )}
       </div>
 
-      {/* Global Back Button (Hidden on home page) */}
-      {!isHomePage && (
+      {/* Global Back Button (Visible on non-home pages) */}
+      {activePage !== 'home' && (
         <button
           onClick={handleBack}
           aria-label="Go back to previous page"
@@ -86,28 +129,11 @@ function App() {
       )}
 
       <div className="relative z-10">
-        <Routes>
-          <Route path="/" element={<Home theme={theme} toggleTheme={toggleTheme} />} />
-          <Route path="/about" element={<AboutMomo theme={theme} />} />
-          <Route path="/system" element={<SystemDetail theme={theme} />} />
-          <Route path="/system-a" element={<SystemZoneA theme={theme} />} />
-          <Route path="/system-b" element={<SystemZoneB theme={theme} />} />
-          <Route path="/system-c" element={<SystemZoneC theme={theme} />} />
-          <Route path="/system-05" element={<SystemZone05 theme={theme} />} />
-          <Route path="/whitepaper" element={<Whitepaper theme={theme} />} />
-          <Route path="/guide" element={<LinearGuide theme={theme} />} />
-          <Route path="/logic" element={<LogicLoop theme={theme} />} />
-          <Route path="/sanctuary" element={<Sanctuary theme={theme} />} />
-          <Route path="/chat" element={<AIChat theme={theme} />} />
-          <Route path="/origins" element={<NineOrigins theme={theme} />} />
-          <Route path="/principles" element={<SevenPrinciples theme={theme} />} />
-          <Route path="/script" element={<UniverseScript theme={theme} />} />
-          <Route path="*" element={<NotFound theme={theme} />} />
-        </Routes>
+        {renderPage()}
       </div>
       
       {/* New Open Map Navigation */}
-      <Nav theme={theme} />
+      <Nav activePage={activePage} onNavigate={handleNavigate} theme={theme} />
     </div>
   );
 }

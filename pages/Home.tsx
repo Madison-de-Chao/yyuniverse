@@ -1,18 +1,17 @@
 
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Shield, ArrowRight, Search, HelpCircle, Sun, Moon, FileText } from 'lucide-react';
-import { Theme } from '../types';
+import { PageId, Theme } from '../types';
 import { IntegrityMotherModel } from '../components/Visuals';
 
 interface HomeProps {
+  onNavigate: (page: PageId) => void;
   theme: Theme;
   toggleTheme: () => void;
 }
 
-export const Home: React.FC<HomeProps> = ({ theme, toggleTheme }) => {
+export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) => {
   const isDark = theme === 'dark';
-  const navigate = useNavigate();
 
   // Shimmer Effect: Linear gradient moving across the text
   // Dark: Gold -> Pale Gold/White -> Gold
@@ -102,7 +101,7 @@ export const Home: React.FC<HomeProps> = ({ theme, toggleTheme }) => {
         </p>
         
         <button 
-          onClick={() => navigate('/whitepaper')}
+          onClick={() => onNavigate('whitepaper')}
           className={`mt-10 flex items-center gap-3 px-8 py-3 rounded-full border text-xs font-mono tracking-[0.2em] transition-all z-10 duration-500 group opacity-0 animate-reveal-blur ${
             isDark 
               ? 'border-slate-700 bg-slate-900/50 text-slate-400 hover:border-gold hover:text-gold hover:bg-slate-900 hover:shadow-[0_0_30px_rgba(255,215,0,0.15)]' 
@@ -120,7 +119,7 @@ export const Home: React.FC<HomeProps> = ({ theme, toggleTheme }) => {
         
         {/* Portal 1: Sanctuary */}
         <button 
-          onClick={() => navigate('/sanctuary')}
+          onClick={() => onNavigate('sanctuary')}
           className={`group relative overflow-hidden p-10 rounded-[2rem] border text-left transition-all duration-500 hover:-translate-y-2 ${
             isDark 
               ? 'bg-slate-900/40 border-slate-800 hover:border-purple-500/50 hover:shadow-[0_0_60px_rgba(168,85,247,0.15)]' 
@@ -156,7 +155,7 @@ export const Home: React.FC<HomeProps> = ({ theme, toggleTheme }) => {
 
         {/* Portal 2: Logic System */}
         <button 
-          onClick={() => navigate('/logic')}
+          onClick={() => onNavigate('logic')}
           className={`group relative overflow-hidden p-10 rounded-[2rem] border text-left transition-all duration-500 hover:-translate-y-2 ${
             isDark 
               ? 'bg-slate-900/40 border-slate-800 hover:border-gold/50 hover:shadow-[0_0_60px_rgba(251,191,36,0.15)]' 
@@ -192,7 +191,7 @@ export const Home: React.FC<HomeProps> = ({ theme, toggleTheme }) => {
 
         {/* Portal 3: Linear Guide */}
         <button 
-          onClick={() => navigate('/guide')}
+          onClick={() => onNavigate('guide')}
           className={`group relative overflow-hidden p-10 rounded-[2rem] border text-left transition-all duration-500 hover:-translate-y-2 ${
             isDark 
               ? 'bg-slate-900/40 border-slate-800 hover:border-jade/50 hover:shadow-[0_0_60px_rgba(16,185,129,0.15)]' 

@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Theme } from '../types';
 import { Layers, Zap, Scale, Eye, Activity, Repeat, Grid, X, ArrowRight, Circle, Fingerprint, Heart, Globe, Shield, Anchor, RefreshCw, Waves } from 'lucide-react';
 import { UnityField, CosmicCompass } from '../components/Visuals';

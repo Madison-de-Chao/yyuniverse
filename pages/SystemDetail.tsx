@@ -1,17 +1,16 @@
 
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Theme } from '../types';
-import { Layers, ArrowRight, Heart, Brain, Zap, BookOpen, Shield } from 'lucide-react';
+import { Theme, PageId } from '../types';
+import { Layers, ArrowRight, Heart, Brain, Zap, BookOpen, Shield, Circle } from 'lucide-react';
 import { SystemMap } from '../components/SystemMap';
 
 interface SystemDetailProps {
   theme: Theme;
+  onNavigate: (page: PageId) => void;
 }
 
-export const SystemDetail: React.FC<SystemDetailProps> = ({ theme }) => {
+export const SystemDetail: React.FC<SystemDetailProps> = ({ theme, onNavigate }) => {
   const isDark = theme === 'dark';
-  const navigate = useNavigate();
   const textColor = isDark ? 'text-slate-200' : 'text-ink';
   const mutedText = isDark ? 'text-slate-400' : 'text-gray-600';
   const cardBg = isDark ? 'bg-slate-900/50 border-slate-800' : 'bg-white border-gray-200 shadow-sm';
@@ -37,7 +36,7 @@ export const SystemDetail: React.FC<SystemDetailProps> = ({ theme }) => {
         
         {/* THE INTERACTIVE MAP */}
         <div className={`w-full rounded-3xl border overflow-hidden mb-20 ${isDark ? 'bg-void border-slate-800' : 'bg-[#fbf9f4] border-gray-200'}`}>
-           <SystemMap theme={theme} />
+           <SystemMap theme={theme} onNavigate={onNavigate} />
         </div>
       </header>
 
@@ -47,7 +46,7 @@ export const SystemDetail: React.FC<SystemDetailProps> = ({ theme }) => {
         {/* ZONE C: PHILOSOPHY */}
         <div 
           className={`group relative p-8 rounded-3xl border text-left transition-all duration-500 hover:-translate-y-1 ${cardBg} flex flex-col h-full cursor-pointer`}
-          onClick={() => navigate('/system-c')}
+          onClick={() => onNavigate('system-c')}
         >
           <div className={`absolute top-0 right-0 w-32 h-32 rounded-full blur-[60px] opacity-20 transition-opacity group-hover:opacity-40 ${
             isDark ? 'bg-purple-500' : 'bg-purple-300'
@@ -83,7 +82,7 @@ export const SystemDetail: React.FC<SystemDetailProps> = ({ theme }) => {
         {/* ZONE B: STRUCTURE */}
         <div 
           className={`group relative p-8 rounded-3xl border text-left transition-all duration-500 hover:-translate-y-1 ${cardBg} flex flex-col h-full cursor-pointer`}
-          onClick={() => navigate('/system-b')}
+          onClick={() => onNavigate('system-b')}
         >
           <div className={`absolute top-0 right-0 w-32 h-32 rounded-full blur-[60px] opacity-20 transition-opacity group-hover:opacity-40 ${
             isDark ? 'bg-gold' : 'bg-amber-300'
@@ -119,7 +118,7 @@ export const SystemDetail: React.FC<SystemDetailProps> = ({ theme }) => {
         {/* ZONE A: APPLICATION */}
         <div 
           className={`group relative p-8 rounded-3xl border text-left transition-all duration-500 hover:-translate-y-1 ${cardBg} flex flex-col h-full cursor-pointer`}
-          onClick={() => navigate('/system-a')}
+          onClick={() => onNavigate('system-a')}
         >
           <div className={`absolute top-0 right-0 w-32 h-32 rounded-full blur-[60px] opacity-20 transition-opacity group-hover:opacity-40 ${
             isDark ? 'bg-blue-500' : 'bg-blue-300'
@@ -157,7 +156,7 @@ export const SystemDetail: React.FC<SystemDetailProps> = ({ theme }) => {
       {/* 3. SATELLITE SYSTEMS */}
       <div className="mt-12 grid md:grid-cols-2 gap-8">
         <div 
-            onClick={() => navigate('/sanctuary')}
+            onClick={() => onNavigate('sanctuary')}
             className={`p-6 rounded-2xl border flex items-center gap-6 cursor-pointer transition-all hover:scale-[1.01] ${cardBg}`}
         >
             <div className={`p-4 rounded-full ${isDark ? 'bg-slate-800 text-gold' : 'bg-gray-100 text-muted-gold'}`}>
@@ -170,7 +169,7 @@ export const SystemDetail: React.FC<SystemDetailProps> = ({ theme }) => {
         </div>
 
         <div 
-            onClick={() => navigate('/whitepaper')}
+            onClick={() => onNavigate('whitepaper')}
             className={`p-6 rounded-2xl border flex items-center gap-6 cursor-pointer transition-all hover:scale-[1.01] ${cardBg}`}
         >
             <div className={`p-4 rounded-full ${isDark ? 'bg-slate-800 text-blue-400' : 'bg-gray-100 text-blue-600'}`}>

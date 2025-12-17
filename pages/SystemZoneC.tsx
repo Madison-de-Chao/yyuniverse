@@ -1,14 +1,16 @@
 
 
+
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Theme, PageId } from '../types';
-import { Heart, Star, TrendingUp, Map, Building, Circle, X, ArrowRight, CheckCircle2, BookOpen, Zap, Compass, Layers, Home } from 'lucide-react';
+import { Heart, PenTool, Star, Shield, TrendingUp, Map, Building, Circle, X, ArrowRight, CheckCircle2, BookOpen, Zap, Compass, Layers, Home } from 'lucide-react';
 import { UnityField, KnowledgeTowerDiagram, KnowledgeTowerIllustration, WorldWonderDiagram, WorldWonderIllustration, MentalHedgeDiagram, MentalHedgeIllustration, CityAbstractDiagram, CityAbstractIllustration, CareTruthDiagram, CareTruthIllustration, ThoughtPrismDiagram, ThoughtPrismIllustration, ConstellationMapDiagram, ConstellationMapIllustration } from '../components/Visuals';
 import { CoreValuesMap } from '../components/Infographics';
+import { useNavigate } from 'react-router-dom';
 
 interface SystemZoneCProps {
   theme: Theme;
+  onNavigate?: (page: PageId) => void;
 }
 
 // --- DATA: 7 Philosophical Tools (Enhanced with Two Visual Types) ---
@@ -128,20 +130,20 @@ const PHILOSOPHY_TOOLS = [
     }
 ];
 
-export const SystemZoneC: React.FC<SystemZoneCProps> = ({ theme }) => {
+export const SystemZoneC: React.FC<SystemZoneCProps> = ({ theme, onNavigate }) => {
   const isDark = theme === 'dark';
   const textColor = isDark ? 'text-slate-200' : 'text-ink';
   const mutedText = isDark ? 'text-slate-400' : 'text-gray-600';
   const cardBg = isDark ? 'bg-slate-900/50 border-slate-800' : 'bg-white border-gray-200 shadow-sm';
   
   const [activeToolId, setActiveToolId] = useState<string | null>(null);
-  const navigate = useNavigate();
 
   const activeTool = PHILOSOPHY_TOOLS.find(t => t.id === activeToolId);
 
-  // Navigation handler
+  // Safety check for navigation if component used in isolation
   const handleNav = (page: PageId) => {
-    navigate(`/${page}`);
+    if (onNavigate) onNavigate(page);
+    else console.warn("Navigation handler not provided");
   }
 
   return (

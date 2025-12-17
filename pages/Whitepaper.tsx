@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Theme } from '../types';
-import { Download, ChevronRight, AlignLeft } from 'lucide-react';
+import { Book, Download, ChevronRight, AlignLeft, FileText } from 'lucide-react';
 import { UnityField } from '../components/Visuals';
 
 interface WhitepaperProps {

@@ -1,7 +1,8 @@
 
 import React from 'react';
 import { Theme } from '../types';
-import { ExternalLink, MessageCircle, Download, Sparkles } from 'lucide-react';
+import { ExternalLink, MessageCircle, Terminal, Download, Shield, Cpu, Sparkles } from 'lucide-react';
+import { DualCore } from '../components/Visuals';
 import { DOWNLOADABLE_BOT_PROMPT } from '../constants';
 
 interface AboutMomoProps {

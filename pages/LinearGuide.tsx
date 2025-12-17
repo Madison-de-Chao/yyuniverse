@@ -1,17 +1,16 @@
 
 import React, { useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Theme } from '../types';
+import { PageId, Theme } from '../types';
 import { ArrowDown, Circle, Shield } from 'lucide-react';
 import { UnityField, DualCore, CognitiveCycle } from '../components/Visuals';
 
 interface LinearGuideProps {
   theme: Theme;
+  onNavigate: (page: PageId) => void;
 }
 
-export const LinearGuide: React.FC<LinearGuideProps> = ({ theme }) => {
+export const LinearGuide: React.FC<LinearGuideProps> = ({ theme, onNavigate }) => {
   const isDark = theme === 'dark';
-  const navigate = useNavigate();
   
   const sectionRef1 = useRef<HTMLDivElement>(null);
   const sectionRef2 = useRef<HTMLDivElement>(null);
@@ -195,7 +194,7 @@ export const LinearGuide: React.FC<LinearGuideProps> = ({ theme }) => {
         
         <div className="grid gap-6 md:grid-cols-2 max-w-3xl mx-auto w-full">
           <button 
-            onClick={() => navigate('/logic')}
+            onClick={() => onNavigate('logic')}
             className={`p-8 rounded-2xl border transition-all group text-left ${
               isDark 
                 ? 'bg-slate-900 border-gold/30 hover:bg-gold/10' 
@@ -214,7 +213,7 @@ export const LinearGuide: React.FC<LinearGuideProps> = ({ theme }) => {
           </button>
 
           <button 
-            onClick={() => navigate('/sanctuary')}
+            onClick={() => onNavigate('sanctuary')}
             className={`p-8 rounded-2xl border transition-all group text-left ${
               isDark 
                 ? 'bg-slate-900 border-purple-500/30 hover:bg-purple-500/10' 
