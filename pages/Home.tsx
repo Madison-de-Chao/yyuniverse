@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Shield, ArrowRight, Search, HelpCircle, Sun, Moon, FileText } from 'lucide-react';
+import { Shield, ArrowRight, Search, HelpCircle, Sun, Moon, FileText, PanelsTopLeft, Globe2, LayoutDashboard, PlayCircle, Pointer, Users } from 'lucide-react';
 import { PageId, Theme } from '../types';
 import { IntegrityMotherModel } from '../components/Visuals';
 
@@ -12,6 +12,50 @@ interface HomeProps {
 
 export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) => {
   const isDark = theme === 'dark';
+  const pillarCards = [
+    {
+      title: '策展架構',
+      description: '以研究級脈絡梳理宇宙觀，所有內容都有據可查、可回溯。',
+      icon: PanelsTopLeft,
+      badge: '專業館藏',
+    },
+    {
+      title: '互動導覽',
+      description: '以情境引導與視覺化路徑解說，讓觀眾可以循序理解並立即操作。',
+      icon: Globe2,
+      badge: '動態教學',
+    },
+    {
+      title: '決策支援',
+      description: '八階思維系統做為決策護欄，提供可重複練習的安全沙盒。',
+      icon: LayoutDashboard,
+      badge: '策略骨架',
+    },
+  ];
+
+  const journeySteps = [
+    {
+      title: '沉浸起點',
+      subtitle: '理解宇宙故事與關鍵人物',
+      description: '先從宇宙設定與默默超的角色出發，確定同一個詞彙與價值觀。',
+      cta: () => onNavigate('about'),
+      label: 'Start',
+    },
+    {
+      title: '系統骨架',
+      subtitle: '看懂整體系統與邏輯循環',
+      description: '透過系統詳解、八階思維與線性引導，建立穩定的決策框架。',
+      cta: () => onNavigate('system'),
+      label: 'Structure',
+    },
+    {
+      title: '實際演練',
+      subtitle: '應用在命理、對話與白皮書',
+      description: '把架構帶進虹靈御所、誠實 AI 與白皮書，完成一次完整體驗。',
+      cta: () => onNavigate('whitepaper'),
+      label: 'Practice',
+    },
+  ];
 
   // Shimmer Effect: Linear gradient moving across the text
   // Dark: Gold -> Pale Gold/White -> Gold
@@ -226,6 +270,124 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) =>
         </button>
 
       </div>
+
+      {/* Museum-grade highlights */}
+      <section className="w-full max-w-6xl mb-16 z-10 px-4">
+        <div
+          className={`aurora-border p-[1px] ${
+            isDark ? 'bg-slate-900/60' : 'bg-white/70'
+          }`}
+        >
+          <div className={`card-content rounded-[18px] ${isDark ? 'bg-slate-950/70' : 'bg-white/90'} p-8 md:p-10 flex flex-col gap-8 shadow-2xl`}>
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <div>
+                <p className={`font-mono uppercase tracking-[0.28em] text-xs mb-2 ${isDark ? 'text-blue-200' : 'text-stone-500'}`}>Curated Experience</p>
+                <h2 className={`font-serif text-3xl md:text-4xl font-bold ${isDark ? 'text-slate-100' : 'text-ink'}`}>館級標準 · 專業導覽核心</h2>
+                <p className={`${isDark ? 'text-slate-300' : 'text-stone-600'} mt-3 max-w-3xl leading-relaxed`}>
+                  以科博館的策展思維設計網站：每個節點都具有清楚的目的、證據與路徑，確保觀眾能在沉浸的視覺中保持方向感，快速進入互動教學流程。
+                </p>
+              </div>
+              <div className={`flex items-center gap-3 px-4 py-3 rounded-2xl ${isDark ? 'bg-slate-800/70 text-gold border border-slate-700' : 'bg-amber-50 text-muted-gold border border-amber-200'}`}>
+                <Users size={18} />
+                <span className="font-mono text-xs tracking-[0.2em] uppercase">導覽團隊即時更新</span>
+              </div>
+            </div>
+
+            <div className="grid gap-4 md:gap-6 md:grid-cols-3">
+              {pillarCards.map((pillar) => {
+                const Icon = pillar.icon;
+                return (
+                  <div
+                    key={pillar.title}
+                    className={`group p-6 rounded-2xl border relative overflow-hidden transition-transform duration-500 hover:-translate-y-1 ${
+                      isDark
+                        ? 'bg-slate-900/70 border-slate-800 hover:border-gold/50'
+                        : 'bg-white border-stone-200 hover:border-muted-gold'
+                    }`}
+                  >
+                    <div className={`flex items-center gap-3 mb-3 ${isDark ? 'text-slate-200' : 'text-ink'}`}>
+                      <span className={`p-3 rounded-xl ${isDark ? 'bg-slate-800 text-gold' : 'bg-stone-100 text-muted-gold'}`}>
+                        <Icon size={18} />
+                      </span>
+                      <div>
+                        <p className="font-serif text-xl font-semibold">{pillar.title}</p>
+                        <span className={`text-[11px] uppercase tracking-[0.2em] ${isDark ? 'text-slate-400' : 'text-stone-500'}`}>
+                          {pillar.badge}
+                        </span>
+                      </div>
+                    </div>
+                    <p className={`${isDark ? 'text-slate-300' : 'text-stone-700'} leading-relaxed`}>{pillar.description}</p>
+                    <div className={`absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${isDark ? 'bg-gradient-to-br from-gold/5 via-emerald-500/5 to-blue-500/5' : 'bg-gradient-to-br from-amber-100/50 via-emerald-100/50 to-blue-100/50'}`}></div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Guided path callout */}
+      <section className="w-full max-w-6xl mb-32 z-10 px-4">
+        <div className={`p-8 md:p-10 rounded-3xl border shadow-xl relative overflow-hidden ${
+          isDark ? 'bg-slate-900/70 border-slate-800 text-slate-100' : 'bg-white/90 border-stone-200 text-ink'
+        }`}
+        >
+          <div className="absolute inset-0 pointer-events-none opacity-60" style={{ background: 'radial-gradient(circle at 20% 20%, rgba(255,215,0,0.06), transparent 45%), radial-gradient(circle at 80% 30%, rgba(59,130,246,0.08), transparent 50%)' }} />
+          <div className="relative flex flex-col gap-6">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <div>
+                <p className={`font-mono uppercase tracking-[0.28em] text-xs mb-2 ${isDark ? 'text-emerald-200' : 'text-emerald-700'}`}>Interactive Learning Route</p>
+                <h3 className="font-serif text-2xl md:text-3xl font-bold">三步驟完成一次沉浸式教學</h3>
+                <p className={`${isDark ? 'text-slate-300' : 'text-stone-600'} max-w-3xl mt-2`}>
+                  依照策展路徑循序探索，避免迷航，同時保留彈性：任何時刻都能跳回全域地圖或切換深度導覽。
+                </p>
+              </div>
+              <button
+                onClick={() => onNavigate('logic')}
+                className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-[0.2em] transition-colors duration-300 ${
+                  isDark ? 'bg-slate-800/80 text-gold border border-slate-700 hover:border-gold' : 'bg-stone-100 text-ink border border-stone-300 hover:border-muted-gold'
+                }`}
+              >
+                <PlayCircle size={16} /> 立即啟動八階思維
+              </button>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-3">
+              {journeySteps.map((step, index) => (
+                <div
+                  key={step.title}
+                  className={`relative p-6 rounded-2xl border h-full flex flex-col gap-3 transition-all duration-500 ${
+                    isDark ? 'bg-slate-950/50 border-slate-800 hover:border-gold/50' : 'bg-white border-stone-200 hover:border-muted-gold'
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <div className={`text-xs font-mono tracking-[0.24em] uppercase ${isDark ? 'text-slate-400' : 'text-stone-500'}`}>{step.label}</div>
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ${
+                      isDark ? 'bg-slate-800 text-gold' : 'bg-stone-100 text-muted-gold'
+                    }`}>
+                      {index + 1}
+                    </div>
+                  </div>
+                  <div>
+                    <p className="font-serif text-xl font-semibold mb-1">{step.title}</p>
+                    <p className={`text-sm ${isDark ? 'text-slate-300' : 'text-stone-600'}`}>{step.subtitle}</p>
+                  </div>
+                  <p className={`${isDark ? 'text-slate-300' : 'text-stone-600'} leading-relaxed flex-1`}>{step.description}</p>
+                  <button
+                    onClick={step.cta}
+                    className={`inline-flex items-center gap-2 text-xs font-bold tracking-[0.16em] uppercase transition-colors ${
+                      isDark ? 'text-gold hover:text-yellow-200' : 'text-muted-gold hover:text-amber-800'
+                    }`}
+                  >
+                    <Pointer size={14} /> 前往
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 };

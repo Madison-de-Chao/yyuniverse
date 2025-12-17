@@ -18,3 +18,14 @@ View your app in AI Studio: https://ai.studio/apps/drive/1ZDMbwaf75YpjyqIh_l1rqQ
 2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
 3. Run the app:
    `npm run dev`
+
+## Deploy
+
+For a static, museum-grade experience with minimal ops overhead, deploy to a Vite-friendly static host such as **Vercel**:
+
+- **Build command:** `npm run build`
+- **Output directory:** `dist`
+- **Environment variables:** configure `GEMINI_API_KEY` in the platform dashboard (never hardcode secrets).
+- **Edge delivery:** enable CDN caching for `/assets` while keeping API calls client-side to avoid credential exposure.
+
+Other compatible options include Netlify and Cloudflare Pages if your organization already uses them; use the same build and output settings above.
