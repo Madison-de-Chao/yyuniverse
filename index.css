@@ -1,6 +1,10 @@
 /* Global presentation layer for the museum-grade experience */
 :root {
   color-scheme: light;
+  /* CSS variables for decorative borders */
+  --border-gradient: linear-gradient(120deg, rgba(255, 215, 0, 0.8), rgba(168, 85, 247, 0.6), rgba(59, 130, 246, 0.7));
+  --border-radius: 20px;
+  --border-opacity: 1;
 }
 
 body {
@@ -23,6 +27,24 @@ body {
   background-size: 240px 240px, 240px 240px;
   pointer-events: none;
   z-index: 0;
+  /* Performance optimization: promote to own compositor layer */
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Responsive grid sizing for mobile devices */
+@media (max-width: 640px) {
+  .museum-grid::before,
+  .museum-grid::after {
+    background-size: 120px 120px, 120px 120px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .museum-grid::before,
+  .museum-grid::after {
+    background-size: 180px 180px, 180px 180px;
+  }
 }
 
 .museum-grid::after {
@@ -32,18 +54,46 @@ body {
   mix-blend-mode: screen;
 }
 
+/* Consolidated decorative border utility with CSS variables */
+.decorative-border {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--border-radius);
+}
+
+.decorative-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: var(--border-radius);
+  padding: 1px;
+  background: var(--border-gradient);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: var(--border-opacity);
+}
+
+.decorative-border > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Brand ornament variant with custom gradient and border radius */
 .brand-ornament {
   position: relative;
   overflow: hidden;
+  --border-radius: 24px;
+  --border-gradient: linear-gradient(120deg, rgba(255, 215, 0, 0.8), rgba(168, 85, 247, 0.6), rgba(59, 130, 246, 0.7));
 }
 
 .brand-ornament::before {
   content: "";
   position: absolute;
   inset: -1px;
-  border-radius: 24px;
+  border-radius: var(--border-radius);
   padding: 1px;
-  background: linear-gradient(120deg, rgba(255, 215, 0, 0.8), rgba(168, 85, 247, 0.6), rgba(59, 130, 246, 0.7));
+  background: var(--border-gradient);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -54,10 +104,12 @@ body {
   z-index: 1;
 }
 
+/* Aurora border variant with simpler border approach */
 .aurora-border {
   position: relative;
   overflow: hidden;
   border-radius: 20px;
+  --border-gradient: linear-gradient(135deg, rgba(16, 185, 129, 0.3), rgba(59, 130, 246, 0.25), rgba(255, 215, 0, 0.35));
 }
 
 .aurora-border::before {
@@ -65,7 +117,7 @@ body {
   position: absolute;
   inset: -1px;
   border-radius: 20px;
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.3), rgba(59, 130, 246, 0.25), rgba(255, 215, 0, 0.35));
+  background: var(--border-gradient);
   opacity: 0.8;
   z-index: 0;
 }
