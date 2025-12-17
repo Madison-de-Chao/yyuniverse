@@ -2,7 +2,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Theme } from '../types';
-import { Layers, ArrowRight, Heart, Brain, Zap, BookOpen, Shield, Circle } from 'lucide-react';
+import { Layers, ArrowRight, Heart, Brain, Zap, BookOpen, Shield } from 'lucide-react';
 import { SystemMap } from '../components/SystemMap';
 
 interface SystemDetailProps {

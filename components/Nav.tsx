@@ -1,8 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Compass, Brain, MessageSquare, Home, Map as MapIcon, Star, BookOpen, X, User, Layers, FileText, Ghost } from 'lucide-react';
-import { PageId } from '../types';
+import { Compass, Brain, MessageSquare, Home, Star, BookOpen, X, User, Layers, FileText, Ghost } from 'lucide-react';
 
 interface NavProps {
   theme: 'light' | 'dark';
@@ -25,12 +24,12 @@ export const Nav: React.FC<NavProps> = ({ theme }) => {
       }, 100);
     } else {
       const timer = setTimeout(() => setIsAnimating(false), 500);
-      if (openButtonRef.current && !isOpen && isAnimating) {
+      if (openButtonRef.current && !isOpen && !isAnimating) {
           openButtonRef.current.focus();
       }
       return () => clearTimeout(timer);
     }
-  }, [isOpen]);
+  }, [isOpen, isAnimating]);
 
   const menuItems = [
     { id: 'home', path: '/', icon: Home, label: '首頁大廳', desc: 'Entrance' },

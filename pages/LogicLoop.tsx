@@ -95,7 +95,7 @@ export const LogicLoop: React.FC<LogicLoopProps> = ({ theme }) => {
           case 'BatteryLow': return <BatteryLow size={24} />;
           default: return <Edit3 size={24} />;
       }
-  }
+  };
 
   // VIEW: Loading State
   if (isLoading) {

@@ -1,9 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { Theme } from '../types';
-import { UnityField, DualCore, WorldWonderIllustration, KnowledgeTowerDiagram, MentalHedgeDiagram, CosmicCompass } from '../components/Visuals';
+import { UnityField, DualCore, WorldWonderIllustration, KnowledgeTowerDiagram, MentalHedgeDiagram } from '../components/Visuals';
 import { CoIntelligenceBlueprint } from '../components/Infographics';
-import { X, Zap, Compass, ArrowRight, Scale, Activity, Brain, Heart, AlertTriangle } from 'lucide-react';
+import { X, Zap, Compass, ArrowRight, Scale, Brain, Heart } from 'lucide-react';
 
 interface NineOriginsProps {
   theme: Theme;
@@ -185,7 +185,6 @@ export const NineOrigins: React.FC<NineOriginsProps> = ({ theme }) => {
   const textColor = isDark ? 'text-slate-200' : 'text-ink';
   const mutedText = isDark ? 'text-slate-400' : 'text-gray-600';
   
-  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const [selectedOrigin, setSelectedOrigin] = useState<typeof ORIGINS[0] | null>(null);
 
   // Helper to render the visual component dynamically

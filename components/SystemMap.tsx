@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Theme, PageId } from '../types';
+import { Theme } from '../types';
 
 interface SystemMapProps {
   theme: Theme;

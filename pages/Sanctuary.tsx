@@ -2,7 +2,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Theme } from '../types';
-import { Star, Activity, Map, Flame, Zap, Filter, Power } from 'lucide-react';
+import { Star, Activity, Flame, Zap, Filter, Power } from 'lucide-react';
 import { CityAbstract } from '../components/Visuals';
 
 interface SanctuaryProps {

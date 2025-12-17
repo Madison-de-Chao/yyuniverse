@@ -514,8 +514,8 @@ export const IntegrityMotherModel: React.FC<VisualProps> = ({ theme, className =
          {isDark ? <CosmicRingSVG /> : <ZenEnsoSVG />}
       </div>
     </div>
-  )
-}
+  );
+};
 
 export const ZenEnsoSVG = () => (
   <svg className="w-full h-full overflow-visible animate-draw" viewBox="0 0 200 200">

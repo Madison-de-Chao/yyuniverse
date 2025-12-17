@@ -1,8 +1,8 @@
 
 import React from 'react';
 import { Theme } from '../types';
-import { Brain, AlertTriangle, Shield, Clock, XCircle, MessageSquare, Flame, UserX, Target, HelpCircle, Activity, Globe, Heart, Zap, Layers, Scale, Database, Cpu, Anchor, Compass, Star, Building, Map, Home } from 'lucide-react';
-import { CognitiveCycle, UnityField, DualCore } from './Visuals';
+import { Brain, AlertTriangle, Shield, Clock, XCircle, MessageSquare, Flame, UserX, Target, HelpCircle, Activity, Globe, Heart, Zap, Layers, Scale, Database, Anchor, Compass, Star, Building, Map, Home } from 'lucide-react';
+import { CognitiveCycle } from './Visuals';
 
 interface GraphicProps {
   theme: Theme;

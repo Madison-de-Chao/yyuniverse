@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Theme, PageId } from '../types';
-import { Heart, PenTool, Star, Shield, TrendingUp, Map, Building, Circle, X, ArrowRight, CheckCircle2, BookOpen, Zap, Compass, Layers, Home } from 'lucide-react';
+import { Heart, Star, TrendingUp, Map, Building, Circle, X, ArrowRight, CheckCircle2, BookOpen, Zap, Compass, Layers, Home } from 'lucide-react';
 import { UnityField, KnowledgeTowerDiagram, KnowledgeTowerIllustration, WorldWonderDiagram, WorldWonderIllustration, MentalHedgeDiagram, MentalHedgeIllustration, CityAbstractDiagram, CityAbstractIllustration, CareTruthDiagram, CareTruthIllustration, ThoughtPrismDiagram, ThoughtPrismIllustration, ConstellationMapDiagram, ConstellationMapIllustration } from '../components/Visuals';
 import { CoreValuesMap } from '../components/Infographics';
 

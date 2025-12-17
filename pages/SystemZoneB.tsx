@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Theme } from '../types';
-import { Brain, Layers, Activity, AlertTriangle, Search, CheckCircle2, User, Shield, Heart, MessageCircle, Zap, Anchor, Compass, Scale, Lock, Mic, RefreshCw, Target, Globe, ArrowRight, Box } from 'lucide-react';
+import { Brain, Layers, Activity, AlertTriangle, Search, CheckCircle2, User, Shield, Heart, MessageCircle, Zap, Compass, Scale, Mic, RefreshCw, Target, Globe, ArrowRight, Box } from 'lucide-react';
 import { CognitiveCycle } from '../components/Visuals';
 import { StructureToolsMap } from '../components/Infographics';
 
