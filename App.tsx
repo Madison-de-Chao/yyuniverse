@@ -17,7 +17,7 @@ import { NineOrigins } from './pages/NineOrigins';
 import { SevenPrinciples } from './pages/SevenPrinciples';
 import { UniverseScript } from './pages/UniverseScript';
 import { PageId, Theme } from './types';
-import { ChevronLeft } from 'lucide-react';
+import { Activity, ChevronLeft, Map, Sparkles } from 'lucide-react';
 
 function App() {
   const [activePage, setActivePage] = useState<PageId>('home');
@@ -112,6 +112,56 @@ function App() {
         )}
       </div>
 
+      {/* Brand ribbon to reinforce museum-grade positioning */}
+      <div className="fixed top-4 inset-x-0 flex justify-center px-4 z-40 pointer-events-none">
+        <div
+          className={`brand-ornament pointer-events-auto flex flex-col md:flex-row gap-4 items-start md:items-center w-full max-w-5xl px-6 py-4 rounded-2xl border shadow-lg transition-colors duration-500 ${
+            theme === 'dark'
+              ? 'bg-slate-900/70 border-slate-800 text-slate-100'
+              : 'bg-white/80 border-stone-200 text-ink'
+          } backdrop-blur-xl`}
+          role="status"
+          aria-label="品牌導覽狀態條"
+        >
+          <div className="flex items-center gap-3">
+            <span className={`p-3 rounded-full ${theme === 'dark' ? 'bg-slate-800 text-gold' : 'bg-stone-100 text-muted-gold'}`}>
+              <Sparkles size={18} />
+            </span>
+            <div className="leading-tight">
+              <p className="font-serif font-bold tracking-wide text-sm md:text-base">科博館等級官方導覽 · 專業可信任</p>
+              <p className="font-mono text-[11px] uppercase tracking-[0.2em] opacity-70">Immersive teaching · Guided cognition</p>
+            </div>
+          </div>
+
+          <div className="flex flex-wrap md:flex-nowrap items-center gap-3 md:ml-auto">
+            <div
+              className={`flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold tracking-wide ${
+                theme === 'dark' ? 'bg-slate-800/70 text-emerald-300 border border-emerald-900' : 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+              }`}
+            >
+              <Activity size={14} /> LIVE 導覽模式
+            </div>
+            <div
+              className={`hidden sm:flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold tracking-wide ${
+                theme === 'dark' ? 'bg-slate-800/70 text-blue-200 border border-slate-700' : 'bg-blue-50 text-blue-700 border border-blue-200'
+              }`}
+            >
+              <Map size={14} /> 全域地圖可隨時開啟
+            </div>
+            <button
+              onClick={() => handleNavigate('guide')}
+              className={`px-4 py-2 rounded-xl text-xs font-bold tracking-[0.18em] uppercase transition-colors duration-300 shadow-md flex items-center gap-2 ${
+                theme === 'dark'
+                  ? 'bg-gradient-to-r from-amber-400 to-amber-300 text-void hover:from-amber-300 hover:to-amber-200'
+                  : 'bg-gradient-to-r from-ink to-slate-800 text-paper hover:from-slate-800 hover:to-slate-700'
+              }`}
+            >
+              立即體驗
+            </button>
+          </div>
+        </div>
+      </div>
+
       {/* Global Back Button (Visible on non-home pages) */}
       {activePage !== 'home' && (
         <button
@@ -128,7 +178,7 @@ function App() {
         </button>
       )}
 
-      <div className="relative z-10">
+      <div className="relative z-10 museum-grid">
         {renderPage()}
       </div>
       
