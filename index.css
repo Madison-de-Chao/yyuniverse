@@ -23,6 +23,7 @@ body {
   background-size: 240px 240px, 240px 240px;
   pointer-events: none;
   z-index: 0;
+  transform: translateZ(0);
 }
 
 .museum-grid::after {
