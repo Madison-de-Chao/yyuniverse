@@ -1,0 +1,85 @@
+/* Global presentation layer for the museum-grade experience */
+:root {
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  background-color: #050508;
+}
+
+.museum-grid {
+  position: relative;
+  overflow: hidden;
+}
+
+.museum-grid::before,
+.museum-grid::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255, 215, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 215, 0, 0.05) 1px, transparent 1px);
+  background-size: 240px 240px, 240px 240px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.museum-grid::after {
+  background-image: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.06), transparent 35%),
+    radial-gradient(circle at 80% 0%, rgba(37, 99, 235, 0.08), transparent 40%),
+    radial-gradient(circle at 50% 90%, rgba(16, 185, 129, 0.08), transparent 40%);
+  mix-blend-mode: screen;
+}
+
+.brand-ornament {
+  position: relative;
+  overflow: hidden;
+}
+
+.brand-ornament::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 24px;
+  padding: 1px;
+  background: linear-gradient(120deg, rgba(255, 215, 0, 0.8), rgba(168, 85, 247, 0.6), rgba(59, 130, 246, 0.7));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.brand-ornament > * {
+  position: relative;
+  z-index: 1;
+}
+
+.aurora-border {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.aurora-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.3), rgba(59, 130, 246, 0.25), rgba(255, 215, 0, 0.35));
+  opacity: 0.8;
+  z-index: 0;
+}
+
+.aurora-border::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
+  z-index: 1;
+}
+
+.card-content {
+  position: relative;
+  z-index: 2;
+}
