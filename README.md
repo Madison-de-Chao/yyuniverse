@@ -21,7 +21,7 @@ View your app in AI Studio: https://ai.studio/apps/drive/1ZDMbwaf75YpjyqIh_l1rqQ
 
 ## Deploy
 
-For a static, museum-grade experience with minimal ops overhead, deploy to a Vite-friendly static host such as **Vercel**:
+For a static deployment with minimal ops overhead, deploy to a Vite-friendly static host such as **Vercel**:
 
 - **Build command:** `npm run build`
 - **Output directory:** `dist`

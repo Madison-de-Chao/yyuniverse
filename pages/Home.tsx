@@ -351,7 +351,6 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) =>
                 className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-[0.2em] transition-colors duration-300 ${
                   isDark ? 'bg-slate-800/80 text-gold border border-slate-700 hover:border-gold' : 'bg-stone-100 text-ink border border-stone-300 hover:border-muted-gold'
                 }`}
-                aria-label="Start 8-step thinking route"
               >
                 <PlayCircle size={16} /> 立即啟動八階思維
               </button>
