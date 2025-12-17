@@ -274,7 +274,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) =>
       {/* Museum-grade highlights */}
       <section className="w-full max-w-6xl mb-16 z-10 px-4">
         <div
-          className={`aurora-border p-[1px] ${
+          className={`decorative-border p-[1px] ${
             isDark ? 'bg-slate-900/60' : 'bg-white/70'
           }`}
         >
