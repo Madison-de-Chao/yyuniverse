@@ -40,6 +40,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) =>
       description: '先從宇宙設定與默默超的角色出發，確定同一個詞彙與價值觀。',
       cta: () => onNavigate('about'),
       label: 'Start',
+      ariaLabel: 'Navigate to About page to learn about universe story and key characters',
     },
     {
       title: '系統骨架',
@@ -47,6 +48,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) =>
       description: '透過系統詳解、八階思維與線性引導，建立穩定的決策框架。',
       cta: () => onNavigate('system'),
       label: 'Structure',
+      ariaLabel: 'Navigate to System page to understand overall system and logic',
     },
     {
       title: '實際演練',
@@ -54,6 +56,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) =>
       description: '把架構帶進虹靈御所、誠實 AI 與白皮書，完成一次完整體驗。',
       cta: () => onNavigate('whitepaper'),
       label: 'Practice',
+      ariaLabel: 'Navigate to Whitepaper page to see practical applications',
     },
   ];
 
@@ -379,6 +382,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) =>
                     className={`inline-flex items-center gap-2 text-xs font-bold tracking-[0.16em] uppercase transition-colors ${
                       isDark ? 'text-gold hover:text-yellow-200' : 'text-muted-gold hover:text-amber-800'
                     }`}
+                    aria-label={step.ariaLabel}
                   >
                     <Pointer size={14} /> 前往
                   </button>
