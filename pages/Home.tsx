@@ -10,6 +10,15 @@ interface HomeProps {
   toggleTheme: () => void;
 }
 
+interface JourneyStep {
+  title: string;
+  subtitle: string;
+  description: string;
+  cta: () => void;
+  label: string;
+  ariaLabel: string;
+}
+
 export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) => {
   const isDark = theme === 'dark';
   const pillarCards = [
@@ -33,7 +42,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) =>
     },
   ];
 
-  const journeySteps = [
+  const journeySteps: JourneyStep[] = [
     {
       title: '沉浸起點',
       subtitle: '理解宇宙故事與關鍵人物',
