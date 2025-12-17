@@ -1,0 +1,231 @@
+
+import React from 'react';
+import { Shield, ArrowRight, Search, HelpCircle, Sun, Moon, FileText } from 'lucide-react';
+import { PageId, Theme } from '../types';
+import { IntegrityMotherModel } from '../components/Visuals';
+
+interface HomeProps {
+  onNavigate: (page: PageId) => void;
+  theme: Theme;
+  toggleTheme: () => void;
+}
+
+export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) => {
+  const isDark = theme === 'dark';
+
+  // Shimmer Effect: Linear gradient moving across the text
+  // Dark: Gold -> Pale Gold/White -> Gold
+  // Light: Ink -> Grey -> Ink
+  const shimmerClass = isDark
+    ? "bg-[linear-gradient(110deg,#FFD700_45%,#FFF8DC_50%,#FFD700_55%)] bg-[length:250%_100%] bg-clip-text text-transparent animate-shimmer"
+    : "bg-[linear-gradient(110deg,#2C2420_45%,#78716c_50%,#2C2420_55%)] bg-[length:250%_100%] bg-clip-text text-transparent animate-shimmer";
+
+  return (
+    <div className="min-h-screen flex flex-col items-center px-4 relative overflow-x-hidden">
+      
+      {/* Theme Toggle Top Right */}
+      <div className="absolute top-6 right-6 z-50">
+        <button
+          onClick={toggleTheme}
+          className={`p-3 rounded-full transition-all duration-500 shadow-lg ${
+            isDark 
+              ? 'bg-slate-800/80 text-gold hover:bg-slate-700 border border-slate-700 hover:shadow-[0_0_15px_rgba(255,215,0,0.3)]' 
+              : 'bg-white/80 text-ink hover:bg-white border border-stone-200 hover:shadow-lg'
+          } backdrop-blur-md`}
+          title={isDark ? "切換至靜心模式" : "切換至宇宙模式"}
+          aria-label={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
+        >
+          {isDark ? <Sun size={20} /> : <Moon size={20} />}
+        </button>
+      </div>
+
+      {/* Hero Section with Visual */}
+      <header className="text-center mt-12 mb-20 w-full max-w-6xl relative flex flex-col items-center">
+        
+        {/* Main Visual Diagram - Integrity Model with Labels */}
+        <div className="mb-12 w-full transform hover:scale-[1.01] transition-transform duration-1000 ease-in-out">
+          <IntegrityMotherModel theme={theme} showLabels={true} />
+        </div>
+
+        {/* Main Title - Chinese & English - Artistic Font with Staggered Reveal AND Shimmer */}
+        <h1 
+          className={`font-art font-bold mb-8 tracking-wide z-10 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-4 leading-tight ${
+            isDark 
+              ? 'drop-shadow-[0_0_25px_rgba(255,215,0,0.4)]' 
+              : 'drop-shadow-sm'
+          }`}
+          aria-label="元壹宇宙 Yuan-Yi Universe × 虹靈御所 Rainbow Sanctuary × 默默超思維 MomoChao Cognition"
+        >
+          {/* Item 1: Yuan-Yi Universe */}
+          <span className="flex flex-col items-center opacity-0 animate-reveal-blur" style={{ animationDelay: '0.2s' }}>
+            <span className={`text-4xl md:text-5xl lg:text-6xl ${shimmerClass}`}>元壹宇宙</span>
+            <span className={`text-[10px] md:text-xs font-serif tracking-[0.15em] uppercase mt-1 md:mt-3 ${isDark ? 'text-slate-400' : 'text-stone-500'}`}>Yuan-Yi Universe</span>
+          </span>
+
+          <span className={`hidden md:block text-2xl font-light font-sans opacity-0 animate-reveal-blur ${isDark ? 'text-gold' : 'text-muted-gold'}`} style={{ animationDelay: '0.4s' }} aria-hidden="true">×</span>
+          
+          {/* Item 2: Rainbow Sanctuary */}
+          <span className="flex flex-col items-center opacity-0 animate-reveal-blur" style={{ animationDelay: '0.6s' }}>
+             <span className={`text-4xl md:text-5xl lg:text-6xl ${shimmerClass}`}>虹靈御所</span>
+             <span className={`text-[10px] md:text-xs font-serif tracking-[0.15em] uppercase mt-1 md:mt-3 ${isDark ? 'text-slate-400' : 'text-stone-500'}`}>Rainbow Sanctuary</span>
+          </span>
+
+          <span className={`hidden md:block text-2xl font-light font-sans opacity-0 animate-reveal-blur ${isDark ? 'text-gold' : 'text-muted-gold'}`} style={{ animationDelay: '0.8s' }} aria-hidden="true">×</span>
+          
+          {/* Item 3: MomoChao Cognition */}
+          <span className="flex flex-col items-center opacity-0 animate-reveal-blur" style={{ animationDelay: '1.0s' }}>
+             <span className={`text-4xl md:text-5xl lg:text-6xl ${shimmerClass}`}>默默超思維</span>
+             <span className={`text-[10px] md:text-xs font-serif tracking-[0.15em] uppercase mt-1 md:mt-3 ${isDark ? 'text-slate-400' : 'text-stone-500'}`}>MomoChao Cognition</span>
+          </span>
+        </h1>
+        
+        <p className={`font-mono text-[10px] md:text-xs tracking-[0.2em] mb-3 uppercase z-10 transition-colors duration-500 opacity-0 animate-reveal-blur ${
+          isDark ? 'text-blue-200' : 'text-stone-500'
+        }`} style={{ animationDelay: '1.2s' }}>
+          Integrity Thinking System · AI Collaborative Lab
+        </p>
+
+        <p className={`font-mono text-[9px] tracking-[0.3em] mb-10 uppercase z-10 transition-colors duration-500 opacity-0 animate-reveal-blur ${
+          isDark ? 'text-gold' : 'text-muted-gold'
+        }`} style={{ animationDelay: '1.3s' }}>
+          Created by CHAO WEICHEN
+        </p>
+        
+        <div className={`w-16 h-[2px] mx-auto mb-8 transition-colors duration-500 opacity-0 animate-reveal-blur ${isDark ? 'bg-gold shadow-[0_0_15px_#FFD700]' : 'bg-muted-gold'}`} style={{ animationDelay: '1.4s' }}></div>
+        
+        {/* Main Quote - Handwritten Font with Reveal */}
+        <p className={`font-hand font-bold text-xl md:text-2xl whitespace-nowrap z-10 transition-colors duration-500 leading-relaxed opacity-0 animate-reveal-blur ${
+          isDark ? 'text-slate-200' : 'text-stone-700'
+        }`} style={{ animationDelay: '1.6s' }}>
+          「在混亂的時代，建立有骨架的靈魂。」
+        </p>
+        
+        <button 
+          onClick={() => onNavigate('whitepaper')}
+          className={`mt-10 flex items-center gap-3 px-8 py-3 rounded-full border text-xs font-mono tracking-[0.2em] transition-all z-10 duration-500 group opacity-0 animate-reveal-blur ${
+            isDark 
+              ? 'border-slate-700 bg-slate-900/50 text-slate-400 hover:border-gold hover:text-gold hover:bg-slate-900 hover:shadow-[0_0_30px_rgba(255,215,0,0.15)]' 
+              : 'border-stone-300 bg-white/50 text-stone-600 hover:border-ink hover:text-ink hover:bg-white hover:shadow-xl'
+          } backdrop-blur-sm`} 
+          style={{ animationDelay: '1.8s' }}
+          aria-label="Read Full Whitepaper"
+        >
+          <FileText size={14} className="group-hover:scale-110 transition-transform" /> 閱讀完整白皮書
+        </button>
+      </header>
+
+      {/* The 3 Portals - Enhanced Visuals */}
+      <div className="grid gap-8 w-full max-w-6xl md:grid-cols-3 mb-32 z-10 px-4 opacity-0 animate-fade-in-up" style={{ animationDelay: '2.0s', animationFillMode: 'forwards' }}>
+        
+        {/* Portal 1: Sanctuary */}
+        <button 
+          onClick={() => onNavigate('sanctuary')}
+          className={`group relative overflow-hidden p-10 rounded-[2rem] border text-left transition-all duration-500 hover:-translate-y-2 ${
+            isDark 
+              ? 'bg-slate-900/40 border-slate-800 hover:border-purple-500/50 hover:shadow-[0_0_60px_rgba(168,85,247,0.15)]' 
+              : 'bg-white/60 border-stone-200 hover:border-purple-300 hover:shadow-2xl hover:shadow-purple-100'
+          } backdrop-blur-md`}
+          aria-label="Enter Sanctuary for Fate Reading"
+        >
+          <div className={`absolute top-[-30%] right-[-30%] w-64 h-64 rounded-full blur-[80px] transition-opacity duration-700 opacity-0 group-hover:opacity-30 ${
+            isDark ? 'bg-purple-600' : 'bg-purple-400'
+          }`} />
+          
+          <div className={`mb-8 p-4 rounded-2xl w-fit transition-all duration-500 ${
+            isDark ? 'bg-purple-950/50 text-purple-400 group-hover:bg-purple-900 group-hover:scale-110' : 'bg-purple-50 text-purple-700 group-hover:bg-purple-100 group-hover:scale-110'
+          }`}>
+            <Search size={32} strokeWidth={1.5} />
+          </div>
+          <h3 className={`font-serif text-3xl font-bold mb-4 transition-colors ${
+            isDark ? 'text-slate-100' : 'text-ink'
+          }`}>
+            解讀命理
+          </h3>
+          <p className={`font-hand font-bold text-xl mb-10 leading-loose transition-colors opacity-80 ${
+            isDark ? 'text-slate-300' : 'text-stone-600'
+          }`}>
+            進入虹靈御所。透過命理看見結構，而不是被命運決定。
+          </p>
+          <span className={`flex items-center text-xs font-bold tracking-[0.2em] uppercase transition-all duration-300 ${
+            isDark ? 'text-purple-400 group-hover:text-purple-300' : 'text-purple-700 group-hover:text-purple-900'
+          }`}>
+            進入御所 <ArrowRight size={14} className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+          </span>
+        </button>
+
+        {/* Portal 2: Logic System */}
+        <button 
+          onClick={() => onNavigate('logic')}
+          className={`group relative overflow-hidden p-10 rounded-[2rem] border text-left transition-all duration-500 hover:-translate-y-2 ${
+            isDark 
+              ? 'bg-slate-900/40 border-slate-800 hover:border-gold/50 hover:shadow-[0_0_60px_rgba(251,191,36,0.15)]' 
+              : 'bg-white/60 border-stone-200 hover:border-muted-gold hover:shadow-2xl hover:shadow-amber-100'
+          } backdrop-blur-md`}
+          aria-label="Start Logic Loop for Decision Making"
+        >
+          <div className={`absolute top-[-30%] right-[-30%] w-64 h-64 rounded-full blur-[80px] transition-opacity duration-700 opacity-0 group-hover:opacity-30 ${
+            isDark ? 'bg-gold' : 'bg-amber-400'
+          }`} />
+
+          <div className={`mb-8 p-4 rounded-2xl w-fit transition-all duration-500 ${
+            isDark ? 'bg-yellow-950/50 text-gold group-hover:bg-yellow-900 group-hover:scale-110' : 'bg-amber-50 text-muted-gold group-hover:bg-amber-100 group-hover:scale-110'
+          }`}>
+            <Shield size={32} strokeWidth={1.5} />
+          </div>
+          <h3 className={`font-serif text-3xl font-bold mb-4 transition-colors ${
+            isDark ? 'text-slate-100' : 'text-ink'
+          }`}>
+            避險思維
+          </h3>
+          <p className={`font-hand font-bold text-xl mb-10 leading-loose transition-colors opacity-80 ${
+            isDark ? 'text-slate-300' : 'text-stone-600'
+          }`}>
+            啟動八階思維循環。在情緒與混亂中建立決策骨架。
+          </p>
+          <span className={`flex items-center text-xs font-bold tracking-[0.2em] uppercase transition-all duration-300 ${
+            isDark ? 'text-gold group-hover:text-yellow-300' : 'text-muted-gold group-hover:text-yellow-700'
+          }`}>
+            啟動思維循環 <ArrowRight size={14} className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+          </span>
+        </button>
+
+        {/* Portal 3: Linear Guide */}
+        <button 
+          onClick={() => onNavigate('guide')}
+          className={`group relative overflow-hidden p-10 rounded-[2rem] border text-left transition-all duration-500 hover:-translate-y-2 ${
+            isDark 
+              ? 'bg-slate-900/40 border-slate-800 hover:border-jade/50 hover:shadow-[0_0_60px_rgba(16,185,129,0.15)]' 
+              : 'bg-white/60 border-stone-200 hover:border-emerald-600 hover:shadow-2xl hover:shadow-emerald-100'
+          } backdrop-blur-md`}
+          aria-label="Start Linear Guide to learn the system"
+        >
+          <div className={`absolute top-[-30%] right-[-30%] w-64 h-64 rounded-full blur-[80px] transition-opacity duration-700 opacity-0 group-hover:opacity-30 ${
+            isDark ? 'bg-jade' : 'bg-emerald-400'
+          }`} />
+
+          <div className={`mb-8 p-4 rounded-2xl w-fit transition-all duration-500 ${
+            isDark ? 'bg-emerald-950/50 text-jade group-hover:bg-emerald-900 group-hover:scale-110' : 'bg-emerald-50 text-emerald-700 group-hover:bg-emerald-100 group-hover:scale-110'
+          }`}>
+            <HelpCircle size={32} strokeWidth={1.5} />
+          </div>
+          <h3 className={`font-serif text-3xl font-bold mb-4 transition-colors ${
+            isDark ? 'text-slate-100' : 'text-ink'
+          }`}>
+            新手引導
+          </h3>
+          <p className={`font-hand font-bold text-xl mb-10 leading-loose transition-colors opacity-80 ${
+            isDark ? 'text-slate-300' : 'text-stone-600'
+          }`}>
+            跟著默默超一起想。從元壹宇宙觀到實際應用，了解這套系統。
+          </p>
+          <span className={`flex items-center text-xs font-bold tracking-[0.2em] uppercase transition-all duration-300 ${
+            isDark ? 'text-jade group-hover:text-emerald-400' : 'text-emerald-700 group-hover:text-emerald-900'
+          }`}>
+            開始引導 <ArrowRight size={14} className="ml-2 group-hover:translate-x-2 transition-transform duration-300" />
+          </span>
+        </button>
+
+      </div>
+    </div>
+  );
+};
