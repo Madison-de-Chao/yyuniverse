@@ -25,7 +25,7 @@ For a static, museum-grade experience with minimal ops overhead, deploy to a Vit
 
 - **Build command:** `npm run build`
 - **Output directory:** `dist`
-- **Environment variables:** configure `GEMINI_API_KEY` in the platform dashboard (never hardcode secrets).
-- **Edge delivery:** enable CDN caching for `/assets` while keeping API calls client-side to avoid credential exposure.
+- **Environment variables:** configure `GEMINI_API_KEY` in the platform dashboard as a **server-side** secret (never hardcode secrets or expose them to the browser).
+- **Edge delivery:** enable CDN caching for `/assets` and route all Gemini API requests through a backend or serverless function that uses `GEMINI_API_KEY` server-side; the frontend should only call this trusted endpoint and must never send the raw API key from the client.
 
-Other compatible options include Netlify and Cloudflare Pages if your organization already uses them; use the same build and output settings above.
+Other compatible options include Netlify and Cloudflare Pages if your organization already uses them; use the same build and output settings above, and apply the same pattern of server-side Gemini requests.
