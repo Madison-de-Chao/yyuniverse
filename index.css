@@ -23,6 +23,24 @@ body {
   background-size: 240px 240px, 240px 240px;
   pointer-events: none;
   z-index: 0;
+  /* Performance optimization: promote to own compositor layer */
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Responsive grid sizing for mobile devices */
+@media (max-width: 640px) {
+  .museum-grid::before,
+  .museum-grid::after {
+    background-size: 120px 120px, 120px 120px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .museum-grid::before,
+  .museum-grid::after {
+    background-size: 180px 180px, 180px 180px;
+  }
 }
 
 .museum-grid::after {
@@ -32,6 +50,7 @@ body {
   mix-blend-mode: screen;
 }
 
+/* Brand ornament variant with custom gradient and border radius */
 .brand-ornament {
   position: relative;
   overflow: hidden;
@@ -54,6 +73,7 @@ body {
   z-index: 1;
 }
 
+/* Aurora border variant with simpler border approach */
 .aurora-border {
   position: relative;
   overflow: hidden;
