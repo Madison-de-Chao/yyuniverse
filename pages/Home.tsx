@@ -391,7 +391,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) =>
                     className={`inline-flex items-center gap-2 text-xs font-bold tracking-[0.16em] uppercase transition-colors ${
                       isDark ? 'text-gold hover:text-yellow-200' : 'text-muted-gold hover:text-amber-800'
                     }`}
-                    aria-label={step.ariaLabel}
+                    aria-label={`前往 ${step.ariaLabel}`}
                   >
                     <Pointer size={14} /> 前往
                   </button>
