@@ -299,11 +299,10 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) =>
                 return (
                   <div
                     key={pillar.title}
-                    tabIndex={0}
-                    className={`group p-6 rounded-2xl border relative overflow-hidden transition-transform duration-500 hover:-translate-y-1 focus-visible:-translate-y-1 focus-visible:outline-none ${
+                    className={`group p-6 rounded-2xl border relative overflow-hidden transition-transform duration-500 hover:-translate-y-1 ${
                       isDark
-                        ? 'bg-slate-900/70 border-slate-800 hover:border-gold/50 focus-visible:border-gold/50'
-                        : 'bg-white border-stone-200 hover:border-muted-gold focus-visible:border-muted-gold'
+                        ? 'bg-slate-900/70 border-slate-800 hover:border-gold/50'
+                        : 'bg-white border-stone-200 hover:border-muted-gold'
                     }`}
                   >
                     <div className={`flex items-center gap-3 mb-3 ${isDark ? 'text-slate-200' : 'text-ink'}`}>
@@ -318,7 +317,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) =>
                       </div>
                     </div>
                     <p className={`${isDark ? 'text-slate-300' : 'text-stone-700'} leading-relaxed`}>{pillar.description}</p>
-                    <div className={`absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-500 ${isDark ? 'bg-gradient-to-br from-gold/5 via-emerald-500/5 to-blue-500/5' : 'bg-gradient-to-br from-amber-100/50 via-emerald-100/50 to-blue-100/50'}`}></div>
+                    <div className={`absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${isDark ? 'bg-gradient-to-br from-gold/5 via-emerald-500/5 to-blue-500/5' : 'bg-gradient-to-br from-amber-100/50 via-emerald-100/50 to-blue-100/50'}`}></div>
                   </div>
                 );
               })}
