@@ -307,7 +307,6 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) =>
                         ? 'bg-slate-900/70 border-slate-800 hover:border-gold/50 focus-visible:border-gold/50'
                         : 'bg-white border-stone-200 hover:border-muted-gold focus-visible:border-muted-gold'
                     }`}
-                    tabIndex={0}
                   >
                     <div className={`flex items-center gap-3 mb-3 ${isDark ? 'text-slate-200' : 'text-ink'}`}>
                       <span className={`p-3 rounded-xl ${isDark ? 'bg-slate-800 text-gold' : 'bg-stone-100 text-muted-gold'}`}>
