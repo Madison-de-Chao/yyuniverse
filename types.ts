@@ -39,3 +39,11 @@ export interface LayerAnalysis {
 export type Theme = 'dark' | 'light';
 
 export type PageId = 'home' | 'logic' | 'chat' | 'guide' | 'sanctuary' | 'about' | 'system' | 'system-a' | 'system-b' | 'system-c' | 'system-05' | 'whitepaper' | 'origins' | 'principles' | 'script' | 'mirror';
+
+export type DecorativeBorderStyles = React.CSSProperties & {
+  '--border-radius'?: string;
+  '--border-gradient'?: string;
+  '--border-opacity'?: string;
+  '--inner-radius-offset'?: string;
+  '--overlay-gradient'?: string;
+};
