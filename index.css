@@ -29,39 +29,10 @@ body {
 }
 
 /* Responsive grid sizing for mobile devices */
-@media (max-width: 640px) {
+@media (max-width: 480px) {
   .museum-grid::before,
   .museum-grid::after {
-    background-size: 120px 120px, 120px 120px;
-  }
-}
-
-@media (min-width: 641px) and (max-width: 1024px) {
-  .museum-grid::before,
-  .museum-grid::after {
-    background-size: 180px 180px, 180px 180px;
-  }
-}
-
-/* Responsive grid sizing for different viewport sizes */
-@media (min-width: 1600px) {
-  .museum-grid::before,
-  .museum-grid::after {
-    background-size: 240px 240px, 240px 240px;
-  }
-}
-
-@media (min-width: 1024px) and (max-width: 1599px) {
-  .museum-grid::before,
-  .museum-grid::after {
-    background-size: 200px 200px, 200px 200px;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1023px) {
-  .museum-grid::before,
-  .museum-grid::after {
-    background-size: 18vw 18vw, 18vw 18vw;
+    background-size: 25vw 25vw, 25vw 25vw;
   }
 }
 
@@ -72,10 +43,25 @@ body {
   }
 }
 
-@media (max-width: 481px) {
+@media (min-width: 769px) and (max-width: 1023px) {
   .museum-grid::before,
   .museum-grid::after {
-    background-size: 25vw 25vw, 25vw 25vw;
+    background-size: 18vw 18vw, 18vw 18vw;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1599px) {
+  .museum-grid::before,
+  .museum-grid::after {
+    background-size: 200px 200px, 200px 200px;
+  }
+}
+
+/* Responsive grid sizing for different viewport sizes */
+@media (min-width: 1600px) {
+  .museum-grid::before,
+  .museum-grid::after {
+    background-size: 240px 240px, 240px 240px;
   }
 }
 
