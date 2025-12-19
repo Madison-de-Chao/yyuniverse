@@ -140,6 +140,7 @@ function App() {
                   ? 'bg-gradient-to-r from-amber-400 to-amber-300 text-void hover:from-amber-300 hover:to-amber-200'
                   : 'bg-gradient-to-r from-ink to-slate-800 text-paper hover:from-slate-800 hover:to-slate-700'
               }`}
+              aria-label="Start guided experience"
             >
               <Map className="w-4 h-4" />
               立即體驗

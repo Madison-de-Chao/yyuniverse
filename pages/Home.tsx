@@ -1,13 +1,22 @@
 
 import React from 'react';
 import { Shield, ArrowRight, Search, HelpCircle, Sun, Moon, FileText, PanelsTopLeft, Globe2, LayoutDashboard, PlayCircle, Pointer, Users } from 'lucide-react';
-import { PageId, Theme } from '../types';
+import { PageId, Theme, DecorativeBorderStyles } from '../types';
 import { IntegrityMotherModel } from '../components/Visuals';
 
 interface HomeProps {
   onNavigate: (page: PageId) => void;
   theme: Theme;
   toggleTheme: () => void;
+}
+
+interface JourneyStep {
+  title: string;
+  subtitle: string;
+  description: string;
+  cta: () => void;
+  label: string;
+  ariaLabel: string;
 }
 
 export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) => {
@@ -33,13 +42,14 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) =>
     },
   ];
 
-  const journeySteps = [
+  const journeySteps: JourneyStep[] = [
     {
       title: '沉浸起點',
       subtitle: '理解宇宙故事與關鍵人物',
       description: '先從宇宙設定與默默超的角色出發，確定同一個詞彙與價值觀。',
       cta: () => onNavigate('about'),
       label: 'Start',
+      ariaLabel: 'Navigate to About page to learn about universe story and key characters',
     },
     {
       title: '系統骨架',
@@ -47,6 +57,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) =>
       description: '透過系統詳解、八階思維與線性引導，建立穩定的決策框架。',
       cta: () => onNavigate('system'),
       label: 'Structure',
+      ariaLabel: 'Navigate to System page to understand overall system and logic loop',
     },
     {
       title: '實際演練',
@@ -54,6 +65,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) =>
       description: '把架構帶進虹靈御所、誠實 AI 與白皮書，完成一次完整體驗。',
       cta: () => onNavigate('whitepaper'),
       label: 'Practice',
+      ariaLabel: 'Navigate to Whitepaper page to apply learning in practice',
     },
   ];
 
@@ -274,9 +286,22 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) =>
       {/* Museum-grade highlights */}
       <section className="w-full max-w-6xl mb-16 z-10 px-4">
         <div
-          className={`aurora-border p-[1px] ${
+          className={`decorative-border p-[1px] ${
             isDark ? 'bg-slate-900/60' : 'bg-white/70'
           }`}
+          style={{
+            '--border-radius': '22px',
+            '--border-gradient':
+              isDark
+                ? 'linear-gradient(135deg, rgba(250, 204, 21, 0.45), rgba(45, 212, 191, 0.4), rgba(59, 130, 246, 0.4))'
+                : 'linear-gradient(135deg, rgba(245, 158, 11, 0.5), rgba(52, 211, 153, 0.45), rgba(59, 130, 246, 0.45))',
+            '--border-opacity': isDark ? '0.9' : '0.85',
+            '--inner-radius-offset': '4px',
+            '--overlay-gradient':
+              isDark
+                ? 'radial-gradient(circle at top left, rgba(250, 250, 249, 0.12), transparent 55%)'
+                : 'radial-gradient(circle at top left, rgba(250, 250, 249, 0.6), transparent 55%)',
+          } as DecorativeBorderStyles}
         >
           <div className={`card-content rounded-[18px] ${isDark ? 'bg-slate-950/70' : 'bg-white/90'} p-8 md:p-10 flex flex-col gap-8 shadow-2xl`}>
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
@@ -299,10 +324,10 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) =>
                 return (
                   <div
                     key={pillar.title}
-                    className={`group p-6 rounded-2xl border relative overflow-hidden transition-transform duration-500 hover:-translate-y-1 ${
+                    className={`group p-6 rounded-2xl border relative overflow-hidden transition-transform duration-500 hover:-translate-y-1 focus-visible:outline-none focus-visible:-translate-y-1 ${
                       isDark
-                        ? 'bg-slate-900/70 border-slate-800 hover:border-gold/50'
-                        : 'bg-white border-stone-200 hover:border-muted-gold'
+                        ? 'bg-slate-900/70 border-slate-800 hover:border-gold/50 focus-visible:border-gold/50'
+                        : 'bg-white border-stone-200 hover:border-muted-gold focus-visible:border-muted-gold'
                     }`}
                   >
                     <div className={`flex items-center gap-3 mb-3 ${isDark ? 'text-slate-200' : 'text-ink'}`}>
@@ -379,7 +404,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) =>
                       isDark ? 'text-gold hover:text-yellow-200' : 'text-muted-gold hover:text-amber-800'
                     }`}
                   >
-                    <Pointer size={14} /> 前往
+                    <Pointer size={14} /> 前往 {step.ariaLabel}
                   </button>
                 </div>
               ))}
