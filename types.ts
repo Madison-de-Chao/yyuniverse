@@ -1,5 +1,3 @@
-import React from 'react';
-
 export enum StepId {
   DOUBT = 'doubt',
   COST = 'cost',
