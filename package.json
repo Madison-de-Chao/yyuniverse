@@ -16,6 +16,9 @@
     "react-helmet-async": "^2.0.5",
     "react-router-dom": "^7.11.0"
   },
+  "npmConfig": {
+    "legacy-peer-deps": true
+  },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.18",
     "@types/node": "^22.14.0",
