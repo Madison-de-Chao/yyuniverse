@@ -54,6 +54,7 @@ export const Nav: React.FC<NavProps> = ({ activePage, onNavigate, theme, onToggl
           <div 
             className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
             onClick={() => setIsOpen(false)}
+            role="presentation"
           />
           
           {/* Panel */}
