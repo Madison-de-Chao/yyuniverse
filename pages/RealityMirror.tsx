@@ -281,7 +281,7 @@ const MirrorCard: React.FC<{ mirror: MirrorData; theme: Theme; isExpanded: boole
           <div className="space-y-3">
             {mirror.contrast.map((item, idx) => (
               <div 
-                key={idx}
+                key={item.category}
                 className={`grid grid-cols-3 gap-4 p-4 rounded-xl transition-all duration-300 ${
                   isDark 
                     ? 'bg-slate-800/50 hover:bg-slate-800' 
