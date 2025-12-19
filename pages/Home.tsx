@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Shield, ArrowRight, Search, HelpCircle, Sun, Moon, FileText, PanelsTopLeft, Globe2, LayoutDashboard, PlayCircle, Pointer, Users } from 'lucide-react';
-import { PageId, Theme } from '../types';
+import { PageId, Theme, DecorativeBorderStyles } from '../types';
 import { IntegrityMotherModel } from '../components/Visuals';
 
 interface HomeProps {
@@ -286,9 +286,22 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) =>
       {/* Museum-grade highlights */}
       <section className="w-full max-w-6xl mb-16 z-10 px-4">
         <div
-          className={`aurora-border p-[1px] ${
+          className={`decorative-border p-[1px] ${
             isDark ? 'bg-slate-900/60' : 'bg-white/70'
           }`}
+          style={{
+            '--border-radius': '22px',
+            '--border-gradient':
+              isDark
+                ? 'linear-gradient(135deg, rgba(250, 204, 21, 0.45), rgba(45, 212, 191, 0.4), rgba(59, 130, 246, 0.4))'
+                : 'linear-gradient(135deg, rgba(245, 158, 11, 0.5), rgba(52, 211, 153, 0.45), rgba(59, 130, 246, 0.45))',
+            '--border-opacity': isDark ? '0.9' : '0.85',
+            '--inner-radius-offset': '4px',
+            '--overlay-gradient':
+              isDark
+                ? 'radial-gradient(circle at top left, rgba(250, 250, 249, 0.12), transparent 55%)'
+                : 'radial-gradient(circle at top left, rgba(250, 250, 249, 0.6), transparent 55%)',
+          } as DecorativeBorderStyles}
         >
           <div className={`card-content rounded-[18px] ${isDark ? 'bg-slate-950/70' : 'bg-white/90'} p-8 md:p-10 flex flex-col gap-8 shadow-2xl`}>
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">

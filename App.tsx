@@ -16,7 +16,7 @@ import { Whitepaper } from './pages/Whitepaper';
 import { NineOrigins } from './pages/NineOrigins';
 import { SevenPrinciples } from './pages/SevenPrinciples';
 import { UniverseScript } from './pages/UniverseScript';
-import { PageId, Theme } from './types';
+import { PageId, Theme, DecorativeBorderStyles } from './types';
 import { Activity, ChevronLeft, Map, Sparkles } from 'lucide-react';
 
 function App() {
@@ -115,11 +115,17 @@ function App() {
       {/* Brand ribbon to reinforce museum-grade positioning */}
       <div className="fixed top-4 inset-x-0 flex justify-center px-4 z-40 pointer-events-none">
         <div
-          className={`brand-ornament pointer-events-auto flex flex-col md:flex-row gap-4 items-start md:items-center w-full max-w-5xl px-6 py-4 rounded-2xl border shadow-lg transition-colors duration-500 ${
+          className={`decorative-border pointer-events-auto flex flex-col md:flex-row gap-4 items-start md:items-center w-full max-w-5xl px-6 py-4 border shadow-lg transition-colors duration-500 ${
             theme === 'dark'
               ? 'bg-slate-900/70 border-slate-800 text-slate-100'
               : 'bg-white/80 border-stone-200 text-ink'
           } backdrop-blur-xl`}
+          style={{
+            '--border-radius': '24px',
+            '--border-gradient': 'linear-gradient(120deg, rgba(255, 215, 0, 0.8), rgba(168, 85, 247, 0.6), rgba(59, 130, 246, 0.7))',
+            borderRadius: '24px',
+          } as DecorativeBorderStyles}
+          data-border-style="mask"
           role="status"
           aria-label="品牌導覽狀態條"
         >

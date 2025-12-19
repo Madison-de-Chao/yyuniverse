@@ -86,53 +86,60 @@ body {
   mix-blend-mode: screen;
 }
 
-/* Brand ornament variant with custom gradient and border radius */
-.brand-ornament {
+/* Unified decorative border utility with CSS custom properties */
+.decorative-border {
   position: relative;
+  --border-radius: 20px;
+  --border-gradient: linear-gradient(135deg, rgba(16, 185, 129, 0.3), rgba(59, 130, 246, 0.25), rgba(255, 215, 0, 0.35));
+  --border-opacity: 0.8;
+  /* Fixed 2px offset provides consistent visual gap between outer and inner borders
+     across different border-radius values. This creates a uniform border thickness
+     regardless of the element's corner radius, ensuring predictable spacing. */
+  --inner-radius-offset: 2px;
+  --overlay-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
+}
+
+/* Apply overflow hidden only for mask-composite style */
+.decorative-border[data-border-style="mask"] {
   overflow: hidden;
 }
 
-.brand-ornament::before {
+.decorative-border::before {
   content: "";
   position: absolute;
   inset: -1px;
-  border-radius: 24px;
+  border-radius: var(--border-radius);
+  background: var(--border-gradient);
+  opacity: var(--border-opacity);
+  z-index: 0;
+}
+
+/* For mask-composite border style (like brand-ornament) */
+.decorative-border[data-border-style="mask"]::before {
   padding: 1px;
-  background: linear-gradient(120deg, rgba(255, 215, 0, 0.8), rgba(168, 85, 247, 0.6), rgba(59, 130, 246, 0.7));
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
 }
 
-.brand-ornament > * {
-  position: relative;
-  z-index: 1;
-}
-
-/* Aurora border variant with simpler border approach */
-.aurora-border {
-  position: relative;
-  overflow: hidden;
-  border-radius: 20px;
-}
-
-.aurora-border::before {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  border-radius: 20px;
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.3), rgba(59, 130, 246, 0.25), rgba(255, 215, 0, 0.35));
-  opacity: 0.8;
-  z-index: 0;
-}
-
-.aurora-border::after {
+.decorative-border::after {
   content: "";
   position: absolute;
   inset: 0;
-  border-radius: 18px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
+  border-radius: calc(var(--border-radius) - var(--inner-radius-offset));
+  background: var(--overlay-gradient);
   z-index: 1;
+}
+
+/* Disable overlay when not needed (mask style) */
+.decorative-border[data-border-style="mask"]::after {
+  display: none;
+}
+
+.decorative-border > * {
+  position: relative;
+  z-index: 2;
 }
 
 .card-content {
