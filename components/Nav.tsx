@@ -1,36 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import { PageId, Theme } from '../types';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Theme } from '../types';
 import { Menu, X, Sun, Moon, Home, Map, MessageSquare, BookOpen, Shield, User, Layers, Compass, FileText, Star, Sparkles, Scale } from 'lucide-react';
 
 interface NavProps {
-  activePage: PageId;
-  onNavigate: (page: PageId) => void;
   theme: Theme;
   onToggleTheme: () => void;
 }
 
-const NAV_ITEMS: { id: PageId; label: string; icon: React.ElementType }[] = [
-  { id: 'home', label: '首頁', icon: Home },
-  { id: 'guide', label: '導覽', icon: Map },
-  { id: 'chat', label: 'AI 對話', icon: MessageSquare },
-  { id: 'logic', label: '思維循環', icon: Layers },
-  { id: 'system', label: '系統總覽', icon: Compass },
-  { id: 'origins', label: '九大起源', icon: Star },
-  { id: 'principles', label: '七大法則', icon: Sparkles },
-  { id: 'mirror', label: '真實之鏡', icon: Scale },
-  { id: 'script', label: '宇宙劇本', icon: FileText },
-  { id: 'whitepaper', label: '白皮書', icon: BookOpen },
-  { id: 'sanctuary', label: '避難所', icon: Shield },
-  { id: 'about', label: '關於墨', icon: User },
+// 路由映射：將舊的 PageId 映射到新的路由路徑
+const NAV_ITEMS: { path: string; label: string; icon: React.ElementType }[] = [
+  { path: '/', label: '首頁', icon: Home },
+  { path: '/guide', label: '導覽', icon: Map },
+  { path: '/ai-chat', label: 'AI 對話', icon: MessageSquare },
+  { path: '/logic-loop', label: '思維循環', icon: Layers },
+  { path: '/system', label: '系統總覽', icon: Compass },
+  { path: '/nine-origins', label: '九大起源', icon: Star },
+  { path: '/seven-principles', label: '七大法則', icon: Sparkles },
+  { path: '/reality-mirror', label: '真實之鏡', icon: Scale },
+  { path: '/universe-script', label: '宇宙劇本', icon: FileText },
+  { path: '/whitepaper', label: '白皮書', icon: BookOpen },
+  { path: '/sanctuary', label: '避難所', icon: Shield },
+  { path: '/about', label: '關於墨', icon: User },
 ];
 
-export const Nav: React.FC<NavProps> = ({ activePage, onNavigate, theme, onToggleTheme }) => {
+export const Nav: React.FC<NavProps> = ({ theme, onToggleTheme }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
   const isDark = theme === 'dark';
 
-  const handleNavigate = (page: PageId) => {
-    onNavigate(page);
+  const handleNavigate = (path: string) => {
+    navigate(path);
     setIsOpen(false);
+    window.scrollTo(0, 0);
   };
 
   // Close menu on Escape key press
@@ -103,11 +106,11 @@ export const Nav: React.FC<NavProps> = ({ activePage, onNavigate, theme, onToggl
             <div className="p-2">
               {NAV_ITEMS.map((item) => {
                 const Icon = item.icon;
-                const isActive = activePage === item.id;
+                const isActive = location.pathname === item.path;
                 return (
                   <button
-                    key={item.id}
-                    onClick={() => handleNavigate(item.id)}
+                    key={item.path}
+                    onClick={() => handleNavigate(item.path)}
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all duration-200 ${
                       isActive 
                         ? (isDark 

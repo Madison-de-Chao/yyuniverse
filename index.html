@@ -1,97 +1,40 @@
-
 <!DOCTYPE html>
 <html lang="zh-TW">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="探索默默超思維系統，一個融合哲學、邏輯與宇宙觀的深度思維框架。透過九大起源、七大法則與真實之鏡，重新認識自我與世界的本質。" />
+    <meta name="keywords" content="默默超, 思維系統, 哲學, 宇宙觀, 九大起源, 七大法則, 真實之鏡, 元壹宇宙" />
+    <meta name="author" content="默默超" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://yyuniverse.com/" />
+    <meta property="og:title" content="元壹宇宙 | 默默超思維系統" />
+    <meta property="og:description" content="探索默默超思維系統，一個融合哲學、邏輯與宇宙觀的深度思維框架。" />
+    <meta property="og:image" content="https://yyuniverse.com/og-image.jpg" />
+    <meta property="og:site_name" content="元壹宇宙" />
+    <meta property="og:locale" content="zh_TW" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://yyuniverse.com/" />
+    <meta name="twitter:title" content="元壹宇宙 | 默默超思維系統" />
+    <meta name="twitter:description" content="探索默默超思維系統，一個融合哲學、邏輯與宇宙觀的深度思維框架。" />
+    <meta name="twitter:image" content="https://yyuniverse.com/og-image.jpg" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://yyuniverse.com/" />
     <title>元壹宇宙 yyuniverse.com | 默默超思維系統</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 預加載字體 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Noto+Serif+TC:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Shippori+Mincho:wght@400;500;600;700;800&family=Klee+One:wght@400;600&display=swap" rel="stylesheet">
-    <script>
-      tailwind.config = {
-        darkMode: 'class',
-        theme: {
-          extend: {
-            colors: {
-              // Dark Mode (Deep Universe)
-              'void': '#050508', // Deepest black-blue
-              'cyber-text': '#E2E8F0',
-              
-              // Light Mode (Zen Parchment)
-              'paper': '#F0EBE0', // Warm, aged paper
-              'ink': '#2C2420', // Soft charcoal/sepia black
-              'paper-accent': '#E6DFD0',
-
-              // Shared Elements
-              'gold': '#FFD700', // Bright glowing gold (Dark mode)
-              'muted-gold': '#A67C52', // Antique bronze/gold (Light mode)
-              'cinnabar': '#C0392B', // Seal red
-              'jade': '#276749', // Deep jade
-              'earth': '#8D8172', // Stone/Earth
-            },
-            fontFamily: {
-              serif: ['"Noto Serif TC"', 'serif'],
-              mono: ['"JetBrains Mono"', 'monospace'],
-              sans: ['"Noto Sans TC"', 'sans-serif'],
-              art: ['"Shippori Mincho"', '"Noto Serif TC"', 'serif'],
-              hand: ['"Klee One"', '"Noto Serif TC"', 'cursive'],
-            },
-            animation: {
-              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-              'spin-slow': 'spin 20s linear infinite',
-              'spin-slower': 'spin 60s linear infinite',
-              'spin-reverse-slow': 'spin-reverse 25s linear infinite',
-              'float': 'float 6s ease-in-out infinite',
-              'draw': 'draw 2s ease-out forwards',
-              'fade-in': 'fadeIn 0.8s ease-out forwards',
-              'fade-in-up': 'fadeInUp 0.6s ease-out forwards',
-              'breathing': 'breathing 5s ease-in-out infinite',
-              'reveal-blur': 'revealBlur 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
-              'shimmer': 'shimmer 8s linear infinite',
-              'pop-in': 'popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
-            },
-            keyframes: {
-              'spin-reverse': {
-                'from': { transform: 'rotate(360deg)' },
-                'to': { transform: 'rotate(0deg)' },
-              },
-              'float': {
-                '0%, 100%': { transform: 'translateY(0)' },
-                '50%': { transform: 'translateY(-10px)' },
-              },
-              'draw': {
-                'from': { strokeDashoffset: '1000' },
-                'to': { strokeDashoffset: '0' },
-              },
-              'fadeIn': {
-                '0%': { opacity: '0' },
-                '100%': { opacity: '1' },
-              },
-              'fadeInUp': {
-                '0%': { opacity: '0', transform: 'translateY(20px)' },
-                '100%': { opacity: '1', transform: 'translateY(0)' },
-              },
-              'breathing': {
-                '0%, 100%': { transform: 'scale(1)', opacity: '0.8' },
-                '50%': { transform: 'scale(1.05)', opacity: '1' },
-              },
-              'revealBlur': {
-                '0%': { opacity: '0', transform: 'translateY(30px)', filter: 'blur(12px)' },
-                '100%': { opacity: '1', transform: 'translateY(0)', filter: 'blur(0px)' },
-              },
-              'shimmer': {
-                '0%': { backgroundPosition: '200% 0' },
-                '100%': { backgroundPosition: '-200% 0' }
-              },
-              'popIn': {
-                '0%': { opacity: '0', transform: 'scale(0.9)' },
-                '100%': { opacity: '1', transform: 'scale(1)' },
-              }
-            }
-          }
-        }
-      }
-    </script>
+    
     <style>
       /* Custom Scrollbar */
       ::-webkit-scrollbar {
@@ -144,6 +87,16 @@
         outline: none;
       }
 
+      /* Reduced Motion Support */
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: 0.001ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.001ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
+
       @media print {
         body * {
           visibility: hidden;
@@ -163,22 +116,11 @@
         }
       }
     </style>
-  <script type="importmap">
-{
-  "imports": {
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
-    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.6"
-  }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
-</head>
+    
+    <link rel="stylesheet" href="/index.css">
+  </head>
   <body>
     <div id="root"></div>
-  <script type="module" src="/index.tsx"></script>
-</body>
+    <script type="module" src="/index.tsx"></script>
+  </body>
 </html>

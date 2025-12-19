@@ -1,93 +1,48 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter, useNavigate, useLocation } from 'react-router-dom';
 import { Nav } from './components/Nav';
-import { Home } from './pages/Home';
-import { LogicLoop } from './pages/LogicLoop';
-import { AIChat } from './pages/AIChat';
-import { LinearGuide } from './pages/LinearGuide';
-import { Sanctuary } from './pages/Sanctuary';
-import { AboutMomo } from './pages/AboutMomo';
-import { SystemDetail } from './pages/SystemDetail';
-import { SystemZoneA } from './pages/SystemZoneA';
-import { SystemZoneB } from './pages/SystemZoneB';
-import { SystemZoneC } from './pages/SystemZoneC';
-import { SystemZone05 } from './pages/SystemZone05';
-import { Whitepaper } from './pages/Whitepaper';
-import { NineOrigins } from './pages/NineOrigins';
-import { SevenPrinciples } from './pages/SevenPrinciples';
-import { UniverseScript } from './pages/UniverseScript';
-import { RealityMirror } from './pages/RealityMirror';
-import { PageId, Theme } from './types';
+import { AppRoutes } from './router';
+import { Theme } from './types';
 import { ChevronLeft, Map } from 'lucide-react';
 
-function App() {
-  const [activePage, setActivePage] = useState<PageId>('home');
+// 內部組件，用於訪問 router hooks
+function AppContent() {
   const [theme, setTheme] = useState<Theme>('dark');
-  // History stack for navigation
-  const [history, setHistory] = useState<PageId[]>([]);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  // Initialize theme from local storage if available, or default to dark
+  // 從 localStorage 讀取主題偏好
   useEffect(() => {
-    // Optional: Logic to read system preference or localStorage
+    const savedTheme = localStorage.getItem('theme') as Theme;
+    if (savedTheme) {
+      setTheme(savedTheme);
+    } else {
+      // 檢測系統主題偏好
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      setTheme(prefersDark ? 'dark' : 'light');
+    }
   }, []);
+
+  // 保存主題到 localStorage
+  useEffect(() => {
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
   const toggleTheme = () => {
     setTheme(prev => prev === 'dark' ? 'light' : 'dark');
   };
 
-  const handleNavigate = (page: PageId) => {
-    if (page === activePage) return;
-    // Push current page to history before navigating
-    setHistory(prev => [...prev, activePage]);
-    setActivePage(page);
-    window.scrollTo(0, 0);
-  };
-
   const handleBack = () => {
-    const newHistory = [...history];
-    const prevPage = newHistory.pop(); // Get the last page
-    setHistory(newHistory);
-    setActivePage(prevPage || 'home'); // Fallback to home if history empty
+    navigate(-1);
     window.scrollTo(0, 0);
   };
 
-  const renderPage = () => {
-    switch (activePage) {
-      case 'home':
-        return <Home theme={theme} onNavigate={handleNavigate} />;
-      case 'logic':
-        return <LogicLoop theme={theme} />;
-      case 'chat':
-        return <AIChat theme={theme} />;
-      case 'guide':
-        return <LinearGuide theme={theme} onNavigate={handleNavigate} />;
-      case 'sanctuary':
-        return <Sanctuary theme={theme} onNavigate={handleNavigate} />;
-      case 'about':
-        return <AboutMomo theme={theme} />;
-      case 'system':
-        return <SystemDetail theme={theme} onNavigate={handleNavigate} />;
-      case 'system-a':
-        return <SystemZoneA theme={theme} />;
-      case 'system-b':
-        return <SystemZoneB theme={theme} />;
-      case 'system-c':
-        return <SystemZoneC theme={theme} />;
-      case 'system-05':
-        return <SystemZone05 theme={theme} />;
-      case 'whitepaper':
-        return <Whitepaper theme={theme} />;
-      case 'origins':
-        return <NineOrigins theme={theme} />;
-      case 'principles':
-        return <SevenPrinciples theme={theme} />;
-      case 'script':
-        return <UniverseScript theme={theme} />;
-      case 'mirror':
-        return <RealityMirror theme={theme} />;
-      default:
-        return <Home theme={theme} onNavigate={handleNavigate} />;
-    }
+  const handleNavigateToGuide = () => {
+    navigate('/guide');
+    window.scrollTo(0, 0);
   };
+
+  const isHomePage = location.pathname === '/';
 
   return (
     <div
@@ -134,7 +89,7 @@ function App() {
             <span className="text-xs opacity-60">LIVE 導覽模式</span>
             <span className="text-xs opacity-40">全域地圖可隨時開啟</span>
             <button
-              onClick={() => handleNavigate('guide')}
+              onClick={handleNavigateToGuide}
               className={`px-4 py-2 rounded-xl text-xs font-bold tracking-[0.18em] uppercase transition-colors duration-300 shadow-md flex items-center gap-2 ${
                 theme === 'dark'
                   ? 'bg-gradient-to-r from-amber-400 to-amber-300 text-void hover:from-amber-300 hover:to-amber-200'
@@ -152,7 +107,7 @@ function App() {
       {/* Content with top padding for fixed header */}
       <div className="relative z-0 pt-20">
         {/* Global Back Button (Visible on non-home pages) */}
-        {activePage !== 'home' && (
+        {!isHomePage && (
           <button
             onClick={handleBack}
             className={`fixed top-24 left-6 z-40 px-4 py-2 rounded-lg flex items-center gap-2 transition-colors duration-300 ${
@@ -166,17 +121,23 @@ function App() {
           </button>
         )}
 
-        {renderPage()}
+        <AppRoutes theme={theme} toggleTheme={toggleTheme} />
 
         {/* New Open Map Navigation */}
         <Nav 
-          activePage={activePage} 
-          onNavigate={handleNavigate} 
           theme={theme}
           onToggleTheme={toggleTheme}
         />
       </div>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
   );
 }
 
