@@ -33,6 +33,20 @@ body {
   }
 }
 
+@media (min-width: 1024px) and (max-width: 1599px) {
+  .museum-grid::before,
+  .museum-grid::after {
+    background-size: 200px 200px, 200px 200px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1023px) {
+  .museum-grid::before,
+  .museum-grid::after {
+    background-size: 18vw 18vw, 18vw 18vw;
+  }
+}
+
 @media (min-width: 481px) and (max-width: 768px) {
   .museum-grid::before,
   .museum-grid::after {
