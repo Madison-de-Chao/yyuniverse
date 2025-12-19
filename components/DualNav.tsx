@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Theme } from '../types';
 import { Sun, Moon, Home, Map, Target, BookText, FileSearch, Info, Star, Sparkles, Scale, FileText, BookOpen, Shield, User, Layers, Compass, MessageSquare } from 'lucide-react';
@@ -50,33 +50,33 @@ export const DualNav: React.FC<DualNavProps> = ({ theme, onToggleTheme }) => {
           isDark 
             ? 'bg-void/95 border-b border-gold/20' 
             : 'bg-paper/95 border-b border-ink/10'
-        } backdrop-blur-md`}
+        } backdrop-blur-md shadow-sm`}
         aria-label="Academic navigation"
       >
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between h-16">
-            {/* Logo */}
+            {/* Logo 區域 - 增加寬度避免重疊 */}
             <div 
               onClick={() => handleNavigate('/museum')}
-              className="flex items-center gap-3 cursor-pointer"
+              className="flex items-center gap-2 cursor-pointer flex-shrink-0 min-w-[180px]"
             >
               <img 
                 src="/logo.png" 
                 alt="元壹宇宙" 
-                className="h-10 w-10"
+                className="h-8 w-8 sm:h-10 sm:w-10"
               />
-              <div className="flex flex-col">
-                <span className={`font-serif font-bold text-lg ${isDark ? 'text-gold' : 'text-muted-gold'}`}>
+              <div className="hidden sm:flex flex-col">
+                <span className={`font-serif font-bold text-base ${isDark ? 'text-gold' : 'text-muted-gold'}`}>
                   元壹宇宙
                 </span>
-                <span className="text-xs opacity-60 tracking-wider">
+                <span className="text-[10px] opacity-60 tracking-wider">
                   YUANYI UNIVERSE
                 </span>
               </div>
             </div>
 
-            {/* 學術導航項目 */}
-            <div className="hidden md:flex items-center gap-1">
+            {/* 學術導航項目 - 桌面版 */}
+            <div className="hidden lg:flex items-center gap-1 flex-1 justify-center">
               {academicNav.map((item) => {
                 const Icon = item.icon;
                 const isActive = location.pathname === item.path;
@@ -84,18 +84,44 @@ export const DualNav: React.FC<DualNavProps> = ({ theme, onToggleTheme }) => {
                   <button
                     key={item.path}
                     onClick={() => handleNavigate(item.path)}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                    className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-all duration-200 ${
                       isActive 
                         ? (isDark 
-                            ? 'bg-gold/10 text-gold' 
-                            : 'bg-amber-50 text-muted-gold')
+                            ? 'bg-gold/15 text-gold' 
+                            : 'bg-amber-100 text-muted-gold')
                         : (isDark 
-                            ? 'text-paper/70 hover:text-paper hover:bg-gold/5' 
-                            : 'text-void/70 hover:text-void hover:bg-ink/5')
+                            ? 'text-paper/80 hover:text-paper hover:bg-gold/5' 
+                            : 'text-void/80 hover:text-void hover:bg-ink/5')
                     }`}
                   >
                     <Icon size={16} />
-                    <span>{item.label}</span>
+                    <span className="text-sm">{item.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* 學術導航項目 - 移動版（簡化） */}
+            <div className="flex lg:hidden items-center gap-1 flex-1 justify-end overflow-x-auto scrollbar-hide">
+              {academicNav.slice(0, 3).map((item) => {
+                const Icon = item.icon;
+                const isActive = location.pathname === item.path;
+                return (
+                  <button
+                    key={item.path}
+                    onClick={() => handleNavigate(item.path)}
+                    className={`flex items-center gap-1 px-2 py-1.5 rounded-md text-xs font-medium whitespace-nowrap transition-all duration-200 ${
+                      isActive 
+                        ? (isDark 
+                            ? 'bg-gold/15 text-gold' 
+                            : 'bg-amber-100 text-muted-gold')
+                        : (isDark 
+                            ? 'text-paper/80 hover:text-paper hover:bg-gold/5' 
+                            : 'text-void/80 hover:text-void hover:bg-ink/5')
+                    }`}
+                  >
+                    <Icon size={14} />
+                    <span className="hidden sm:inline">{item.label}</span>
                   </button>
                 );
               })}
@@ -105,29 +131,34 @@ export const DualNav: React.FC<DualNavProps> = ({ theme, onToggleTheme }) => {
             <button
               onClick={onToggleTheme}
               aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-              className={`p-2 rounded-lg transition-colors ${
+              className={`p-2 rounded-lg transition-colors flex-shrink-0 ml-2 ${
                 isDark 
                   ? 'hover:bg-gold/10 text-gold' 
                   : 'hover:bg-ink/10 text-muted-gold'
               }`}
             >
-              {isDark ? <Sun size={20} /> : <Moon size={20} />}
+              {isDark ? <Sun size={18} /> : <Moon size={18} />}
             </button>
           </div>
         </div>
       </nav>
 
-      {/* 次導航：探索內容 */}
+      {/* 次導航：探索內容 - 視覺上更輕量 */}
       <nav 
         className={`transition-colors duration-300 ${
           isDark 
-            ? 'bg-void/90 border-b border-gold/10' 
-            : 'bg-paper/90 border-b border-ink/5'
+            ? 'bg-void/80 border-b border-gold/5' 
+            : 'bg-paper/80 border-b border-ink/5'
         } backdrop-blur-sm`}
         aria-label="Exploration navigation"
       >
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex items-center gap-1 overflow-x-auto py-2 scrollbar-hide">
+            <span className={`text-[10px] uppercase tracking-wider mr-2 flex-shrink-0 ${
+              isDark ? 'text-paper/40' : 'text-void/40'
+            }`}>
+              探索
+            </span>
             {explorationNav.map((item) => {
               const Icon = item.icon;
               const isActive = location.pathname === item.path;
@@ -135,17 +166,17 @@ export const DualNav: React.FC<DualNavProps> = ({ theme, onToggleTheme }) => {
                 <button
                   key={item.path}
                   onClick={() => handleNavigate(item.path)}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium whitespace-nowrap transition-all duration-200 ${
+                  className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-normal whitespace-nowrap transition-all duration-200 ${
                     isActive 
                       ? (isDark 
                           ? 'bg-gold/10 text-gold' 
                           : 'bg-amber-50 text-muted-gold')
                       : (isDark 
-                          ? 'text-paper/60 hover:text-paper hover:bg-gold/5' 
-                          : 'text-void/60 hover:text-void hover:bg-ink/5')
+                          ? 'text-paper/50 hover:text-paper/80 hover:bg-gold/5' 
+                          : 'text-void/50 hover:text-void/80 hover:bg-ink/5')
                   }`}
                 >
-                  <Icon size={14} />
+                  <Icon size={12} />
                   <span>{item.label}</span>
                 </button>
               );
