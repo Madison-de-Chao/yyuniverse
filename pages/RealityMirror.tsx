@@ -329,10 +329,10 @@ export const RealityMirror: React.FC<RealityMirrorProps> = ({ theme }) => {
           真實之鏡
         </h1>
         <p className="font-mono text-sm tracking-[0.2em] opacity-60 uppercase mb-8">Reality Mirror — 7 Contrasts</p>
-        <p className={`max-w-2xl mx-auto text-lg italic font-serif leading-relaxed ${isDark ? 'text-slate-400' : 'text-gray-600'}`}>
-          「元壹宇宙不是要取代任何系統，而是提供一個更底層的視角。<br/>
-          這裡呈現與七大既有框架的對照，看見結構層的不同。」
-        </p>
+        <div className={`max-w-2xl mx-auto text-lg italic font-serif leading-relaxed ${isDark ? 'text-slate-400' : 'text-gray-600'}`}>
+          <p>「元壹宇宙不是要取代任何系統，而是提供一個更底層的視角。</p>
+          <p>這裡呈現與七大既有框架的對照，看見結構層的不同。」</p>
+        </div>
       </header>
 
       {/* Mirror Cards */}
@@ -353,10 +353,10 @@ export const RealityMirror: React.FC<RealityMirrorProps> = ({ theme }) => {
         isDark ? 'bg-slate-900/30 border-slate-800' : 'bg-gray-50 border-gray-200'
       }`}>
         <Check size={24} className={`mx-auto mb-4 ${isDark ? 'text-green-500' : 'text-green-600'}`} />
-        <p className={`text-sm leading-relaxed max-w-xl mx-auto ${isDark ? 'text-slate-400' : 'text-gray-600'}`}>
-          每個對照都不是「對錯」之分，而是「層級」之別。<br/>
-          元壹宇宙試圖觸及更底層的結構，讓這些智慧傳統得以在新框架中被重新理解。
-        </p>
+        <div className={`text-sm leading-relaxed max-w-xl mx-auto ${isDark ? 'text-slate-400' : 'text-gray-600'}`}>
+          <p>每個對照都不是「對錯」之分，而是「層級」之別。</p>
+          <p>元壹宇宙試圖觸及更底層的結構，讓這些智慧傳統得以在新框架中被重新理解。</p>
+        </div>
       </div>
 
     </div>
