@@ -28,8 +28,7 @@ body {
   transform: translateZ(0);
 }
 
-/* Responsive grid sizing - non-overlapping breakpoints */
-/* Mobile: 0-480px */
+/* Responsive grid sizing for mobile devices */
 @media (max-width: 480px) {
   .museum-grid::before,
   .museum-grid::after {
@@ -37,7 +36,6 @@ body {
   }
 }
 
-/* Small tablet: 481-768px */
 @media (min-width: 481px) and (max-width: 768px) {
   .museum-grid::before,
   .museum-grid::after {
@@ -53,7 +51,6 @@ body {
   }
 }
 
-/* Desktop: 1024-1599px */
 @media (min-width: 1024px) and (max-width: 1599px) {
   .museum-grid::before,
   .museum-grid::after {
@@ -61,7 +58,7 @@ body {
   }
 }
 
-/* Large desktop: 1600px+ */
+/* Responsive grid sizing for different viewport sizes */
 @media (min-width: 1600px) {
   .museum-grid::before,
   .museum-grid::after {

@@ -324,10 +324,10 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) =>
                 return (
                   <div
                     key={pillar.title}
-                    className={`group p-6 rounded-2xl border relative overflow-hidden transition-transform duration-500 hover:-translate-y-1 focus-visible:outline-none focus-visible:-translate-y-1 ${
+                    className={`group p-6 rounded-2xl border relative overflow-hidden transition-transform duration-500 hover:-translate-y-1 ${
                       isDark
-                        ? 'bg-slate-900/70 border-slate-800 hover:border-gold/50 focus-visible:border-gold/50'
-                        : 'bg-white border-stone-200 hover:border-muted-gold focus-visible:border-muted-gold'
+                        ? 'bg-slate-900/70 border-slate-800 hover:border-gold/50'
+                        : 'bg-white border-stone-200 hover:border-muted-gold'
                     }`}
                   >
                     <div className={`flex items-center gap-3 mb-3 ${isDark ? 'text-slate-200' : 'text-ink'}`}>
