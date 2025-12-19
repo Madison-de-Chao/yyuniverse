@@ -16,7 +16,7 @@ import { Whitepaper } from './pages/Whitepaper';
 import { NineOrigins } from './pages/NineOrigins';
 import { SevenPrinciples } from './pages/SevenPrinciples';
 import { UniverseScript } from './pages/UniverseScript';
-import { PageId, Theme } from './types';
+import { PageId, Theme, DecorativeBorderStyles } from './types';
 import { Activity, ChevronLeft, Map, Sparkles } from 'lucide-react';
 
 function App() {
@@ -124,7 +124,7 @@ function App() {
             '--border-radius': '24px',
             '--border-gradient': 'linear-gradient(120deg, rgba(255, 215, 0, 0.8), rgba(168, 85, 247, 0.6), rgba(59, 130, 246, 0.7))',
             borderRadius: '24px',
-          } as React.CSSProperties}
+          } as DecorativeBorderStyles}
           data-border-style="mask"
           role="status"
           aria-label="品牌導覽狀態條"

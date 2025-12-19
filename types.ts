@@ -38,3 +38,12 @@ export interface LayerAnalysis {
 export type Theme = 'dark' | 'light';
 
 export type PageId = 'home' | 'logic' | 'chat' | 'guide' | 'sanctuary' | 'about' | 'system' | 'system-a' | 'system-b' | 'system-c' | 'system-05' | 'whitepaper' | 'origins' | 'principles' | 'script';
+
+// Type-safe CSS custom properties for decorative-border class
+export interface DecorativeBorderStyles extends React.CSSProperties {
+  '--border-radius'?: string;
+  '--border-gradient'?: string;
+  '--border-opacity'?: string;
+  '--inner-radius-offset'?: string;
+  '--overlay-gradient'?: string;
+}
