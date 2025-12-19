@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { Theme } from './types';
 import { SEO } from './components/SEO';
 import { pageMeta } from './seo-config';
@@ -64,196 +64,189 @@ function PageWrapper({
   );
 }
 
-// 創建路由配置
-export function createAppRouter(theme: Theme, toggleTheme: () => void) {
-  return createBrowserRouter([
-    { 
-      path: '/', 
-      element: (
-        <PageWrapper seoKey="home">
-          <Home theme={theme} onNavigate={() => {}} toggleTheme={toggleTheme} />
-        </PageWrapper>
-      )
-    },
-    { 
-      path: '/whitepaper', 
-      element: (
-        <PageWrapper seoKey="whitepaper">
-          <Whitepaper theme={theme} onNavigate={() => {}} />
-        </PageWrapper>
-      )
-    },
-    { 
-      path: '/about', 
-      element: (
-        <PageWrapper seoKey="about">
-          <AboutMomo theme={theme} onNavigate={() => {}} />
-        </PageWrapper>
-      )
-    },
-    { 
-      path: '/logic-loop', 
-      element: (
-        <PageWrapper seoKey="logicLoop">
-          <LogicLoop theme={theme} onNavigate={() => {}} />
-        </PageWrapper>
-      )
-    },
-    { 
-      path: '/ai-chat', 
-      element: (
-        <PageWrapper seoKey="aiChat">
-          <AIChat theme={theme} onNavigate={() => {}} />
-        </PageWrapper>
-      )
-    },
-    { 
-      path: '/guide', 
-      element: (
-        <PageWrapper seoKey="guide">
-          <LinearGuide theme={theme} onNavigate={() => {}} />
-        </PageWrapper>
-      )
-    },
-    { 
-      path: '/sanctuary', 
-      element: (
-        <PageWrapper seoKey="sanctuary">
-          <Sanctuary theme={theme} onNavigate={() => {}} />
-        </PageWrapper>
-      )
-    },
-    { 
-      path: '/system', 
-      element: (
-        <PageWrapper seoKey="system">
-          <SystemDetail theme={theme} onNavigate={() => {}} />
-        </PageWrapper>
-      )
-    },
-    { 
-      path: '/system/zone-a', 
-      element: (
-        <PageWrapper seoKey="systemZoneA">
-          <SystemZoneA theme={theme} onNavigate={() => {}} />
-        </PageWrapper>
-      )
-    },
-    { 
-      path: '/system/zone-b', 
-      element: (
-        <PageWrapper seoKey="systemZoneB">
-          <SystemZoneB theme={theme} onNavigate={() => {}} />
-        </PageWrapper>
-      )
-    },
-    { 
-      path: '/system/zone-c', 
-      element: (
-        <PageWrapper seoKey="systemZoneC">
-          <SystemZoneC theme={theme} onNavigate={() => {}} />
-        </PageWrapper>
-      )
-    },
-    { 
-      path: '/system/zone-05', 
-      element: (
-        <PageWrapper seoKey="systemZone05">
-          <SystemZone05 theme={theme} onNavigate={() => {}} />
-        </PageWrapper>
-      )
-    },
-    { 
-      path: '/nine-origins', 
-      element: (
-        <PageWrapper seoKey="nineOrigins">
-          <NineOrigins theme={theme} onNavigate={() => {}} />
-        </PageWrapper>
-      )
-    },
-    { 
-      path: '/seven-principles', 
-      element: (
-        <PageWrapper seoKey="sevenPrinciples">
-          <SevenPrinciples theme={theme} onNavigate={() => {}} />
-        </PageWrapper>
-      )
-    },
-    { 
-      path: '/universe-script', 
-      element: (
-        <PageWrapper seoKey="universeScript">
-          <UniverseScript theme={theme} onNavigate={() => {}} />
-        </PageWrapper>
-      )
-    },
-    { 
-      path: '/reality-mirror', 
-      element: (
-        <PageWrapper seoKey="realityMirror">
-          <RealityMirror theme={theme} onNavigate={() => {}} />
-        </PageWrapper>
-      )
-    },
-    // 學術架構路由
-    { 
-      path: '/museum', 
-      element: (
-        <PageWrapper seoKey="museum">
-          <MuseumHome />
-        </PageWrapper>
-      )
-    },
-    { 
-      path: '/system-map', 
-      element: (
-        <PageWrapper seoKey="systemMap">
-          <SystemMap />
-        </PageWrapper>
-      )
-    },
-    { 
-      path: '/challenge-kit', 
-      element: (
-        <PageWrapper seoKey="challengeKit">
-          <ChallengeKit />
-        </PageWrapper>
-      )
-    },
-    { 
-      path: '/glossary', 
-      element: (
-        <PageWrapper seoKey="glossary">
-          <Glossary />
-        </PageWrapper>
-      )
-    },
-    { 
-      path: '/references', 
-      element: (
-        <PageWrapper seoKey="references">
-          <References />
-        </PageWrapper>
-      )
-    },
-    { 
-      path: '/about-system', 
-      element: (
-        <PageWrapper seoKey="aboutSystem">
-          <AboutSystem />
-        </PageWrapper>
-      )
-    },
-  ]);
-}
-
-// 路由提供者組件
+// 路由組件
 export function AppRoutes({ theme, toggleTheme }: { theme: Theme; toggleTheme: () => void }) {
-  const router = createAppRouter(theme, toggleTheme);
-  
   return (
     <Suspense fallback={<LoadingFallback />}>
-      <RouterProvider router={router} />
+      <Routes>
+        <Route 
+          path="/" 
+          element={
+            <PageWrapper seoKey="home">
+              <Home theme={theme} onNavigate={() => {}} toggleTheme={toggleTheme} />
+            </PageWrapper>
+          }
+        />
+        <Route 
+          path="/whitepaper" 
+          element={
+            <PageWrapper seoKey="whitepaper">
+              <Whitepaper theme={theme} onNavigate={() => {}} />
+            </PageWrapper>
+          }
+        />
+        <Route 
+          path="/about" 
+          element={
+            <PageWrapper seoKey="about">
+              <AboutMomo theme={theme} onNavigate={() => {}} />
+            </PageWrapper>
+          }
+        />
+        <Route 
+          path="/logic-loop" 
+          element={
+            <PageWrapper seoKey="logicLoop">
+              <LogicLoop theme={theme} onNavigate={() => {}} />
+            </PageWrapper>
+          }
+        />
+        <Route 
+          path="/ai-chat" 
+          element={
+            <PageWrapper seoKey="aiChat">
+              <AIChat theme={theme} onNavigate={() => {}} />
+            </PageWrapper>
+          }
+        />
+        <Route 
+          path="/guide" 
+          element={
+            <PageWrapper seoKey="guide">
+              <LinearGuide theme={theme} onNavigate={() => {}} />
+            </PageWrapper>
+          }
+        />
+        <Route 
+          path="/sanctuary" 
+          element={
+            <PageWrapper seoKey="sanctuary">
+              <Sanctuary theme={theme} onNavigate={() => {}} />
+            </PageWrapper>
+          }
+        />
+        <Route 
+          path="/system" 
+          element={
+            <PageWrapper seoKey="system">
+              <SystemDetail theme={theme} onNavigate={() => {}} />
+            </PageWrapper>
+          }
+        />
+        <Route 
+          path="/system/zone-a" 
+          element={
+            <PageWrapper seoKey="systemZoneA">
+              <SystemZoneA theme={theme} onNavigate={() => {}} />
+            </PageWrapper>
+          }
+        />
+        <Route 
+          path="/system/zone-b" 
+          element={
+            <PageWrapper seoKey="systemZoneB">
+              <SystemZoneB theme={theme} onNavigate={() => {}} />
+            </PageWrapper>
+          }
+        />
+        <Route 
+          path="/system/zone-c" 
+          element={
+            <PageWrapper seoKey="systemZoneC">
+              <SystemZoneC theme={theme} onNavigate={() => {}} />
+            </PageWrapper>
+          }
+        />
+        <Route 
+          path="/system/zone-05" 
+          element={
+            <PageWrapper seoKey="systemZone05">
+              <SystemZone05 theme={theme} onNavigate={() => {}} />
+            </PageWrapper>
+          }
+        />
+        <Route 
+          path="/nine-origins" 
+          element={
+            <PageWrapper seoKey="nineOrigins">
+              <NineOrigins theme={theme} onNavigate={() => {}} />
+            </PageWrapper>
+          }
+        />
+        <Route 
+          path="/seven-principles" 
+          element={
+            <PageWrapper seoKey="sevenPrinciples">
+              <SevenPrinciples theme={theme} onNavigate={() => {}} />
+            </PageWrapper>
+          }
+        />
+        <Route 
+          path="/universe-script" 
+          element={
+            <PageWrapper seoKey="universeScript">
+              <UniverseScript theme={theme} onNavigate={() => {}} />
+            </PageWrapper>
+          }
+        />
+        <Route 
+          path="/reality-mirror" 
+          element={
+            <PageWrapper seoKey="realityMirror">
+              <RealityMirror theme={theme} onNavigate={() => {}} />
+            </PageWrapper>
+          }
+        />
+        {/* 學術架構路由 */}
+        <Route 
+          path="/museum" 
+          element={
+            <PageWrapper seoKey="museum">
+              <MuseumHome />
+            </PageWrapper>
+          }
+        />
+        <Route 
+          path="/system-map" 
+          element={
+            <PageWrapper seoKey="systemMap">
+              <SystemMap />
+            </PageWrapper>
+          }
+        />
+        <Route 
+          path="/challenge-kit" 
+          element={
+            <PageWrapper seoKey="challengeKit">
+              <ChallengeKit />
+            </PageWrapper>
+          }
+        />
+        <Route 
+          path="/glossary" 
+          element={
+            <PageWrapper seoKey="glossary">
+              <Glossary />
+            </PageWrapper>
+          }
+        />
+        <Route 
+          path="/references" 
+          element={
+            <PageWrapper seoKey="references">
+              <References />
+            </PageWrapper>
+          }
+        />
+        <Route 
+          path="/about-system" 
+          element={
+            <PageWrapper seoKey="aboutSystem">
+              <AboutSystem />
+            </PageWrapper>
+          }
+        />
+      </Routes>
     </Suspense>
   );
 }
