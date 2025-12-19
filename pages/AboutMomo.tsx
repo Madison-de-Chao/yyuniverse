@@ -211,3 +211,5 @@ export const AboutMomo: React.FC<AboutMomoProps> = ({ theme }) => {
     </div>
   );
 };
+
+export default AboutMomo;

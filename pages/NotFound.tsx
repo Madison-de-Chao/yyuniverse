@@ -49,3 +49,5 @@ export const NotFound: React.FC<NotFoundProps> = ({ theme }) => {
     </div>
   );
 };
+
+export default NotFound;

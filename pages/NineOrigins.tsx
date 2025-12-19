@@ -359,3 +359,5 @@ export const NineOrigins: React.FC<NineOriginsProps> = ({ theme }) => {
     </div>
   );
 };
+
+export default NineOrigins;

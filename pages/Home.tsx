@@ -416,3 +416,5 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) =>
     </div>
   );
 };
+
+export default Home;

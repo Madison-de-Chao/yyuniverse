@@ -494,3 +494,5 @@ export const SystemZoneA: React.FC<SystemZoneAProps> = ({ theme }) => {
     </div>
   );
 };
+
+export default SystemZoneA;

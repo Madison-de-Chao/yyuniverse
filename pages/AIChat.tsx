@@ -143,3 +143,5 @@ export const AIChat: React.FC<AIChatProps> = ({ theme }) => {
     </div>
   );
 };
+
+export default AIChat;

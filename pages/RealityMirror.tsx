@@ -363,3 +363,5 @@ export const RealityMirror: React.FC<RealityMirrorProps> = ({ theme }) => {
   );
 };
    
+
+export default RealityMirror;

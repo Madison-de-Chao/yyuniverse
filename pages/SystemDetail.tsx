@@ -185,3 +185,5 @@ export const SystemDetail: React.FC<SystemDetailProps> = ({ theme, onNavigate })
     </div>
   );
 };
+
+export default SystemDetail;
