@@ -185,3 +185,5 @@ export const Sanctuary: React.FC<SanctuaryProps> = ({ theme, onNavigate }) => {
     </div>
   );
 };
+
+export default Sanctuary;

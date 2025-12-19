@@ -357,3 +357,5 @@ export const UniverseScript: React.FC<UniverseScriptProps> = ({ theme }) => {
     </div>
   );
 };
+
+export default UniverseScript;

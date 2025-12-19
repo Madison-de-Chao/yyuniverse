@@ -398,3 +398,5 @@ export const SystemZoneC: React.FC<SystemZoneCProps> = ({ theme, onNavigate }) =
     </div>
   );
 };
+
+export default SystemZoneC;

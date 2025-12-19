@@ -287,3 +287,5 @@ export const LogicLoop: React.FC<LogicLoopProps> = ({ theme }) => {
     </div>
   );
 };
+
+export default LogicLoop;

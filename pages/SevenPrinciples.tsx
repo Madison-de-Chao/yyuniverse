@@ -446,3 +446,5 @@ export const SevenPrinciples: React.FC<SevenPrinciplesProps> = ({ theme }) => {
     </div>
   );
 };
+
+export default SevenPrinciples;

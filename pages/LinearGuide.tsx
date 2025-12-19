@@ -237,3 +237,5 @@ export const LinearGuide: React.FC<LinearGuideProps> = ({ theme, onNavigate }) =
     </div>
   );
 };
+
+export default LinearGuide;

@@ -422,3 +422,5 @@ export const SystemZone05: React.FC<SystemZone05Props> = ({ theme }) => {
     </div>
   );
 };
+
+export default SystemZone05;

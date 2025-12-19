@@ -427,3 +427,5 @@ export const Whitepaper: React.FC<WhitepaperProps> = ({ theme }) => {
     </div>
   );
 };
+
+export default Whitepaper;
