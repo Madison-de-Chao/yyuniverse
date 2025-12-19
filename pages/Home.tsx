@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Shield, ArrowRight, Search, HelpCircle, Sun, Moon, FileText, PanelsTopLeft, Globe2, LayoutDashboard, PlayCircle, Pointer, Users } from 'lucide-react';
-import { PageId, Theme } from '../types';
+import { PageId, Theme, DecorativeBorderStyles } from '../types';
 import { IntegrityMotherModel } from '../components/Visuals';
 
 interface HomeProps {
@@ -301,7 +301,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) =>
               isDark
                 ? 'radial-gradient(circle at top left, rgba(250, 250, 249, 0.12), transparent 55%)'
                 : 'radial-gradient(circle at top left, rgba(250, 250, 249, 0.6), transparent 55%)',
-          }}
+          } as DecorativeBorderStyles}
         >
           <div className={`card-content rounded-[18px] ${isDark ? 'bg-slate-950/70' : 'bg-white/90'} p-8 md:p-10 flex flex-col gap-8 shadow-2xl`}>
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
