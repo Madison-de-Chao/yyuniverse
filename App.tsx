@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, useNavigate, useLocation } from 'react-router-dom';
-import { Nav } from './components/Nav';
+import { DualNav } from './components/DualNav';
 import { AppRoutes } from './router';
 import { Theme } from './types';
-import { ChevronLeft, Map } from 'lucide-react';
+import { ChevronLeft } from 'lucide-react';
 
 // 內部組件，用於訪問 router hooks
 function AppContent() {
@@ -37,10 +37,7 @@ function AppContent() {
     window.scrollTo(0, 0);
   };
 
-  const handleNavigateToGuide = () => {
-    navigate('/guide');
-    window.scrollTo(0, 0);
-  };
+
 
   const isHomePage = location.pathname === '/';
 
@@ -69,43 +66,11 @@ function AppContent() {
         </>
       )}
 
-      {/* Brand ribbon to reinforce museum-grade positioning */}
-      <div className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
-        theme === 'dark' 
-          ? 'bg-void/90 border-b border-gold/30 text-paper' 
-          : 'bg-paper/90 border-b border-ink/20 text-void'
-      }`}>
-        <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <span className="text-xs opacity-60 tracking-wider">
-              科博館等級官方導覽 · 專業可信任
-            </span>
-            <span className="text-xs opacity-40">
-              Immersive teaching · Guided cognition
-            </span>
-          </div>
-          
-          <div className="flex items-center gap-3">
-            <span className="text-xs opacity-60">LIVE 導覽模式</span>
-            <span className="text-xs opacity-40">全域地圖可隨時開啟</span>
-            <button
-              onClick={handleNavigateToGuide}
-              className={`px-4 py-2 rounded-xl text-xs font-bold tracking-[0.18em] uppercase transition-colors duration-300 shadow-md flex items-center gap-2 ${
-                theme === 'dark'
-                  ? 'bg-gradient-to-r from-amber-400 to-amber-300 text-void hover:from-amber-300 hover:to-amber-200'
-                  : 'bg-gradient-to-r from-ink to-slate-800 text-paper hover:from-slate-800 hover:to-slate-700'
-              }`}
-              aria-label="Start guided experience"
-            >
-              <Map className="w-4 h-4" />
-              立即體驗
-            </button>
-          </div>
-        </div>
-      </div>
+      {/* Dual Navigation */}
+      <DualNav theme={theme} onToggleTheme={toggleTheme} />
 
-      {/* Content with top padding for fixed header */}
-      <div className="relative z-0 pt-20">
+      {/* Content with top padding for dual navigation */}
+      <div className="relative z-0 pt-32">
         {/* Global Back Button (Visible on non-home pages) */}
         {!isHomePage && (
           <button
@@ -123,11 +88,7 @@ function AppContent() {
 
         <AppRoutes theme={theme} toggleTheme={toggleTheme} />
 
-        {/* New Open Map Navigation */}
-        <Nav 
-          theme={theme}
-          onToggleTheme={toggleTheme}
-        />
+
       </div>
     </div>
   );

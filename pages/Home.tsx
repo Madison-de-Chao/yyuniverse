@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Shield, ArrowRight, Search, HelpCircle, Sun, Moon, FileText, PanelsTopLeft, Globe2, LayoutDashboard, PlayCircle, Pointer, Users } from 'lucide-react';
+import { Shield, ArrowRight, Search, HelpCircle, Sun, Moon, FileText, PlayCircle, Pointer } from 'lucide-react';
 import { PageId, Theme, DecorativeBorderStyles } from '../types';
 import { IntegrityMotherModel } from '../components/Visuals';
 
@@ -21,26 +21,7 @@ interface JourneyStep {
 
 export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) => {
   const isDark = theme === 'dark';
-  const pillarCards = [
-    {
-      title: '策展架構',
-      description: '以研究級脈絡梳理宇宙觀，所有內容都有據可查、可回溯。',
-      icon: PanelsTopLeft,
-      badge: '專業館藏',
-    },
-    {
-      title: '互動導覽',
-      description: '以情境引導與視覺化路徑解說，讓觀眾可以循序理解並立即操作。',
-      icon: Globe2,
-      badge: '動態教學',
-    },
-    {
-      title: '決策支援',
-      description: '八階思維系統做為決策護欄，提供可重複練習的安全沙盒。',
-      icon: LayoutDashboard,
-      badge: '策略骨架',
-    },
-  ];
+
 
   const journeySteps: JourneyStep[] = [
     {
@@ -290,74 +271,6 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) =>
         </button>
 
       </div>
-
-      {/* Museum-grade highlights */}
-      <section className="w-full max-w-6xl mb-16 z-10 px-4">
-        <div
-          className={`decorative-border p-[1px] ${
-            isDark ? 'bg-slate-900/60' : 'bg-white/70'
-          }`}
-          style={{
-            '--border-radius': '22px',
-            '--border-gradient':
-              isDark
-                ? 'linear-gradient(135deg, rgba(250, 204, 21, 0.45), rgba(45, 212, 191, 0.4), rgba(59, 130, 246, 0.4))'
-                : 'linear-gradient(135deg, rgba(245, 158, 11, 0.5), rgba(52, 211, 153, 0.45), rgba(59, 130, 246, 0.45))',
-            '--border-opacity': isDark ? '0.9' : '0.85',
-            '--inner-radius-offset': '4px',
-            '--overlay-gradient':
-              isDark
-                ? 'radial-gradient(circle at top left, rgba(250, 250, 249, 0.12), transparent 55%)'
-                : 'radial-gradient(circle at top left, rgba(250, 250, 249, 0.6), transparent 55%)',
-          } as DecorativeBorderStyles}
-        >
-          <div className={`card-content rounded-[18px] ${isDark ? 'bg-slate-950/70' : 'bg-white/90'} p-8 md:p-10 flex flex-col gap-8 shadow-2xl`}>
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-              <div>
-                <p className={`font-mono uppercase tracking-[0.28em] text-xs mb-2 ${isDark ? 'text-blue-200' : 'text-stone-500'}`}>Curated Experience</p>
-                <h2 className={`font-serif text-3xl md:text-4xl font-bold ${isDark ? 'text-slate-100' : 'text-ink'}`}>館級標準 · 專業導覽核心</h2>
-                <p className={`${isDark ? 'text-slate-300' : 'text-stone-600'} mt-3 max-w-3xl leading-relaxed`}>
-                  以科博館的策展思維設計網站：每個節點都具有清楚的目的、證據與路徑，確保觀眾能在沉浸的視覺中保持方向感，快速進入互動教學流程。
-                </p>
-              </div>
-              <div className={`flex items-center gap-3 px-4 py-3 rounded-2xl ${isDark ? 'bg-slate-800/70 text-gold border border-slate-700' : 'bg-amber-50 text-muted-gold border border-amber-200'}`}>
-                <Users size={18} />
-                <span className="font-mono text-xs tracking-[0.2em] uppercase">導覽團隊即時更新</span>
-              </div>
-            </div>
-
-            <div className="grid gap-4 md:gap-6 md:grid-cols-3">
-              {pillarCards.map((pillar) => {
-                const Icon = pillar.icon;
-                return (
-                  <div
-                    key={pillar.title}
-                    className={`group p-6 rounded-2xl border relative overflow-hidden transition-transform duration-500 hover:-translate-y-1 ${
-                      isDark
-                        ? 'bg-slate-900/70 border-slate-800 hover:border-gold/50'
-                        : 'bg-white border-stone-200 hover:border-muted-gold'
-                    }`}
-                  >
-                    <div className={`flex items-center gap-3 mb-3 ${isDark ? 'text-slate-200' : 'text-ink'}`}>
-                      <span className={`p-3 rounded-xl ${isDark ? 'bg-slate-800 text-gold' : 'bg-stone-100 text-muted-gold'}`}>
-                        <Icon size={18} />
-                      </span>
-                      <div>
-                        <p className="font-serif text-xl font-semibold">{pillar.title}</p>
-                        <span className={`text-[11px] uppercase tracking-[0.2em] ${isDark ? 'text-slate-400' : 'text-stone-500'}`}>
-                          {pillar.badge}
-                        </span>
-                      </div>
-                    </div>
-                    <p className={`${isDark ? 'text-slate-300' : 'text-stone-700'} leading-relaxed`}>{pillar.description}</p>
-                    <div className={`absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${isDark ? 'bg-gradient-to-br from-gold/5 via-emerald-500/5 to-blue-500/5' : 'bg-gradient-to-br from-amber-100/50 via-emerald-100/50 to-blue-100/50'}`}></div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Guided path callout */}
       <section className="w-full max-w-6xl mb-32 z-10 px-4">
