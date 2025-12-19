@@ -144,6 +144,7 @@ function App() {
               className={`flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold tracking-wide ${
                 theme === 'dark' ? 'bg-slate-800/70 text-emerald-300 border border-emerald-900' : 'bg-emerald-50 text-emerald-700 border border-emerald-200'
               }`}
+              role="status"
             >
               <Activity size={14} /> LIVE 導覽模式
             </div>
@@ -151,6 +152,7 @@ function App() {
               className={`hidden sm:flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold tracking-wide ${
                 theme === 'dark' ? 'bg-slate-800/70 text-blue-200 border border-slate-700' : 'bg-blue-50 text-blue-700 border border-blue-200'
               }`}
+              role="status"
             >
               <Map size={14} /> 全域地圖可隨時開啟
             </div>
@@ -161,6 +163,7 @@ function App() {
                   ? 'bg-gradient-to-r from-amber-400 to-amber-300 text-void hover:from-amber-300 hover:to-amber-200'
                   : 'bg-gradient-to-r from-ink to-slate-800 text-paper hover:from-slate-800 hover:to-slate-700'
               }`}
+              aria-label="Start guided experience"
             >
               立即體驗
             </button>

@@ -10,6 +10,15 @@ interface HomeProps {
   toggleTheme: () => void;
 }
 
+interface JourneyStep {
+  title: string;
+  subtitle: string;
+  description: string;
+  cta: () => void;
+  label: string;
+  ariaLabel: string;
+}
+
 export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) => {
   const isDark = theme === 'dark';
   const pillarCards = [
@@ -33,13 +42,14 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) =>
     },
   ];
 
-  const journeySteps = [
+  const journeySteps: JourneyStep[] = [
     {
       title: '沉浸起點',
       subtitle: '理解宇宙故事與關鍵人物',
       description: '先從宇宙設定與默默超的角色出發，確定同一個詞彙與價值觀。',
       cta: () => onNavigate('about'),
       label: 'Start',
+      ariaLabel: 'Navigate to About page to learn about universe story and key characters',
     },
     {
       title: '系統骨架',
@@ -47,6 +57,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) =>
       description: '透過系統詳解、八階思維與線性引導，建立穩定的決策框架。',
       cta: () => onNavigate('system'),
       label: 'Structure',
+      ariaLabel: 'Navigate to System page to understand overall system and logic loop',
     },
     {
       title: '實際演練',
@@ -54,6 +65,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) =>
       description: '把架構帶進虹靈御所、誠實 AI 與白皮書，完成一次完整體驗。',
       cta: () => onNavigate('whitepaper'),
       label: 'Practice',
+      ariaLabel: 'Navigate to Whitepaper page to apply learning in practice',
     },
   ];
 
@@ -299,10 +311,10 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) =>
                 return (
                   <div
                     key={pillar.title}
-                    className={`group p-6 rounded-2xl border relative overflow-hidden transition-transform duration-500 hover:-translate-y-1 ${
+                    className={`group p-6 rounded-2xl border relative overflow-hidden transition-transform duration-500 hover:-translate-y-1 focus-visible:outline-none focus-visible:-translate-y-1 ${
                       isDark
-                        ? 'bg-slate-900/70 border-slate-800 hover:border-gold/50'
-                        : 'bg-white border-stone-200 hover:border-muted-gold'
+                        ? 'bg-slate-900/70 border-slate-800 hover:border-gold/50 focus-visible:border-gold/50'
+                        : 'bg-white border-stone-200 hover:border-muted-gold focus-visible:border-muted-gold'
                     }`}
                   >
                     <div className={`flex items-center gap-3 mb-3 ${isDark ? 'text-slate-200' : 'text-ink'}`}>
@@ -347,7 +359,6 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) =>
                 className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-[0.2em] transition-colors duration-300 ${
                   isDark ? 'bg-slate-800/80 text-gold border border-slate-700 hover:border-gold' : 'bg-stone-100 text-ink border border-stone-300 hover:border-muted-gold'
                 }`}
-                aria-label="Start 8-step thinking route"
               >
                 <PlayCircle size={16} /> 立即啟動八階思維
               </button>
@@ -380,7 +391,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) =>
                       isDark ? 'text-gold hover:text-yellow-200' : 'text-muted-gold hover:text-amber-800'
                     }`}
                   >
-                    <Pointer size={14} /> 前往
+                    <Pointer size={14} /> 前往 {step.ariaLabel}
                   </button>
                 </div>
               ))}
