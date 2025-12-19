@@ -54,7 +54,7 @@ body {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 481px) {
   .museum-grid::before,
   .museum-grid::after {
     background-size: 25vw 25vw, 25vw 25vw;
