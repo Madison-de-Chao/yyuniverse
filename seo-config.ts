@@ -96,6 +96,43 @@ export const pageMeta = {
     keywords: '真實之鏡, 自我認知, 世界本質, 真實面貌',
     url: 'https://yyuniverse.com/reality-mirror',
   },
+  // 學術架構頁面
+  museum: {
+    title: '元壹宇宙｜學術用官網',
+    description: '一套「完整性母律」驅動的思維與協作系統，可被檢核、可被反駁、可被改進的系統工程。',
+    keywords: '元壹宇宙, 完整性母律, CIP協定, Zone A/B, 知識衛生',
+    url: 'https://yyuniverse.com/museum',
+  },
+  systemMap: {
+    title: '系統總覽｜七大文件總覽＋層級對應',
+    description: '從 Kernel 到 Casebook，每一層都有明確的規格與可追溯性。選擇你的路徑：研究者、實作者或合作者。',
+    keywords: '系統總覽, 層級架構, Kernel, Protocol, Law, Application, Casebook',
+    url: 'https://yyuniverse.com/system-map',
+  },
+  challengeKit: {
+    title: 'Challenge Kit｜挑戰規格頁',
+    description: '你希望別人怎麼反駁你？明確命題、可反駁條件、可核對引用。這是 A 站武器頁，用規格回覆我。',
+    keywords: 'Challenge Kit, 挑戰規格, 可反駁性, 命題檢核, 引用規格',
+    url: 'https://yyuniverse.com/challenge-kit',
+  },
+  glossary: {
+    title: '名詞邊界表｜防偷換工具',
+    description: '每個名詞固定模板：定義＋常見偷換＋邊界測試＋反例。避免無限換名詞但不固定定義。',
+    keywords: '名詞表, 定義, 偷換概念, 邊界測試, 反例',
+    url: 'https://yyuniverse.com/glossary',
+  },
+  references: {
+    title: '文獻與引用｜Zone A 證據索引',
+    description: '一句結論＋可核對來源＋它不能推出什麼。每個引用都包含原文段落、它能證明什麼、它不能證明什麼。',
+    keywords: '文獻引用, Zone A, 證據索引, 可核對來源, 引用規格',
+    url: 'https://yyuniverse.com/references',
+  },
+  aboutSystem: {
+    title: '關於｜這不是宗教，而是一套可被檢核的系統工程',
+    description: '元壹宇宙是一套以「完整性母律」為核心的思維與協作系統。我們不爭立場輸贏，我們只檢核。',
+    keywords: '關於, 系統工程, 完整性母律, 治理, 版本控制',
+    url: 'https://yyuniverse.com/about-system',
+  },
 };
 
 // 結構化數據：網站整體

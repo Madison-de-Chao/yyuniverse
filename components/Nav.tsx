@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Theme } from '../types';
-import { Menu, X, Sun, Moon, Home, Map, MessageSquare, BookOpen, Shield, User, Layers, Compass, FileText, Star, Sparkles, Scale } from 'lucide-react';
+import { Menu, X, Sun, Moon, Home, Map, MessageSquare, BookOpen, Shield, User, Layers, Compass, FileText, Star, Sparkles, Scale, Target, BookText, FileSearch, Info } from 'lucide-react';
 
 interface NavProps {
   theme: Theme;
@@ -9,19 +9,35 @@ interface NavProps {
 }
 
 // 路由映射：將舊的 PageId 映射到新的路由路徑
-const NAV_ITEMS: { path: string; label: string; icon: React.ElementType }[] = [
-  { path: '/', label: '首頁', icon: Home },
-  { path: '/guide', label: '導覽', icon: Map },
-  { path: '/ai-chat', label: 'AI 對話', icon: MessageSquare },
-  { path: '/logic-loop', label: '思維循環', icon: Layers },
-  { path: '/system', label: '系統總覽', icon: Compass },
-  { path: '/nine-origins', label: '九大起源', icon: Star },
-  { path: '/seven-principles', label: '七大法則', icon: Sparkles },
-  { path: '/reality-mirror', label: '真實之鏡', icon: Scale },
-  { path: '/universe-script', label: '宇宙劇本', icon: FileText },
-  { path: '/whitepaper', label: '白皮書', icon: BookOpen },
-  { path: '/sanctuary', label: '避難所', icon: Shield },
-  { path: '/about', label: '關於墨', icon: User },
+const NAV_SECTIONS = [
+  {
+    title: '學術架構',
+    items: [
+      { path: '/museum', label: '首頁（A 站）', icon: Home },
+      { path: '/system-map', label: '系統總覽', icon: Map },
+      { path: '/challenge-kit', label: 'Challenge Kit', icon: Target },
+      { path: '/glossary', label: '名詞表', icon: BookText },
+      { path: '/references', label: '文獻引用', icon: FileSearch },
+      { path: '/about-system', label: '關於', icon: Info },
+    ],
+  },
+  {
+    title: '探索內容',
+    items: [
+      { path: '/', label: '首頁（探索）', icon: Home },
+      { path: '/guide', label: '導覽', icon: Map },
+      { path: '/ai-chat', label: 'AI 對話', icon: MessageSquare },
+      { path: '/logic-loop', label: '思維循環', icon: Layers },
+      { path: '/system', label: '系統詳解', icon: Compass },
+      { path: '/nine-origins', label: '九大起源', icon: Star },
+      { path: '/seven-principles', label: '七大法則', icon: Sparkles },
+      { path: '/reality-mirror', label: '真實之鏡', icon: Scale },
+      { path: '/universe-script', label: '宇宙劇本', icon: FileText },
+      { path: '/whitepaper', label: '白皮書', icon: BookOpen },
+      { path: '/sanctuary', label: '避難所', icon: Shield },
+      { path: '/about', label: '關於墨', icon: User },
+    ],
+  },
 ];
 
 export const Nav: React.FC<NavProps> = ({ theme, onToggleTheme }) => {
@@ -102,30 +118,39 @@ export const Nav: React.FC<NavProps> = ({ theme, onToggleTheme }) => {
               </div>
             </div>
 
-            {/* Nav Items */}
+            {/* Nav Sections */}
             <div className="p-2">
-              {NAV_ITEMS.map((item) => {
-                const Icon = item.icon;
-                const isActive = location.pathname === item.path;
-                return (
-                  <button
-                    key={item.path}
-                    onClick={() => handleNavigate(item.path)}
-                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all duration-200 ${
-                      isActive 
-                        ? (isDark 
-                            ? 'bg-gold/10 text-gold' 
-                            : 'bg-amber-50 text-muted-gold')
-                        : (isDark 
-                            ? 'text-slate-300 hover:bg-slate-800 hover:text-white' 
-                            : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900')
-                    }`}
-                  >
-                    <Icon size={18} />
-                    <span className="font-medium">{item.label}</span>
-                  </button>
-                );
-              })}
+              {NAV_SECTIONS.map((section, sectionIdx) => (
+                <div key={section.title} className={sectionIdx > 0 ? 'mt-4' : ''}>
+                  <div className={`px-4 py-2 text-xs font-semibold uppercase tracking-wider ${
+                    isDark ? 'text-slate-500' : 'text-gray-500'
+                  }`}>
+                    {section.title}
+                  </div>
+                  {section.items.map((item) => {
+                    const Icon = item.icon;
+                    const isActive = location.pathname === item.path;
+                    return (
+                      <button
+                        key={item.path}
+                        onClick={() => handleNavigate(item.path)}
+                        className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all duration-200 ${
+                          isActive 
+                            ? (isDark 
+                                ? 'bg-gold/10 text-gold' 
+                                : 'bg-amber-50 text-muted-gold')
+                            : (isDark 
+                                ? 'text-slate-300 hover:bg-slate-800 hover:text-white' 
+                                : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900')
+                        }`}
+                      >
+                        <Icon size={18} />
+                        <span className="font-medium">{item.label}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              ))}
             </div>
           </nav>
         </>

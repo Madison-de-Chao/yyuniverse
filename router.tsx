@@ -22,6 +22,14 @@ const SevenPrinciples = lazy(() => import('./pages/SevenPrinciples'));
 const UniverseScript = lazy(() => import('./pages/UniverseScript'));
 const RealityMirror = lazy(() => import('./pages/RealityMirror'));
 
+// 學術架構頁面
+const MuseumHome = lazy(() => import('./pages/MuseumHome'));
+const SystemMap = lazy(() => import('./pages/SystemMap'));
+const ChallengeKit = lazy(() => import('./pages/ChallengeKit'));
+const Glossary = lazy(() => import('./pages/Glossary'));
+const References = lazy(() => import('./pages/References'));
+const AboutSystem = lazy(() => import('./pages/About'));
+
 // 加載指示器組件
 function LoadingFallback() {
   return (
@@ -184,6 +192,55 @@ export function createAppRouter(theme: Theme, toggleTheme: () => void) {
       element: (
         <PageWrapper seoKey="realityMirror">
           <RealityMirror theme={theme} onNavigate={() => {}} />
+        </PageWrapper>
+      )
+    },
+    // 學術架構路由
+    { 
+      path: '/museum', 
+      element: (
+        <PageWrapper seoKey="museum">
+          <MuseumHome />
+        </PageWrapper>
+      )
+    },
+    { 
+      path: '/system-map', 
+      element: (
+        <PageWrapper seoKey="systemMap">
+          <SystemMap />
+        </PageWrapper>
+      )
+    },
+    { 
+      path: '/challenge-kit', 
+      element: (
+        <PageWrapper seoKey="challengeKit">
+          <ChallengeKit />
+        </PageWrapper>
+      )
+    },
+    { 
+      path: '/glossary', 
+      element: (
+        <PageWrapper seoKey="glossary">
+          <Glossary />
+        </PageWrapper>
+      )
+    },
+    { 
+      path: '/references', 
+      element: (
+        <PageWrapper seoKey="references">
+          <References />
+        </PageWrapper>
+      )
+    },
+    { 
+      path: '/about-system', 
+      element: (
+        <PageWrapper seoKey="aboutSystem">
+          <AboutSystem />
         </PageWrapper>
       )
     },
