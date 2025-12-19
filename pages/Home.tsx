@@ -95,8 +95,16 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) =>
         </button>
       </div>
 
-      {/* Hero Section with Visual */}
+           {/* Hero Section with Visual */}
       <header className="text-center mt-12 mb-20 w-full max-w-6xl relative flex flex-col items-center">
+        {/* Logo */}
+        <div className="mb-8 opacity-0 animate-reveal-blur" style={{ animationDelay: '0s' }}>
+          <img 
+            src="/logo.png" 
+            alt="元壹宇宙 Logo" 
+            className="w-32 h-32 md:w-40 md:h-40 object-contain mx-auto"
+          />
+        </div>
         
         {/* Main Visual Diagram - Integrity Model with Labels */}
         <div className="mb-12 w-full transform hover:scale-[1.01] transition-transform duration-1000 ease-in-out">

@@ -157,7 +157,7 @@ export const organizationStructuredData = {
   '@type': 'Organization',
   name: '元壹宇宙',
   url: 'https://yyuniverse.com',
-  logo: 'https://yyuniverse.com/logo.png',
+  logo: 'https://yyuniverse.vercel.app/logo.png',
   description: '默默超思維系統的官方平台',
   sameAs: [
     // 可以添加社交媒體鏈接
