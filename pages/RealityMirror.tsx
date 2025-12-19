@@ -232,6 +232,8 @@ const MirrorCard: React.FC<{ mirror: MirrorData; theme: Theme; isExpanded: boole
       <button
         onClick={onToggle}
         className={`w-full p-6 flex items-center justify-between text-left transition-all duration-300 group`}
+        aria-expanded={isExpanded}
+        aria-controls={`reality-mirror-panel-${mirror.id}`}
       >
         <div className="flex items-center gap-4">
           <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold ${
