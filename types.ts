@@ -38,16 +38,4 @@ export interface LayerAnalysis {
 
 export type Theme = 'dark' | 'light';
 
-export type PageId = 'home' | 'logic' | 'chat' | 'guide' | 'sanctuary' | 'about' | 'system' | 'system-a' | 'system-b' | 'system-c' | 'system-05' | 'whitepaper' | 'origins' | 'principles' | 'script';
-
-// Type-safe CSS custom properties for decorative-border class
-// This interface extends React.CSSProperties, allowing both:
-// - CSS custom properties (--border-radius, --border-gradient, etc.) for the decorative border
-// - Standard CSS properties (borderRadius, padding, etc.) from React.CSSProperties
-export interface DecorativeBorderStyles extends React.CSSProperties {
-  '--border-radius'?: string;
-  '--border-gradient'?: string;
-  '--border-opacity'?: string;
-  '--inner-radius-offset'?: string;
-  '--overlay-gradient'?: string;
-}
+export type PageId = 'home' | 'logic' | 'chat' | 'guide' | 'sanctuary' | 'about' | 'system' | 'system-a' | 'system-b' | 'system-c' | 'system-05' | 'whitepaper' | 'origins' | 'principles' | 'script' | 'mirror';

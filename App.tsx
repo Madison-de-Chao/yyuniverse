@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Nav } from './components/Nav';
 import { Home } from './pages/Home';
@@ -16,8 +15,9 @@ import { Whitepaper } from './pages/Whitepaper';
 import { NineOrigins } from './pages/NineOrigins';
 import { SevenPrinciples } from './pages/SevenPrinciples';
 import { UniverseScript } from './pages/UniverseScript';
-import { PageId, Theme, DecorativeBorderStyles } from './types';
-import { Activity, ChevronLeft, Map, Sparkles } from 'lucide-react';
+import { RealityMirror } from './pages/RealityMirror';
+import { PageId, Theme } from './types';
+import { ChevronLeft, Map } from 'lucide-react';
 
 function App() {
   const [activePage, setActivePage] = useState<PageId>('home');
@@ -53,7 +53,7 @@ function App() {
   const renderPage = () => {
     switch (activePage) {
       case 'home':
-        return <Home onNavigate={handleNavigate} theme={theme} toggleTheme={toggleTheme} />;
+        return <Home theme={theme} onNavigate={handleNavigate} />;
       case 'logic':
         return <LogicLoop theme={theme} />;
       case 'chat':
@@ -71,7 +71,7 @@ function App() {
       case 'system-b':
         return <SystemZoneB theme={theme} />;
       case 'system-c':
-        return <SystemZoneC theme={theme} onNavigate={handleNavigate} />;
+        return <SystemZoneC theme={theme} />;
       case 'system-05':
         return <SystemZone05 theme={theme} />;
       case 'whitepaper':
@@ -82,80 +82,57 @@ function App() {
         return <SevenPrinciples theme={theme} />;
       case 'script':
         return <UniverseScript theme={theme} />;
+      case 'mirror':
+        return <RealityMirror theme={theme} />;
       default:
-        return <Home onNavigate={handleNavigate} theme={theme} toggleTheme={toggleTheme} />;
+        return <Home theme={theme} onNavigate={handleNavigate} />;
     }
   };
 
   return (
-    <div className={`min-h-screen transition-colors duration-1000 ease-in-out ${
-      theme === 'dark' ? 'bg-void text-cyber-text' : 'bg-paper text-ink'
-    } selection:bg-gold/30 selection:text-gold`}>
-      
+    <div
+      className={`${theme === 'dark' ? 'dark-mode' : 'light-mode'}`}
+      style={{
+        backgroundColor: theme === 'dark' ? '#050508' : '#f5f5f5',
+        color: theme === 'dark' ? '#fafafa' : '#050508'
+      }}
+    >
       {/* Ambient Background Noise/Gradient - Alive & Breathing */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden transition-opacity duration-1000">
-        {theme === 'dark' ? (
-          <>
-            <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-blue-900/10 rounded-full blur-[150px] animate-pulse-slow"></div>
-            <div className="absolute bottom-[-20%] left-[-10%] w-[900px] h-[900px] bg-indigo-950/20 rounded-full blur-[150px] animate-float"></div>
-            <div className="absolute top-[40%] left-[30%] w-[400px] h-[400px] bg-gold/5 rounded-full blur-[120px] animate-pulse-slow" style={{animationDelay: '2s'}}></div>
-            {/* Subtle Grain Texture */}
-            <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]"></div>
-          </>
-        ) : (
-          <>
-            <div className="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] bg-amber-100/60 rounded-full blur-[120px] animate-pulse-slow"></div>
-            <div className="absolute bottom-[-10%] left-[-10%] w-[700px] h-[700px] bg-stone-200/40 rounded-full blur-[100px] animate-float"></div>
-            {/* Paper Texture */}
-            <div className="absolute inset-0 opacity-40 bg-paper-texture"></div>
-          </>
-        )}
-      </div>
+      {theme === 'dark' ? (
+        <>
+          {/* Subtle Grain Texture */}
+          <div className="fixed inset-0 pointer-events-none opacity-5 mix-blend-multiply" style={{
+            backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%270 0 400 400%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27noiseFilter%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.9%27 numOctaves=%274%27 result=%27noise%27/%3E%3C/filter%3E%3Crect width=%27400%27 height=%27400%27 filter=%27url(%23noiseFilter)%27/%3E%3C/svg%3E")'
+          }}></div>
+        </>
+      ) : (
+        <>
+          {/* Paper Texture */}
+          <div className="fixed inset-0 pointer-events-none opacity-3" style={{
+            backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=%270 0 400 400%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27noiseFilter%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.9%27 numOctaves=%274%27 result=%27noise%27/%3E%3C/filter%3E%3Crect width=%27400%27 height=%27400%27 filter=%27url(%23noiseFilter)%27/%3E%3C/svg%3E")'
+          }}></div>
+        </>
+      )}
 
       {/* Brand ribbon to reinforce museum-grade positioning */}
-      <div className="fixed top-4 inset-x-0 flex justify-center px-4 z-40 pointer-events-none">
-        <div
-          className={`decorative-border pointer-events-auto flex flex-col md:flex-row gap-4 items-start md:items-center w-full max-w-5xl px-6 py-4 border shadow-lg transition-colors duration-500 ${
-            theme === 'dark'
-              ? 'bg-slate-900/70 border-slate-800 text-slate-100'
-              : 'bg-white/80 border-stone-200 text-ink'
-          } backdrop-blur-xl`}
-          style={{
-            '--border-radius': '24px',
-            '--border-gradient': 'linear-gradient(120deg, rgba(255, 215, 0, 0.8), rgba(168, 85, 247, 0.6), rgba(59, 130, 246, 0.7))',
-            borderRadius: '24px',
-          } as DecorativeBorderStyles}
-          data-border-style="mask"
-          role="status"
-          aria-label="品牌導覽狀態條"
-        >
+      <div className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
+        theme === 'dark' 
+          ? 'bg-void/90 border-b border-gold/30 text-paper' 
+          : 'bg-paper/90 border-b border-ink/20 text-void'
+      }`}>
+        <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <span className={`p-3 rounded-full ${theme === 'dark' ? 'bg-slate-800 text-gold' : 'bg-stone-100 text-muted-gold'}`}>
-              <Sparkles size={18} />
+            <span className="text-xs opacity-60 tracking-wider">
+              科博館等級官方導覽 · 專業可信任
             </span>
-            <div className="leading-tight">
-              <p className="font-serif font-bold tracking-wide text-sm md:text-base">科博館等級官方導覽 · 專業可信任</p>
-              <p className="font-mono text-[11px] uppercase tracking-[0.2em] opacity-70">Immersive teaching · Guided cognition</p>
-            </div>
+            <span className="text-xs opacity-40">
+              Immersive teaching · Guided cognition
+            </span>
           </div>
-
-          <div className="flex flex-wrap md:flex-nowrap items-center gap-3 md:ml-auto">
-            <div
-              className={`flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold tracking-wide ${
-                theme === 'dark' ? 'bg-slate-800/70 text-emerald-300 border border-emerald-900' : 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-              }`}
-              role="status"
-            >
-              <Activity size={14} /> LIVE 導覽模式
-            </div>
-            <div
-              className={`hidden sm:flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold tracking-wide ${
-                theme === 'dark' ? 'bg-slate-800/70 text-blue-200 border border-slate-700' : 'bg-blue-50 text-blue-700 border border-blue-200'
-              }`}
-              role="status"
-            >
-              <Map size={14} /> 全域地圖可隨時開啟
-            </div>
+          
+          <div className="flex items-center gap-3">
+            <span className="text-xs opacity-60">LIVE 導覽模式</span>
+            <span className="text-xs opacity-40">全域地圖可隨時開啟</span>
             <button
               onClick={() => handleNavigate('guide')}
               className={`px-4 py-2 rounded-xl text-xs font-bold tracking-[0.18em] uppercase transition-colors duration-300 shadow-md flex items-center gap-2 ${
@@ -165,34 +142,40 @@ function App() {
               }`}
               aria-label="Start guided experience"
             >
+              <Map className="w-4 h-4" />
               立即體驗
             </button>
           </div>
         </div>
       </div>
 
-      {/* Global Back Button (Visible on non-home pages) */}
-      {activePage !== 'home' && (
-        <button
-          onClick={handleBack}
-          aria-label="Go back to previous page"
-          className={`fixed top-6 left-6 z-50 px-5 py-2.5 rounded-full flex items-center gap-2 transition-all duration-300 group shadow-lg ${
-            theme === 'dark'
-              ? 'bg-void/80 text-slate-400 border border-slate-800 hover:text-gold hover:border-gold/50 hover:bg-slate-900'
-              : 'bg-paper/80 text-stone-500 border border-stone-200 hover:text-ink hover:border-muted-gold hover:bg-white'
-          } backdrop-blur-md`}
-        >
-          <ChevronLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-          <span className="font-serif text-sm tracking-widest">BACK</span>
-        </button>
-      )}
+      {/* Content with top padding for fixed header */}
+      <div className="relative z-0 pt-20">
+        {/* Global Back Button (Visible on non-home pages) */}
+        {activePage !== 'home' && (
+          <button
+            onClick={handleBack}
+            className={`fixed top-24 left-6 z-40 px-4 py-2 rounded-lg flex items-center gap-2 transition-colors duration-300 ${
+              theme === 'dark'
+                ? 'hover:bg-gold/10 text-paper/70 hover:text-paper'
+                : 'hover:bg-ink/10 text-void/70 hover:text-void'
+            }`}
+          >
+            <ChevronLeft className="w-5 h-5" />
+            <span className="text-sm font-semibold">BACK</span>
+          </button>
+        )}
 
-      <div className="relative z-10 museum-grid">
         {renderPage()}
+
+        {/* New Open Map Navigation */}
+        <Nav 
+          activePage={activePage} 
+          onNavigate={handleNavigate} 
+          theme={theme}
+          onToggleTheme={toggleTheme}
+        />
       </div>
-      
-      {/* New Open Map Navigation */}
-      <Nav activePage={activePage} onNavigate={handleNavigate} theme={theme} />
     </div>
   );
 }
