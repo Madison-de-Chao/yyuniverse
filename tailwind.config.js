@@ -3,7 +3,36 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
-    "./**/*.{js,ts,jsx,tsx}",
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./*.{js,ts,jsx,tsx}",
+  ],
+  safelist: [
+    // 確保這些關鍵類始終被編譯
+    'bg-void',
+    'bg-paper',
+    'bg-black',
+    'bg-gray-900',
+    'text-void',
+    'text-paper',
+    'text-gold',
+    'border-gold',
+    'from-void',
+    'to-void',
+    'from-paper',
+    'to-paper',
+    {
+      pattern: /bg-(void|paper|gold|muted-gold|ink|black|gray|purple|blue|indigo|green|emerald|amber|slate)(-\d+)?/,
+      variants: ['hover', 'focus', 'active'],
+    },
+    {
+      pattern: /text-(void|paper|gold|muted-gold|ink|white|gray|purple|blue|indigo|green|emerald)(-\d+)?/,
+      variants: ['hover', 'focus'],
+    },
+    {
+      pattern: /border-(void|paper|gold|muted-gold|ink|purple|blue|indigo)(-\d+)?/,
+      variants: ['hover'],
+    },
   ],
   theme: {
     extend: {

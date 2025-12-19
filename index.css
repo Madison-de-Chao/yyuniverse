@@ -1,7 +1,60 @@
-/* Global presentation layer for the museum-grade experience */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  /* 自定義顏色 */
+  --color-void: #050508;
+  --color-paper: #fafafa;
+  --color-gold: #f59e0b;
+  --color-muted-gold: #d97706;
+  --color-ink: #1e293b;
+  
+  /* 自定義動畫 */
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-spin-slow: spin 20s linear infinite;
+  --animate-spin-slower: spin 60s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-fade-in: fadeIn 0.5s ease-out;
+  --animate-fade-in-up: fadeInUp 0.6s ease-out;
+  --animate-breathing: breathing 5s ease-in-out infinite;
+  --animate-reveal-blur: revealBlur 1s ease-out forwards;
+  --animate-shimmer: shimmer 8s ease-in-out infinite;
+  --animate-pop-in: popIn 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes breathing {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes revealBlur {
+  0% { filter: blur(10px); opacity: 0; }
+  100% { filter: blur(0); opacity: 1; }
+}
+
+@keyframes shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes popIn {
+  0% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
 
 :root {
   color-scheme: light;
@@ -29,111 +82,83 @@ body {
   z-index: 0;
   /* Performance optimization: promote to own compositor layer */
   will-change: transform;
-  transform: translateZ(0);
 }
 
-/* Responsive grid sizing for mobile devices */
-@media (max-width: 480px) {
-  .museum-grid::before,
-  .museum-grid::after {
-    background-size: 25vw 25vw, 25vw 25vw;
-  }
-}
-
-@media (min-width: 481px) and (max-width: 768px) {
-  .museum-grid::before,
-  .museum-grid::after {
-    background-size: 20vw 20vw, 20vw 20vw;
-  }
-}
-
-/* Tablet: 769-1023px */
-@media (min-width: 769px) and (max-width: 1023px) {
-  .museum-grid::before,
-  .museum-grid::after {
-    background-size: 18vw 18vw, 18vw 18vw;
-  }
-}
-
-@media (min-width: 1024px) and (max-width: 1599px) {
-  .museum-grid::before,
-  .museum-grid::after {
-    background-size: 200px 200px, 200px 200px;
-  }
-}
-
-/* Responsive grid sizing for different viewport sizes */
-@media (min-width: 1600px) {
-  .museum-grid::before,
-  .museum-grid::after {
-    background-size: 240px 240px, 240px 240px;
-  }
+.museum-grid::before {
+  animation: gridMove 60s linear infinite;
 }
 
 .museum-grid::after {
-  background-image: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.06), transparent 35%),
-    radial-gradient(circle at 80% 0%, rgba(37, 99, 235, 0.08), transparent 40%),
-    radial-gradient(circle at 50% 90%, rgba(16, 185, 129, 0.08), transparent 40%);
-  mix-blend-mode: screen;
+  animation: gridMove 45s linear infinite reverse;
+  opacity: 0.5;
 }
 
-/* Unified decorative border utility with CSS custom properties */
+@keyframes gridMove {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(15vw, 15vw);
+  }
+}
+
+/* Decorative border styles */
 .decorative-border {
   position: relative;
-  --border-radius: 20px;
-  --border-gradient: linear-gradient(135deg, rgba(16, 185, 129, 0.3), rgba(59, 130, 246, 0.25), rgba(255, 215, 0, 0.35));
-  --border-opacity: 0.8;
-  /* Fixed 2px offset provides consistent visual gap between outer and inner borders
-     across different border-radius values. This creates a uniform border thickness
-     regardless of the element's corner radius, ensuring predictable spacing. */
-  --inner-radius-offset: 2px;
-  --overlay-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
-}
-
-/* Apply overflow hidden only for mask-composite style */
-.decorative-border[data-border-style="mask"] {
-  overflow: hidden;
+  isolation: isolate;
 }
 
 .decorative-border::before {
   content: "";
-  position: absolute;
-  inset: -1px;
-  border-radius: var(--border-radius);
-  background: var(--border-gradient);
-  opacity: var(--border-opacity);
+  border-radius: var(--border-radius, 0.75rem);
+  background: var(--border-gradient, linear-gradient(135deg, #f59e0b 0%, #d97706 100%));
+  opacity: var(--border-opacity, 0.6);
   z-index: 0;
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  bottom: -1px;
+  left: -1px;
 }
 
-/* For mask-composite border style (like brand-ornament) */
 .decorative-border[data-border-style="mask"]::before {
   padding: 1px;
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-image: linear-gradient(#fff 0 0), linear-gradient(#fff 0 0);
+  mask-image: linear-gradient(#fff 0 0), linear-gradient(#fff 0 0);
+  -webkit-mask-position: 0 0, 0 0;
+  mask-position: 0 0, 0 0;
+  -webkit-mask-size: auto, auto;
+  mask-size: auto, auto;
+  -webkit-mask-repeat: repeat, repeat;
+  mask-repeat: repeat, repeat;
+  -webkit-mask-clip: content-box, border-box;
+  mask-clip: content-box, border-box;
+  -webkit-mask-origin: content-box, border-box;
+  mask-origin: content-box, border-box;
   -webkit-mask-composite: xor;
   mask-composite: exclude;
+  -webkit-mask-source-type: auto, auto;
+  mask-mode: match-source, match-source;
 }
 
 .decorative-border::after {
   content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: calc(var(--border-radius) - var(--inner-radius-offset));
-  background: var(--overlay-gradient);
+  border-radius: calc(var(--border-radius, 0.75rem) - var(--inner-radius-offset, 0px));
+  background: var(--overlay-gradient, transparent);
   z-index: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
-/* Disable overlay when not needed (mask style) */
 .decorative-border[data-border-style="mask"]::after {
   display: none;
 }
 
-.decorative-border > * {
-  position: relative;
-  z-index: 2;
-}
-
+.decorative-border > *,
 .card-content {
-  position: relative;
   z-index: 2;
+  position: relative;
 }
