@@ -92,6 +92,9 @@ body {
   --border-radius: 20px;
   --border-gradient: linear-gradient(135deg, rgba(16, 185, 129, 0.3), rgba(59, 130, 246, 0.25), rgba(255, 215, 0, 0.35));
   --border-opacity: 0.8;
+  /* Fixed 2px offset provides consistent visual gap between outer and inner borders
+     across different border-radius values. This creates a uniform border thickness
+     regardless of the element's corner radius, ensuring predictable spacing. */
   --inner-radius-offset: 2px;
   --overlay-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
 }
