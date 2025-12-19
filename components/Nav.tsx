@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PageId, Theme } from '../types';
 import { Menu, X, Sun, Moon, Home, Map, MessageSquare, BookOpen, Shield, User, Layers, Compass, FileText, Star, Sparkles, Scale } from 'lucide-react';
 
@@ -33,11 +33,24 @@ export const Nav: React.FC<NavProps> = ({ activePage, onNavigate, theme, onToggl
     setIsOpen(false);
   };
 
+  // Close menu on Escape key press
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isOpen) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen]);
+
   return (
     <>
       {/* Floating Action Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
+        aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
         className={`fixed bottom-6 right-6 z-50 p-4 rounded-full shadow-lg transition-all duration-300 ${
           isDark 
             ? 'bg-gold text-black hover:bg-amber-300' 
@@ -58,11 +71,14 @@ export const Nav: React.FC<NavProps> = ({ activePage, onNavigate, theme, onToggl
           />
           
           {/* Panel */}
-          <div className={`fixed bottom-24 right-6 z-50 w-72 max-h-[70vh] overflow-y-auto rounded-2xl border shadow-2xl animate-fade-in-up ${
-            isDark 
-              ? 'bg-slate-900 border-slate-700' 
-              : 'bg-white border-gray-200'
-          }`}>
+          <nav 
+            aria-label="Main navigation"
+            className={`fixed bottom-24 right-6 z-50 w-72 max-h-[70vh] overflow-y-auto rounded-2xl border shadow-2xl animate-fade-in-up ${
+              isDark 
+                ? 'bg-slate-900 border-slate-700' 
+                : 'bg-white border-gray-200'
+            }`}
+          >
             {/* Header */}
             <div className={`p-4 border-b ${isDark ? 'border-slate-800' : 'border-gray-100'}`}>
               <div className="flex items-center justify-between">
@@ -71,6 +87,7 @@ export const Nav: React.FC<NavProps> = ({ activePage, onNavigate, theme, onToggl
                 </h3>
                 <button
                   onClick={onToggleTheme}
+                  aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
                   className={`p-2 rounded-full transition-colors ${
                     isDark 
                       ? 'hover:bg-slate-800 text-gold' 
@@ -107,7 +124,7 @@ export const Nav: React.FC<NavProps> = ({ activePage, onNavigate, theme, onToggl
                 );
               })}
             </div>
-          </div>
+          </nav>
         </>
       )}
     </>
