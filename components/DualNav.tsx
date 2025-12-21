@@ -54,7 +54,7 @@ export const DualNav: React.FC<DualNavProps> = ({ theme, onToggleTheme }) => {
         aria-label="Academic navigation"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-20">
             {/* Logo 區域 - 增加寬度避免重疊 */}
             <div 
               onClick={() => navigate('/')}
@@ -63,7 +63,7 @@ export const DualNav: React.FC<DualNavProps> = ({ theme, onToggleTheme }) => {
               <img 
                 src="/logo.png" 
                 alt="元壹宇宙 YUANYI UNIVERSE" 
-                className="h-12 sm:h-16 w-auto object-contain"
+                className="h-16 sm:h-18 w-auto object-contain"
               />
             </div>
 
