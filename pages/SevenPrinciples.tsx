@@ -16,7 +16,8 @@ const META_LAWS = [
         desc: '宇宙的開端沒有二元、沒有分裂、沒有對立。「元」是未分化的整體。',
         detail: '放大差異之前，我們本質相同。生命體之間沒有階級。所有陰影、光明、能力、弧度，都源自同一個整體。「本無二」不是否定差異，而是指出差異不是本質，而是後續的展開。',
         quote: '「放大差異之前，我們本質相同。」',
-        visual: UnityField
+        visual: UnityField,
+        icon: '/icons/principle1.png'
     },
     { 
         id: 2, 
@@ -25,7 +26,8 @@ const META_LAWS = [
         desc: '「壹」不是一個數字，而是一種結構。內外無界，自他不分。',
         detail: '個體即整體，整體即個體的鏡像。沒有任何意念會無聲地消失，沒有任何選擇是孤立的。每一個情緒、每一個行為，都會在整體中產生連動。\n生命之間的連結不是附加的，而是宇宙原本的運作方式。',
         quote: '「沒有人是一座孤島，我們是同一片大陸的一部份。」',
-        visual: Globe
+        visual: Globe,
+        icon: '/icons/principle2.png'
     },
     { 
         id: 3, 
@@ -34,7 +36,8 @@ const META_LAWS = [
         desc: '生命不是直線，而是「圓弧」。生命不以分裂運作，而以完整運作。',
         detail: '每段弧度都有必要性。陰影與傷害並非錯誤，而是未完成的圓。逃避的部分會以另一種形式再現，每段痛都有它的位置，每段突破都完成新的弧度。',
         quote: '「生命不是直線，而是圓弧。」',
-        visual: Circle
+        visual: Circle,
+        icon: '/icons/principle3.png'
     },
     { 
         id: 4, 
@@ -43,7 +46,8 @@ const META_LAWS = [
         desc: '宇宙結構中不存在單向關係。所有能量交換都是互相影響。',
         detail: '互利助揭示：索取永遠伴隨代價，付出永遠帶來回饋。推動即影響，影響即責任。\n在關係、社會、文明與人機協作中，互利不是選擇，而是事實。',
         quote: '「凡你所給予的，必將回到你身上。」',
-        visual: Heart
+        visual: Heart,
+        icon: '/icons/principle4.png'
     },
     { 
         id: 5, 
@@ -52,7 +56,8 @@ const META_LAWS = [
         desc: '生命不是獎懲系統，而是「回應系統」。結果與個體不可分割。',
         detail: '願擔責指出：人不能躲開自己的弧度。選擇必然帶來回應，後果不能外包。\n迴避只會延遲，不會消除。完整性需要承擔。',
         quote: '「自由不是做你想做的事，而是承擔你所做之事的後果。」',
-        visual: Anchor
+        visual: Anchor,
+        icon: '/icons/principle5.png'
     },
     { 
         id: 6, 
@@ -61,7 +66,8 @@ const META_LAWS = [
         desc: '真實是整合的入口。未被承認的現實不會消失，只會換方式顯化。',
         detail: '語言失真 → 結構也會失真。情緒未命名 → 會在行為中重演。錯誤未面對 → 宇宙會放大回來。\n真實不是道德，而是運作方式。真實是一切弧度得以閉環的必要條件。',
         quote: '「真相能讓你自由，但它會先讓你惱火。」',
-        visual: Shield
+        visual: Shield,
+        icon: '/icons/principle6.png'
     },
     { 
         id: 7, 
@@ -70,7 +76,8 @@ const META_LAWS = [
         desc: '所有弧度最終都會回到源頭。「萬歸一」是宇宙的封印。',
         detail: '未完成的弧度會以事件、關係、情緒再次出現，直到被整合。\n逃避→迴返。壓抑→顯化。分裂→要求合一。未完成→會被生命重新安排。\n所有弧度，最終都要回到完整。',
         quote: '「我們來自塵埃，也將歸於星辰。」',
-        visual: RefreshCw
+        visual: RefreshCw,
+        icon: '/icons/principle7.png'
     },
 ];
 
@@ -300,10 +307,13 @@ export const SevenPrinciples: React.FC<SevenPrinciplesProps> = ({ theme }) => {
                                 {String(law.id).padStart(2, '0')}
                             </div>
 
-                            <div className={`mb-6 p-3 rounded-xl w-fit ${
-                                isDark ? 'bg-gold/10 text-gold' : 'bg-amber-50 text-muted-gold'
-                            }`}>
-                                <Layers size={24} />
+                            {/* Golden Icon */}
+                            <div className="mb-6 flex justify-center">
+                                <img 
+                                    src={law.icon} 
+                                    alt={law.title}
+                                    className="w-32 h-32 object-contain transition-all duration-500 group-hover:scale-110 group-hover:drop-shadow-[0_0_20px_rgba(212,175,55,0.6)]"
+                                />
                             </div>
 
                             <h3 className={`text-2xl font-bold mb-3 ${isDark ? 'text-gold' : 'text-muted-gold'}`}>{law.title}</h3>
