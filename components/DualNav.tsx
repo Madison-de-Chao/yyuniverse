@@ -57,22 +57,14 @@ export const DualNav: React.FC<DualNavProps> = ({ theme, onToggleTheme }) => {
           <div className="flex items-center justify-between h-16">
             {/* Logo 區域 - 增加寬度避免重疊 */}
             <div 
-              onClick={() => handleNavigate('/museum')}
-              className="flex items-center gap-2 cursor-pointer flex-shrink-0 min-w-[180px]"
+              onClick={() => navigate('/')}
+              className="flex items-center cursor-pointer flex-shrink-0"
             >
               <img 
                 src="/logo.png" 
-                alt="元壹宇宙" 
-                className="h-8 w-8 sm:h-10 sm:w-10"
+                alt="元壹宇宙 YUANYI UNIVERSE" 
+                className="h-12 sm:h-16 w-auto object-contain"
               />
-              <div className="hidden sm:flex flex-col">
-                <span className={`font-serif font-bold text-base ${isDark ? 'text-gold' : 'text-muted-gold'}`}>
-                  元壹宇宙
-                </span>
-                <span className="text-[10px] opacity-60 tracking-wider">
-                  YUANYI UNIVERSE
-                </span>
-              </div>
             </div>
 
             {/* 學術導航項目 - 桌面版 */}
