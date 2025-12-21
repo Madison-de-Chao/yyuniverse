@@ -63,7 +63,7 @@ export const DualNav: React.FC<DualNavProps> = ({ theme, onToggleTheme }) => {
               <img 
                 src="/logo.png" 
                 alt="元壹宇宙 YUANYI UNIVERSE" 
-                className="h-16 sm:h-18 w-auto object-contain"
+                className="h-16 sm:h-18 w-auto object-contain min-w-[280px] sm:min-w-[360px]"
               />
             </div>
 
