@@ -14,6 +14,7 @@ interface Particle {
   size: number;
   opacity: number;
   color: string;
+  rotation?: number;
 }
 
 const Gallery: React.FC = () => {
@@ -40,7 +41,45 @@ const Gallery: React.FC = () => {
   const currentItem = currentData[currentIndex];
   const totalItems = currentData.length;
 
-  // 創建粒子爆發
+  // 檢查是否為七大法則頁面（跨頁 09-15）
+  const isSevenPrinciplesPage = (item: GalleryItem | undefined): boolean => {
+    if (!item) return false;
+    const id = typeof item.id === 'number' ? item.id : parseInt(item.id as string);
+    return id >= 9 && id <= 15;
+  };
+
+  // 創建紫色螺旋粒子（七大法則專用）
+  const createPurpleVortexParticles = () => {
+    const newParticles: Particle[] = [];
+    const particleCount = 60;
+    const purpleColors = [
+      'rgba(138, 43, 226, 1)',  // BlueViolet
+      'rgba(186, 85, 211, 1)',  // MediumOrchid
+      'rgba(218, 112, 214, 1)',  // Orchid
+    ];
+    
+    for (let i = 0; i < particleCount; i++) {
+      const angle = (Math.PI * 2 * i) / particleCount;
+      const spiralFactor = Math.sin(i * 0.5) * 0.3;
+      const speed = Math.random() * 4 + 3;
+      newParticles.push({
+        id: Date.now() + i,
+        x: 50,
+        y: 50,
+        vx: Math.cos(angle + spiralFactor) * speed,
+        vy: Math.sin(angle + spiralFactor) * speed,
+        size: Math.random() * 5 + 3,
+        opacity: 1,
+        color: purpleColors[Math.floor(Math.random() * purpleColors.length)],
+        rotation: Math.random() * 360,
+      });
+    }
+    
+    setParticles(newParticles);
+    setTimeout(() => setParticles([]), 1000);
+  };
+
+  // 創建普通粒子爆發
   const createParticleBurst = (color: string) => {
     const newParticles: Particle[] = [];
     const particleCount = 40;
@@ -50,7 +89,7 @@ const Gallery: React.FC = () => {
       const speed = Math.random() * 3 + 2;
       newParticles.push({
         id: Date.now() + i,
-        x: 50, // 中心點（百分比）
+        x: 50,
         y: 50,
         vx: Math.cos(angle) * speed,
         vy: Math.sin(angle) * speed,
@@ -61,8 +100,6 @@ const Gallery: React.FC = () => {
     }
     
     setParticles(newParticles);
-    
-    // 800ms 後清除粒子
     setTimeout(() => setParticles([]), 800);
   };
 
@@ -93,10 +130,14 @@ const Gallery: React.FC = () => {
     if (isTransitioning || currentWing === 'entrance') return;
     if (currentIndex < totalItems - 1) {
       // 觸發特效
-      const color = currentWing === 'intro' ? 'rgba(212,175,55,1)' : 
-                    currentWing === 'deep' ? 'rgba(0,206,209,1)' : 
-                    'rgba(255,255,255,1)';
-      createParticleBurst(color);
+      if (isSevenPrinciplesPage(currentItem)) {
+        createPurpleVortexParticles();
+      } else {
+        const color = currentWing === 'intro' ? 'rgba(212,175,55,1)' : 
+                      currentWing === 'deep' ? 'rgba(0,206,209,1)' : 
+                      'rgba(255,255,255,1)';
+        createParticleBurst(color);
+      }
       setShowGlowPulse(true);
       setTimeout(() => setShowGlowPulse(false), 500);
       
@@ -114,10 +155,14 @@ const Gallery: React.FC = () => {
     if (isTransitioning || currentWing === 'entrance') return;
     if (currentIndex > 0) {
       // 觸發特效
-      const color = currentWing === 'intro' ? 'rgba(212,175,55,1)' : 
-                    currentWing === 'deep' ? 'rgba(0,206,209,1)' : 
-                    'rgba(255,255,255,1)';
-      createParticleBurst(color);
+      if (isSevenPrinciplesPage(currentItem)) {
+        createPurpleVortexParticles();
+      } else {
+        const color = currentWing === 'intro' ? 'rgba(212,175,55,1)' : 
+                      currentWing === 'deep' ? 'rgba(0,206,209,1)' : 
+                      'rgba(255,255,255,1)';
+        createParticleBurst(color);
+      }
       setShowGlowPulse(true);
       setTimeout(() => setShowGlowPulse(false), 500);
       
@@ -431,12 +476,22 @@ const Gallery: React.FC = () => {
 
         {/* 展示框 */}
         <div 
-          className={`relative z-10 max-w-5xl w-full transition-all duration-500 ${
-            isTransitioning 
-              ? direction === 'forward' 
-                ? 'opacity-0 scale-95 translate-y-10 blur-sm' 
-                : 'opacity-0 scale-105 -translate-y-10 blur-sm'
-              : 'opacity-100 scale-100 translate-y-0 blur-0'
+          className={`relative z-10 max-w-5xl w-full ${
+            isSevenPrinciplesPage(currentItem)
+              ? `transition-all duration-[600ms] cubic-bezier(0.68, -0.55, 0.265, 1.55) ${
+                  isTransitioning 
+                    ? direction === 'forward' 
+                      ? 'opacity-0 rotate-[360deg] scale-0' 
+                      : 'opacity-0 rotate-[-360deg] scale-0'
+                    : 'opacity-100 rotate-0 scale-100'
+                }`
+              : `transition-all duration-500 ${
+                  isTransitioning 
+                    ? direction === 'forward' 
+                      ? 'opacity-0 scale-95 translate-y-10 blur-sm' 
+                      : 'opacity-0 scale-105 -translate-y-10 blur-sm'
+                    : 'opacity-100 scale-100 translate-y-0 blur-0'
+                }`
           }`}
         >
           {/* 展品標題 */}
@@ -449,10 +504,16 @@ const Gallery: React.FC = () => {
           {/* 圖片展示框 */}
           <div 
             className={`relative rounded-2xl overflow-hidden border-4 ${config.borderColor} ${
-              showGlowPulse ? 'animate-glowPulse' : ''
+              showGlowPulse 
+                ? isSevenPrinciplesPage(currentItem) 
+                  ? 'animate-purpleVortexGlow' 
+                  : 'animate-glowPulse'
+                : ''
             }`}
             style={{
-              boxShadow: config.shadowColor,
+              boxShadow: isSevenPrinciplesPage(currentItem) && showGlowPulse
+                ? '0 0 80px rgba(138, 43, 226, 1), inset 0 0 40px rgba(186, 85, 211, 0.5)'
+                : config.shadowColor,
               willChange: 'box-shadow, transform',
             }}
           >
@@ -542,6 +603,31 @@ const Gallery: React.FC = () => {
           0% { box-shadow: 0 0 20px currentColor; }
           50% { box-shadow: 0 0 80px currentColor; }
           100% { box-shadow: 0 0 20px currentColor; }
+        }
+        
+        @keyframes purpleVortexGlow {
+          0% {
+            box-shadow: 
+              0 0 20px rgba(138, 43, 226, 0.8),
+              inset 0 0 20px rgba(138, 43, 226, 0.3);
+            transform: rotate(0deg);
+          }
+          50% {
+            box-shadow: 
+              0 0 80px rgba(186, 85, 211, 1),
+              inset 0 0 40px rgba(186, 85, 211, 0.5);
+            transform: rotate(180deg);
+          }
+          100% {
+            box-shadow: 
+              0 0 20px rgba(138, 43, 226, 0.8),
+              inset 0 0 20px rgba(138, 43, 226, 0.3);
+            transform: rotate(360deg);
+          }
+        }
+        
+        .animate-purpleVortexGlow {
+          animation: purpleVortexGlow 1200ms ease-out;
         }
         
         .animate-fadeIn {
