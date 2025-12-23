@@ -133,6 +133,12 @@ export const pageMeta = {
     keywords: '關於, 系統工程, 完整性母律, 治理, 版本控制',
     url: 'https://yyuniverse.com/about-system',
   },
+  gallery: {
+    title: '展示大廳',
+    description: '元壹宇宙完整版（48 跨頁／96 頁）視覺導覽，探索科博館級別的思維系統展示。',
+    keywords: '展示大廳, 視覺導覽, 跨頁展示, 元壹宇宙, 科博館',
+    url: 'https://yyuniverse.com/gallery',
+  },
 };
 
 // 結構化數據：網站整體
@@ -162,6 +168,14 @@ export const organizationStructuredData = {
   sameAs: [
     // 可以添加社交媒體鏈接
   ],
+};
+
+// Gallery 頁面
+export const galleryMeta = {
+  title: '展示大廳',
+  description: '元壹宇宙完整版（48 跨頁／96 頁）視覺導覽，探索科博館級別的思維系統展示。',
+  keywords: '展示大廳, 視覺導覽, 跨頁展示, 元壹宇宙, 科博館',
+  url: 'https://yyuniverse.com/gallery',
 };
 
 // 結構化數據：麵包屑導航

@@ -29,6 +29,7 @@ const ChallengeKit = lazy(() => import('./pages/ChallengeKit'));
 const Glossary = lazy(() => import('./pages/Glossary'));
 const References = lazy(() => import('./pages/References'));
 const AboutSystem = lazy(() => import('./pages/About'));
+const Gallery = lazy(() => import('./pages/Gallery'));
 
 // 加載指示器組件
 function LoadingFallback() {
@@ -243,6 +244,14 @@ export function AppRoutes({ theme, toggleTheme }: { theme: Theme; toggleTheme: (
           element={
             <PageWrapper seoKey="aboutSystem">
               <AboutSystem />
+            </PageWrapper>
+          }
+        />
+        <Route 
+          path="/gallery" 
+          element={
+            <PageWrapper seoKey="gallery">
+              <Gallery />
             </PageWrapper>
           }
         />

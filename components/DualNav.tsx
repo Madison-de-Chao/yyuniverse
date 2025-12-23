@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Theme } from '../types';
-import { Sun, Moon, Home, Map, Target, BookText, FileSearch, Info, Star, Sparkles, Scale, FileText, BookOpen, Shield, User, Layers, Compass, MessageSquare } from 'lucide-react';
+import { Sun, Moon, Home, Map, Target, BookText, FileSearch, Info, Star, Sparkles, Scale, FileText, BookOpen, Shield, User, Layers, Compass, MessageSquare, Image } from 'lucide-react';
 
 interface DualNavProps {
   theme: Theme;
@@ -30,6 +30,7 @@ export const DualNav: React.FC<DualNavProps> = ({ theme, onToggleTheme }) => {
 
   // 探索導航（次導航）
   const explorationNav = [
+    { path: '/gallery', label: '展示大廳', icon: Image },
     { path: '/nine-origins', label: '九大起源', icon: Star },
     { path: '/seven-principles', label: '七大法則', icon: Sparkles },
     { path: '/logic-loop', label: '八階思維', icon: Layers },
