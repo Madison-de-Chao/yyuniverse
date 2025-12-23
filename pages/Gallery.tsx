@@ -5,6 +5,17 @@ import { INTRO_PAGES, DEEP_PAGES, STYLE_ANCHORS, GalleryItem } from '../galleryD
 
 type WingType = 'entrance' | 'intro' | 'deep' | 'style';
 
+interface Particle {
+  id: number;
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  size: number;
+  opacity: number;
+  color: string;
+}
+
 const Gallery: React.FC = () => {
   const navigate = useNavigate();
   
@@ -12,6 +23,8 @@ const Gallery: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [direction, setDirection] = useState<'forward' | 'backward'>('forward');
+  const [particles, setParticles] = useState<Particle[]>([]);
+  const [showGlowPulse, setShowGlowPulse] = useState(false);
 
   // 獲取當前展廳的數據
   const getCurrentWingData = (): GalleryItem[] => {
@@ -26,6 +39,32 @@ const Gallery: React.FC = () => {
   const currentData = getCurrentWingData();
   const currentItem = currentData[currentIndex];
   const totalItems = currentData.length;
+
+  // 創建粒子爆發
+  const createParticleBurst = (color: string) => {
+    const newParticles: Particle[] = [];
+    const particleCount = 40;
+    
+    for (let i = 0; i < particleCount; i++) {
+      const angle = (Math.PI * 2 * i) / particleCount;
+      const speed = Math.random() * 3 + 2;
+      newParticles.push({
+        id: Date.now() + i,
+        x: 50, // 中心點（百分比）
+        y: 50,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        size: Math.random() * 4 + 2,
+        opacity: 1,
+        color,
+      });
+    }
+    
+    setParticles(newParticles);
+    
+    // 800ms 後清除粒子
+    setTimeout(() => setParticles([]), 800);
+  };
 
   // 進入展廳
   const enterWing = (wing: WingType) => {
@@ -53,6 +92,14 @@ const Gallery: React.FC = () => {
   const goForward = useCallback(() => {
     if (isTransitioning || currentWing === 'entrance') return;
     if (currentIndex < totalItems - 1) {
+      // 觸發特效
+      const color = currentWing === 'intro' ? 'rgba(212,175,55,1)' : 
+                    currentWing === 'deep' ? 'rgba(0,206,209,1)' : 
+                    'rgba(255,255,255,1)';
+      createParticleBurst(color);
+      setShowGlowPulse(true);
+      setTimeout(() => setShowGlowPulse(false), 500);
+      
       setIsTransitioning(true);
       setDirection('forward');
       setTimeout(() => {
@@ -66,6 +113,14 @@ const Gallery: React.FC = () => {
   const goBackward = useCallback(() => {
     if (isTransitioning || currentWing === 'entrance') return;
     if (currentIndex > 0) {
+      // 觸發特效
+      const color = currentWing === 'intro' ? 'rgba(212,175,55,1)' : 
+                    currentWing === 'deep' ? 'rgba(0,206,209,1)' : 
+                    'rgba(255,255,255,1)';
+      createParticleBurst(color);
+      setShowGlowPulse(true);
+      setTimeout(() => setShowGlowPulse(false), 500);
+      
       setIsTransitioning(true);
       setDirection('backward');
       setTimeout(() => {
@@ -74,6 +129,24 @@ const Gallery: React.FC = () => {
       }, 300);
     }
   }, [currentIndex, isTransitioning, currentWing]);
+
+  // 粒子動畫更新
+  useEffect(() => {
+    if (particles.length === 0) return;
+
+    const interval = setInterval(() => {
+      setParticles(prev => 
+        prev.map(p => ({
+          ...p,
+          x: p.x + p.vx,
+          y: p.y + p.vy,
+          opacity: p.opacity - 0.02,
+        })).filter(p => p.opacity > 0)
+      );
+    }, 16); // ~60fps
+
+    return () => clearInterval(interval);
+  }, [particles.length]);
 
   // 鍵盤控制
   useEffect(() => {
@@ -145,10 +218,8 @@ const Gallery: React.FC = () => {
 
       if (Math.abs(swipeDistance) > minSwipeDistance) {
         if (swipeDistance > 0) {
-          // 向左滑動 = 前進
           goForward();
         } else {
-          // 向右滑動 = 後退
           goBackward();
         }
       }
@@ -177,6 +248,28 @@ const Gallery: React.FC = () => {
             opacity: Math.random() * 0.7 + 0.3,
             animationDelay: Math.random() * 3 + 's',
             animationDuration: (Math.random() * 2 + 2) + 's',
+          }}
+        />
+      ))}
+    </div>
+  );
+
+  // 粒子系統組件
+  const ParticleSystem = () => (
+    <div className="fixed inset-0 pointer-events-none z-30">
+      {particles.map(p => (
+        <div
+          key={p.id}
+          className="absolute rounded-full"
+          style={{
+            left: `${p.x}%`,
+            top: `${p.y}%`,
+            width: `${p.size}px`,
+            height: `${p.size}px`,
+            backgroundColor: p.color,
+            opacity: p.opacity,
+            boxShadow: `0 0 ${p.size * 2}px ${p.color}`,
+            transition: 'all 0.016s linear',
           }}
         />
       ))}
@@ -290,6 +383,7 @@ const Gallery: React.FC = () => {
         borderColor: 'border-gold/30',
         hoverBorder: 'hover:border-gold',
         shadowColor: '0 0 60px rgba(212,175,55,0.4)',
+        glowColor: 'rgba(212,175,55,0.8)',
       },
       deep: { 
         name: '下鑽版展廳',
@@ -297,6 +391,7 @@ const Gallery: React.FC = () => {
         borderColor: 'border-cyan-500/30',
         hoverBorder: 'hover:border-cyan-500',
         shadowColor: '0 0 60px rgba(0,206,209,0.4)',
+        glowColor: 'rgba(0,206,209,0.8)',
       },
       style: { 
         name: '風格定錨展廳',
@@ -304,6 +399,7 @@ const Gallery: React.FC = () => {
         borderColor: 'border-white/30',
         hoverBorder: 'hover:border-white',
         shadowColor: '0 0 60px rgba(255,255,255,0.4)',
+        glowColor: 'rgba(255,255,255,0.8)',
       },
     };
 
@@ -312,6 +408,7 @@ const Gallery: React.FC = () => {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center px-4 py-20 relative overflow-hidden">
         <StarfieldBackground />
+        <ParticleSystem />
 
         {/* 頂部導航欄 */}
         <div className="fixed top-24 left-0 right-0 z-20 flex items-center justify-between px-8 py-4 bg-void/80 backdrop-blur-md border-b border-gold/20">
@@ -337,9 +434,9 @@ const Gallery: React.FC = () => {
           className={`relative z-10 max-w-5xl w-full transition-all duration-500 ${
             isTransitioning 
               ? direction === 'forward' 
-                ? 'opacity-0 scale-95 translate-y-10' 
-                : 'opacity-0 scale-105 -translate-y-10'
-              : 'opacity-100 scale-100 translate-y-0'
+                ? 'opacity-0 scale-95 translate-y-10 blur-sm' 
+                : 'opacity-0 scale-105 -translate-y-10 blur-sm'
+              : 'opacity-100 scale-100 translate-y-0 blur-0'
           }`}
         >
           {/* 展品標題 */}
@@ -351,9 +448,12 @@ const Gallery: React.FC = () => {
 
           {/* 圖片展示框 */}
           <div 
-            className={`relative rounded-2xl overflow-hidden border-4 ${config.borderColor}`}
+            className={`relative rounded-2xl overflow-hidden border-4 ${config.borderColor} ${
+              showGlowPulse ? 'animate-glowPulse' : ''
+            }`}
             style={{
               boxShadow: config.shadowColor,
+              willChange: 'box-shadow, transform',
             }}
           >
             <img
@@ -438,6 +538,12 @@ const Gallery: React.FC = () => {
           50% { opacity: 1; }
         }
         
+        @keyframes glowPulse {
+          0% { box-shadow: 0 0 20px currentColor; }
+          50% { box-shadow: 0 0 80px currentColor; }
+          100% { box-shadow: 0 0 20px currentColor; }
+        }
+        
         .animate-fadeIn {
           animation: fadeIn 1s ease-out;
         }
@@ -449,6 +555,10 @@ const Gallery: React.FC = () => {
         
         .animate-twinkle {
           animation: twinkle 2s ease-in-out infinite;
+        }
+        
+        .animate-glowPulse {
+          animation: glowPulse 500ms ease-out;
         }
       `}</style>
     </div>
