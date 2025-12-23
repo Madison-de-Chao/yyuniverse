@@ -1,243 +1,456 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft, Home, ChevronLeft, ChevronRight } from 'lucide-react';
 import { INTRO_PAGES, DEEP_PAGES, STYLE_ANCHORS, GalleryItem } from '../galleryData';
 
-type TabType = 'intro' | 'deep' | 'style';
+type WingType = 'entrance' | 'intro' | 'deep' | 'style';
 
 const Gallery: React.FC = () => {
   const navigate = useNavigate();
-  const [isDark, setIsDark] = useState(true);
-  const [activeTab, setActiveTab] = useState<TabType>('intro');
-  const [lightboxOpen, setLightboxOpen] = useState(false);
+  
+  const [currentWing, setCurrentWing] = useState<WingType>('entrance');
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [currentData, setCurrentData] = useState<GalleryItem[]>(INTRO_PAGES);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [direction, setDirection] = useState<'forward' | 'backward'>('forward');
 
-  // 根據 activeTab 更新 currentData
-  useEffect(() => {
-    switch (activeTab) {
-      case 'intro':
-        setCurrentData(INTRO_PAGES);
-        break;
-      case 'deep':
-        setCurrentData(DEEP_PAGES);
-        break;
-      case 'style':
-        setCurrentData(STYLE_ANCHORS);
-        break;
+  // 獲取當前展廳的數據
+  const getCurrentWingData = (): GalleryItem[] => {
+    switch (currentWing) {
+      case 'intro': return INTRO_PAGES;
+      case 'deep': return DEEP_PAGES;
+      case 'style': return STYLE_ANCHORS;
+      default: return [];
     }
-    setCurrentIndex(0); // 切換 tab 時重置索引
-  }, [activeTab]);
-
-  // 開啟燈箱
-  const openLightbox = (index: number) => {
-    setCurrentIndex(index);
-    setLightboxOpen(true);
   };
 
-  // 關閉燈箱
-  const closeLightbox = () => {
-    setLightboxOpen(false);
+  const currentData = getCurrentWingData();
+  const currentItem = currentData[currentIndex];
+  const totalItems = currentData.length;
+
+  // 進入展廳
+  const enterWing = (wing: WingType) => {
+    setIsTransitioning(true);
+    setDirection('forward');
+    setTimeout(() => {
+      setCurrentWing(wing);
+      setCurrentIndex(0);
+      setIsTransitioning(false);
+    }, 500);
   };
 
-  // 上一張
-  const prevImage = () => {
-    setCurrentIndex((prev) => (prev > 0 ? prev - 1 : currentData.length - 1));
+  // 返回入口
+  const returnToEntrance = () => {
+    setIsTransitioning(true);
+    setDirection('backward');
+    setTimeout(() => {
+      setCurrentWing('entrance');
+      setCurrentIndex(0);
+      setIsTransitioning(false);
+    }, 500);
   };
 
-  // 下一張
-  const nextImage = () => {
-    setCurrentIndex((prev) => (prev < currentData.length - 1 ? prev + 1 : 0));
-  };
+  // 前進到下一個展品
+  const goForward = useCallback(() => {
+    if (isTransitioning || currentWing === 'entrance') return;
+    if (currentIndex < totalItems - 1) {
+      setIsTransitioning(true);
+      setDirection('forward');
+      setTimeout(() => {
+        setCurrentIndex(prev => prev + 1);
+        setIsTransitioning(false);
+      }, 300);
+    }
+  }, [currentIndex, totalItems, isTransitioning, currentWing]);
 
-  // 鍵盤操作
+  // 後退到上一個展品
+  const goBackward = useCallback(() => {
+    if (isTransitioning || currentWing === 'entrance') return;
+    if (currentIndex > 0) {
+      setIsTransitioning(true);
+      setDirection('backward');
+      setTimeout(() => {
+        setCurrentIndex(prev => prev - 1);
+        setIsTransitioning(false);
+      }, 300);
+    }
+  }, [currentIndex, isTransitioning, currentWing]);
+
+  // 鍵盤控制
   useEffect(() => {
-    if (!lightboxOpen) return;
-
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowLeft') prevImage();
       if (e.key === 'ArrowRight' || e.key === ' ') {
         e.preventDefault();
-        nextImage();
+        goForward();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        goBackward();
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        returnToEntrance();
+      } else if (e.key === '1') {
+        enterWing('intro');
+      } else if (e.key === '2') {
+        enterWing('deep');
+      } else if (e.key === '3') {
+        enterWing('style');
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [lightboxOpen, currentIndex, currentData]);
+  }, [goForward, goBackward]);
 
-  // 配色
-  const bgColor = isDark ? 'bg-slate-950' : 'bg-gray-50';
-  const textColor = isDark ? 'text-white' : 'text-gray-900';
-  const mutedText = isDark ? 'text-gray-400' : 'text-gray-600';
-  const accentColor = isDark ? 'text-gold' : 'text-muted-gold';
-  const borderColor = isDark ? 'border-slate-800' : 'border-gray-200';
-  const cardBg = isDark ? 'bg-slate-900/50' : 'bg-white';
-  const tabActive = isDark ? 'bg-gold text-slate-950' : 'bg-muted-gold text-white';
-  const tabInactive = isDark ? 'text-gray-400 hover:text-gold' : 'text-gray-600 hover:text-muted-gold';
+  // 滑鼠滾輪控制
+  useEffect(() => {
+    if (currentWing === 'entrance') return;
 
-  return (
-    <div className={`min-h-screen ${bgColor} ${textColor} transition-colors duration-500`}>
-      {/* Header */}
-      <header className="sticky top-0 z-40 backdrop-blur-md border-b" style={{
-        background: isDark ? 'rgba(15, 23, 42, 0.8)' : 'rgba(249, 250, 251, 0.8)',
-        borderColor: isDark ? 'rgba(51, 65, 85, 0.5)' : 'rgba(229, 231, 235, 0.5)'
-      }}>
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <button 
-            onClick={() => navigate('/')}
-            className={`flex items-center gap-2 ${mutedText} hover:${accentColor} transition-colors`}
-          >
-            <ArrowLeft size={20} />
-            <span className="text-sm font-mono uppercase tracking-wider">返回</span>
-          </button>
-          
-          <div className="text-center">
-            <h1 className={`font-serif text-2xl md:text-3xl font-bold ${accentColor}`}>
-              元壹宇宙展示大廳
-            </h1>
-            <p className={`text-xs md:text-sm font-mono tracking-widest ${mutedText} mt-1`}>
-              YUANYI UNIVERSE GALLERY
-            </p>
-          </div>
+    let wheelTimeout: NodeJS.Timeout;
+    const handleWheel = (e: WheelEvent) => {
+      clearTimeout(wheelTimeout);
+      wheelTimeout = setTimeout(() => {
+        if (e.deltaY > 0) {
+          goForward();
+        } else if (e.deltaY < 0) {
+          goBackward();
+        }
+      }, 100);
+    };
 
-          <div className="w-24"></div> {/* Spacer for centering */}
-        </div>
-      </header>
+    window.addEventListener('wheel', handleWheel, { passive: true });
+    return () => {
+      clearTimeout(wheelTimeout);
+      window.removeEventListener('wheel', handleWheel);
+    };
+  }, [goForward, goBackward, currentWing]);
 
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-6 py-12">
-        {/* Intro Section */}
-        <section className="text-center mb-12">
-          <p className={`max-w-3xl mx-auto text-base md:text-lg leading-relaxed ${mutedText} mb-6`}>
-            完整版（48 跨頁／96 頁）<br/>
-            把元壹宇宙變成「可被學習、可被引用、可被長期使用」的導覽書。
-          </p>
-        </section>
+  // 觸控手勢控制
+  useEffect(() => {
+    if (currentWing === 'entrance') return;
 
-        {/* Tabs */}
-        <div className="flex justify-center mb-12">
-          <div className={`p-1 rounded-full border inline-flex ${borderColor} ${cardBg}`}>
-            <button 
-              onClick={() => setActiveTab('intro')}
-              className={`px-6 py-3 rounded-full text-sm font-bold transition-all ${
-                activeTab === 'intro' ? tabActive : tabInactive
-              }`}
-            >
-              入門版（22 跨頁）
-            </button>
-            <button 
-              onClick={() => setActiveTab('deep')}
-              className={`px-6 py-3 rounded-full text-sm font-bold transition-all ${
-                activeTab === 'deep' ? tabActive : tabInactive
-              }`}
-            >
-              下鑽版（24 跨頁）
-            </button>
-            <button 
-              onClick={() => setActiveTab('style')}
-              className={`px-6 py-3 rounded-full text-sm font-bold transition-all ${
-                activeTab === 'style' ? tabActive : tabInactive
-              }`}
-            >
-              風格定錨（3 張）
-            </button>
-          </div>
-        </div>
+    let touchStartX = 0;
+    let touchEndX = 0;
 
-        {/* Gallery Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-          {currentData.map((item, index) => (
-            <button
-              key={item.id}
-              onClick={() => openLightbox(index)}
-              className={`group relative aspect-video rounded-xl overflow-hidden border ${borderColor} ${cardBg} hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-gold/20`}
-            >
-              <img 
-                src={item.file} 
-                alt={item.title}
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
-              <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4`}>
-                <p className="text-white text-sm font-bold">{item.title}</p>
-              </div>
-            </button>
-          ))}
-        </div>
-      </main>
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartX = e.changedTouches[0].screenX;
+    };
 
-      {/* Lightbox */}
-      {lightboxOpen && (
-        <div 
-          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
-          onClick={closeLightbox}
+    const handleTouchEnd = (e: TouchEvent) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    };
+
+    const handleSwipe = () => {
+      const swipeDistance = touchStartX - touchEndX;
+      const minSwipeDistance = 50;
+
+      if (Math.abs(swipeDistance) > minSwipeDistance) {
+        if (swipeDistance > 0) {
+          // 向左滑動 = 前進
+          goForward();
+        } else {
+          // 向右滑動 = 後退
+          goBackward();
+        }
+      }
+    };
+
+    window.addEventListener('touchstart', handleTouchStart);
+    window.addEventListener('touchend', handleTouchEnd);
+    return () => {
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, [goForward, goBackward, currentWing]);
+
+  // 星空背景組件
+  const StarfieldBackground = () => (
+    <div className="fixed inset-0 overflow-hidden pointer-events-none">
+      {[...Array(200)].map((_, i) => (
+        <div
+          key={i}
+          className="absolute rounded-full bg-white animate-twinkle"
+          style={{
+            width: Math.random() * 3 + 'px',
+            height: Math.random() * 3 + 'px',
+            top: Math.random() * 100 + '%',
+            left: Math.random() * 100 + '%',
+            opacity: Math.random() * 0.7 + 0.3,
+            animationDelay: Math.random() * 3 + 's',
+            animationDuration: (Math.random() * 2 + 2) + 's',
+          }}
+        />
+      ))}
+    </div>
+  );
+
+  // 入口大廳
+  const EntranceHall = () => (
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 relative overflow-hidden">
+      <StarfieldBackground />
+      
+      {/* 標題區 */}
+      <div className="text-center mb-16 z-10 animate-fadeIn">
+        <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-gold via-yellow-300 to-gold bg-clip-text text-transparent animate-shimmer">
+          元壹宇宙展示大廳
+        </h1>
+        <p className="text-xl md:text-2xl text-gold/80 mb-4 tracking-wider">
+          YUANYI UNIVERSE GALLERY
+        </p>
+        <p className="text-lg text-gray-400">
+          完整版（48 跨頁／96 頁）
+        </p>
+        <p className="text-md text-gray-500 mt-2">
+          選擇一個入口，開始你的星際導覽之旅...
+        </p>
+      </div>
+
+      {/* 三個展廳入口 */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl w-full z-10">
+        {/* 入門版展廳 */}
+        <button
+          onClick={() => enterWing('intro')}
+          className="group relative bg-gradient-to-br from-gold/10 to-gold/5 border-2 border-gold/30 rounded-2xl p-8 hover:border-gold hover:shadow-[0_0_40px_rgba(212,175,55,0.4)] transition-all duration-500 transform hover:scale-105"
         >
-          {/* Close Button */}
-          <button
-            onClick={closeLightbox}
-            className="absolute top-6 right-6 text-white hover:text-gold transition-colors z-50"
-          >
-            <X size={32} />
-          </button>
-
-          {/* Navigation Buttons */}
-          <button
-            onClick={(e) => { e.stopPropagation(); prevImage(); }}
-            className="absolute left-6 text-white hover:text-gold transition-colors z-50"
-          >
-            <ChevronLeft size={48} />
-          </button>
-          <button
-            onClick={(e) => { e.stopPropagation(); nextImage(); }}
-            className="absolute right-6 text-white hover:text-gold transition-colors z-50"
-          >
-            <ChevronRight size={48} />
-          </button>
-
-          {/* Image Container */}
-          <div 
-            className="max-w-[90vw] max-h-[80vh] flex flex-col items-center"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <img 
-              src={currentData[currentIndex].file} 
-              alt={currentData[currentIndex].title}
-              className="max-w-full max-h-[70vh] object-contain rounded-lg shadow-2xl"
-            />
-
-            {/* Info Section */}
-            <div className="mt-6 text-center max-w-2xl">
-              <h2 className="text-2xl font-bold text-gold mb-3">
-                {currentData[currentIndex].title}
-              </h2>
-              
-              {currentData[currentIndex].narration && (
-                <p className="text-gray-300 text-lg italic mb-2">
-                  「{currentData[currentIndex].narration}」
-                </p>
-              )}
-              
-              {currentData[currentIndex].task && (
-                <p className="text-gray-400 text-sm">
-                  任務：{currentData[currentIndex].task}
-                </p>
-              )}
-              
-              {currentData[currentIndex].description && (
-                <p className="text-gray-400 text-sm">
-                  {currentData[currentIndex].description}
-                </p>
-              )}
-
-              <p className="text-gray-500 text-xs mt-4 font-mono">
-                {currentIndex + 1} / {currentData.length}
-              </p>
+          <div className="absolute inset-0 bg-gradient-to-br from-gold/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="relative z-10">
+            <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gold/20 flex items-center justify-center group-hover:animate-pulse">
+              <span className="text-4xl">🌟</span>
+            </div>
+            <h3 className="text-2xl font-bold text-gold mb-3">入門版展廳</h3>
+            <p className="text-gray-400 mb-4">22 跨頁</p>
+            <p className="text-sm text-gray-500">
+              從封面到尾聲，完整導覽元壹宇宙的核心架構
+            </p>
+            <div className="mt-6 text-gold/60 text-sm">
+              按 1 快速進入
             </div>
           </div>
+        </button>
+
+        {/* 下鑽版展廳 */}
+        <button
+          onClick={() => enterWing('deep')}
+          className="group relative bg-gradient-to-br from-cyan-500/10 to-cyan-500/5 border-2 border-cyan-500/30 rounded-2xl p-8 hover:border-cyan-500 hover:shadow-[0_0_40px_rgba(0,206,209,0.4)] transition-all duration-500 transform hover:scale-105"
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="relative z-10">
+            <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-cyan-500/20 flex items-center justify-center group-hover:animate-pulse">
+              <span className="text-4xl">🔮</span>
+            </div>
+            <h3 className="text-2xl font-bold text-cyan-400 mb-3">下鑽版展廳</h3>
+            <p className="text-gray-400 mb-4">24 跨頁</p>
+            <p className="text-sm text-gray-500">
+              深入每個概念的案例、練習、反例與層級對照
+            </p>
+            <div className="mt-6 text-cyan-500/60 text-sm">
+              按 2 快速進入
+            </div>
+          </div>
+        </button>
+
+        {/* 風格定錨展廳 */}
+        <button
+          onClick={() => enterWing('style')}
+          className="group relative bg-gradient-to-br from-white/10 to-white/5 border-2 border-white/30 rounded-2xl p-8 hover:border-white hover:shadow-[0_0_40px_rgba(255,255,255,0.4)] transition-all duration-500 transform hover:scale-105"
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="relative z-10">
+            <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-white/20 flex items-center justify-center group-hover:animate-pulse">
+              <span className="text-4xl">⭐</span>
+            </div>
+            <h3 className="text-2xl font-bold text-white mb-3">風格定錨展廳</h3>
+            <p className="text-gray-400 mb-4">3 張</p>
+            <p className="text-sm text-gray-500">
+              入口星門、伊出場、閉環完成的視覺定錨
+            </p>
+            <div className="mt-6 text-white/60 text-sm">
+              按 3 快速進入
+            </div>
+          </div>
+        </button>
+      </div>
+
+      {/* 返回按鈕 */}
+      <button
+        onClick={() => navigate(-1)}
+        className="mt-16 flex items-center gap-2 text-gray-400 hover:text-gold transition-colors z-10"
+      >
+        <ArrowLeft size={20} />
+        <span>返回上一頁</span>
+      </button>
+    </div>
+  );
+
+  // 展廳走廊
+  const GalleryCorridor = () => {
+    const wingConfig = {
+      intro: { 
+        name: '入門版展廳',
+        color: 'text-gold', 
+        borderColor: 'border-gold/30',
+        hoverBorder: 'hover:border-gold',
+        shadowColor: '0 0 60px rgba(212,175,55,0.4)',
+      },
+      deep: { 
+        name: '下鑽版展廳',
+        color: 'text-cyan-400', 
+        borderColor: 'border-cyan-500/30',
+        hoverBorder: 'hover:border-cyan-500',
+        shadowColor: '0 0 60px rgba(0,206,209,0.4)',
+      },
+      style: { 
+        name: '風格定錨展廳',
+        color: 'text-white', 
+        borderColor: 'border-white/30',
+        hoverBorder: 'hover:border-white',
+        shadowColor: '0 0 60px rgba(255,255,255,0.4)',
+      },
+    };
+
+    const config = wingConfig[currentWing as 'intro' | 'deep' | 'style'];
+
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center px-4 py-20 relative overflow-hidden">
+        <StarfieldBackground />
+
+        {/* 頂部導航欄 */}
+        <div className="fixed top-24 left-0 right-0 z-20 flex items-center justify-between px-8 py-4 bg-void/80 backdrop-blur-md border-b border-gold/20">
+          <button
+            onClick={returnToEntrance}
+            className="flex items-center gap-2 text-gray-400 hover:text-gold transition-colors"
+          >
+            <Home size={20} />
+            <span className="hidden sm:inline">返回入口</span>
+          </button>
+          
+          <div className={`${config.color} font-semibold text-lg`}>
+            {config.name}
+          </div>
+
+          <div className="text-gray-400 text-sm">
+            {currentIndex + 1} / {totalItems}
+          </div>
         </div>
-      )}
+
+        {/* 展示框 */}
+        <div 
+          className={`relative z-10 max-w-5xl w-full transition-all duration-500 ${
+            isTransitioning 
+              ? direction === 'forward' 
+                ? 'opacity-0 scale-95 translate-y-10' 
+                : 'opacity-0 scale-105 -translate-y-10'
+              : 'opacity-100 scale-100 translate-y-0'
+          }`}
+        >
+          {/* 展品標題 */}
+          <div className="text-center mb-8">
+            <h2 className={`text-3xl md:text-4xl font-bold ${config.color} mb-4`}>
+              {currentItem?.title}
+            </h2>
+          </div>
+
+          {/* 圖片展示框 */}
+          <div 
+            className={`relative rounded-2xl overflow-hidden border-4 ${config.borderColor}`}
+            style={{
+              boxShadow: config.shadowColor,
+            }}
+          >
+            <img
+              src={currentItem?.image}
+              alt={currentItem?.title}
+              className="w-full h-auto"
+            />
+          </div>
+
+          {/* 資訊面板 */}
+          <div className="mt-8 text-center space-y-4">
+            {currentItem?.narration && (
+              <p className="text-lg md:text-xl text-gray-300 italic">
+                「{currentItem.narration}」
+              </p>
+            )}
+            {currentItem?.task && (
+              <p className="text-md text-gray-400">
+                任務：{currentItem.task}
+              </p>
+            )}
+            {currentItem?.description && (
+              <p className="text-md text-gray-400">
+                {currentItem.description}
+              </p>
+            )}
+          </div>
+        </div>
+
+        {/* 左右導航按鈕 */}
+        <div className="fixed left-8 top-1/2 -translate-y-1/2 z-20">
+          <button
+            onClick={goBackward}
+            disabled={currentIndex === 0}
+            className={`p-4 rounded-full bg-void/80 border-2 ${config.borderColor} ${config.hoverBorder} transition-all disabled:opacity-30 disabled:cursor-not-allowed ${config.color}`}
+            style={{
+              boxShadow: currentIndex > 0 ? config.shadowColor : 'none',
+            }}
+          >
+            <ChevronLeft size={32} />
+          </button>
+        </div>
+
+        <div className="fixed right-8 top-1/2 -translate-y-1/2 z-20">
+          <button
+            onClick={goForward}
+            disabled={currentIndex === totalItems - 1}
+            className={`p-4 rounded-full bg-void/80 border-2 ${config.borderColor} ${config.hoverBorder} transition-all disabled:opacity-30 disabled:cursor-not-allowed ${config.color}`}
+            style={{
+              boxShadow: currentIndex < totalItems - 1 ? config.shadowColor : 'none',
+            }}
+          >
+            <ChevronRight size={32} />
+          </button>
+        </div>
+
+        {/* 底部提示 */}
+        <div className="fixed bottom-8 left-0 right-0 z-20 text-center text-gray-500 text-sm">
+          <p>使用 ← → 鍵或點擊左右按鈕導航 · 按 Esc 返回入口</p>
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <div className="min-h-screen bg-void transition-colors duration-300">
+      {currentWing === 'entrance' ? <EntranceHall /> : <GalleryCorridor />}
+      
+      <style>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes shimmer {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+        
+        @keyframes twinkle {
+          0%, 100% { opacity: 0.3; }
+          50% { opacity: 1; }
+        }
+        
+        .animate-fadeIn {
+          animation: fadeIn 1s ease-out;
+        }
+        
+        .animate-shimmer {
+          background-size: 200% 200%;
+          animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        .animate-twinkle {
+          animation: twinkle 2s ease-in-out infinite;
+        }
+      `}</style>
     </div>
   );
 };
