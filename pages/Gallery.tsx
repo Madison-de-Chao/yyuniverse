@@ -361,7 +361,7 @@ const Gallery: React.FC = () => {
       </div>
 
       {/* 展品展示區 */}
-      <div className="relative z-10 flex items-center justify-center min-h-screen px-4 py-20">
+      <div className="relative z-10 flex items-center justify-center min-h-screen px-4">
         {/* 軌道粒子系統（七大法則專用） */}
         {isSevenPrinciplesPage && (
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
@@ -439,7 +439,7 @@ const Gallery: React.FC = () => {
         )}
 
         {/* 展品框架 */}
-        <div className="relative max-w-4xl w-full">
+        <div className="relative max-w-4xl w-full my-20">
           {/* 標題 */}
           <h2 className={`text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r ${theme.primary} bg-clip-text text-transparent`}>
             {currentItem?.title || ''}
@@ -450,7 +450,7 @@ const Gallery: React.FC = () => {
             <img
               src={currentItem?.image}
               alt={currentItem?.title}
-              className={`w-full h-auto max-h-[52vh] object-contain ${
+              className={`w-full h-auto max-h-[48vh] object-contain ${
                 isSevenPrinciplesPage
                   ? isTransitioning
                     ? direction === 'forward'
