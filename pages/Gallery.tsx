@@ -182,10 +182,20 @@ const Gallery: React.FC = () => {
     });
   }, [currentIndex, currentWing]);
 
-  // 當切換頁面時重置圖片載入狀態
+  // 當切換頁面時重置圖片載入狀態並檢查緩存
   useEffect(() => {
     setImageLoaded(false);
-  }, [currentIndex]);
+    
+    // 檢查圖片是否已在緩存中
+    if (currentItem?.image) {
+      const img = new Image();
+      img.src = currentItem.image;
+      if (img.complete) {
+        // 圖片已在緩存中，立即顯示
+        setImageLoaded(true);
+      }
+    }
+  }, [currentIndex, currentItem]);
 
   // 鍵盤控制
   useEffect(() => {
@@ -471,6 +481,7 @@ const Gallery: React.FC = () => {
           {/* 圖片容器 */}
           <div className={`relative border-4 ${theme.border} rounded-3xl overflow-hidden ${showGlowPulse && isSevenPrinciplesPage ? 'animate-purple-swirl-pulse' : showGlowPulse ? 'animate-glow-pulse' : ''}`}>
             <img
+              key={currentIndex}
               src={currentItem?.image}
               alt={currentItem?.title}
               onLoad={() => setImageLoaded(true)}
