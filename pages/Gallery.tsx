@@ -450,7 +450,7 @@ const Gallery: React.FC = () => {
             <img
               src={currentItem?.image}
               alt={currentItem?.title}
-              className={`w-full h-auto max-h-[65vh] object-contain ${
+              className={`w-full h-auto max-h-[58vh] object-contain ${
                 isSevenPrinciplesPage
                   ? isTransitioning
                     ? direction === 'forward'
