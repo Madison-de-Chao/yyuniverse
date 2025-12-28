@@ -439,9 +439,9 @@ const Gallery: React.FC = () => {
         )}
 
         {/* 展品框架 */}
-        <div className="relative max-w-5xl w-full">
+        <div className="relative max-w-4xl w-full">
           {/* 標題 */}
-          <h2 className={`text-3xl md:text-4xl font-bold mb-8 text-center bg-gradient-to-r ${theme.primary} bg-clip-text text-transparent`}>
+          <h2 className={`text-3xl md:text-4xl font-bold mb-6 text-center bg-gradient-to-r ${theme.primary} bg-clip-text text-transparent`}>
             {currentItem?.title || ''}
           </h2>
 
@@ -450,7 +450,7 @@ const Gallery: React.FC = () => {
             <img
               src={currentItem?.image}
               alt={currentItem?.title}
-              className={`w-full h-auto ${
+              className={`w-full h-auto max-h-[65vh] object-contain ${
                 isSevenPrinciplesPage
                   ? isTransitioning
                     ? direction === 'forward'
@@ -467,7 +467,7 @@ const Gallery: React.FC = () => {
           </div>
 
           {/* 旁白和任務 */}
-          <div className="mt-8 space-y-4 text-center">
+          <div className="mt-6 space-y-3 text-center">
             {currentItem?.narration && (
               <p className="text-lg text-gray-300 italic">
                 「{currentItem.narration}」
