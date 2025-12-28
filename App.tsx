@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, useNavigate, useLocation } from 'react-router-dom';
 import { CollapsibleNav } from './components/CollapsibleNav';
+import { Footer } from './components/Footer';
 import { AppRoutes } from './router';
 import { Theme } from './types';
 import { ChevronLeft } from 'lucide-react';
@@ -88,7 +89,8 @@ function AppContent() {
 
         <AppRoutes theme={theme} toggleTheme={toggleTheme} />
 
-
+        {/* Footer */}
+        <Footer theme={theme} />
       </div>
     </div>
   );
