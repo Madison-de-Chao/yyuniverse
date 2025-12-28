@@ -158,7 +158,7 @@ export const CollapsibleNav: React.FC<CollapsibleNavProps> = ({ theme, onToggleT
               <img
                 src="/logo.png"
                 alt="元壹宇宙 YUANYI UNIVERSE"
-                className="h-12 sm:h-14 w-auto object-contain min-w-[240px] sm:min-w-[300px]"
+                className="h-16 sm:h-20 w-auto object-contain min-w-[320px] sm:min-w-[400px]"
               />
             </div>
 
