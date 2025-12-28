@@ -361,7 +361,7 @@ const Gallery: React.FC = () => {
       </div>
 
       {/* 展品展示區 */}
-      <div className="relative z-10 flex items-center justify-center min-h-screen px-4">
+      <div className="relative z-10 flex items-center justify-center min-h-screen px-4 py-20">
         {/* 軌道粒子系統（七大法則專用） */}
         {isSevenPrinciplesPage && (
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
@@ -441,7 +441,7 @@ const Gallery: React.FC = () => {
         {/* 展品框架 */}
         <div className="relative max-w-4xl w-full">
           {/* 標題 */}
-          <h2 className={`text-3xl md:text-4xl font-bold mb-6 text-center bg-gradient-to-r ${theme.primary} bg-clip-text text-transparent`}>
+          <h2 className={`text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r ${theme.primary} bg-clip-text text-transparent`}>
             {currentItem?.title || ''}
           </h2>
 
@@ -450,7 +450,7 @@ const Gallery: React.FC = () => {
             <img
               src={currentItem?.image}
               alt={currentItem?.title}
-              className={`w-full h-auto max-h-[58vh] object-contain ${
+              className={`w-full h-auto max-h-[52vh] object-contain ${
                 isSevenPrinciplesPage
                   ? isTransitioning
                     ? direction === 'forward'
@@ -467,7 +467,7 @@ const Gallery: React.FC = () => {
           </div>
 
           {/* 旁白和任務 */}
-          <div className="mt-6 space-y-3 text-center">
+          <div className="mt-4 space-y-2 text-center">
             {currentItem?.narration && (
               <p className="text-lg text-gray-300 italic">
                 「{currentItem.narration}」
