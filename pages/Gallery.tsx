@@ -40,6 +40,7 @@ const Gallery: React.FC = () => {
   const [showStargateRings, setShowStargateRings] = useState(false);
   const [showCentralFlash, setShowCentralFlash] = useState(false);
   const [stargateColor, setStargateColor] = useState('rgba(255, 215, 0, 1)');
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   // 獲取當前展廳的數據
   const getCurrentWingData = (): GalleryItem[] => {
@@ -163,6 +164,28 @@ const Gallery: React.FC = () => {
       setIsTransitioning(false);
     }, 300);
   };
+
+  // 圖片預載入：當前頁、前一頁、後一頁
+  useEffect(() => {
+    if (currentWing === 'entrance') return;
+    
+    const items = getCurrentWingData();
+    const preloadIndices = [
+      currentIndex - 1,
+      currentIndex,
+      currentIndex + 1
+    ].filter(i => i >= 0 && i < items.length);
+    
+    preloadIndices.forEach(i => {
+      const img = new Image();
+      img.src = items[i].image;
+    });
+  }, [currentIndex, currentWing]);
+
+  // 當切換頁面時重置圖片載入狀態
+  useEffect(() => {
+    setImageLoaded(false);
+  }, [currentIndex]);
 
   // 鍵盤控制
   useEffect(() => {
@@ -450,7 +473,11 @@ const Gallery: React.FC = () => {
             <img
               src={currentItem?.image}
               alt={currentItem?.title}
-              className={`w-full h-auto max-h-[48vh] object-contain ${
+              onLoad={() => setImageLoaded(true)}
+              onError={() => setImageLoaded(true)}
+              className={`w-full h-auto max-h-[48vh] object-contain transition-opacity duration-300 ${
+                imageLoaded ? 'opacity-100' : 'opacity-0'
+              } ${
                 isSevenPrinciplesPage
                   ? isTransitioning
                     ? direction === 'forward'
@@ -479,6 +506,11 @@ const Gallery: React.FC = () => {
               </p>
             )}
           </div>
+
+          {/* 底部操作提示 */}
+          <div className="mt-6 text-center text-sm text-gray-500">
+            使用 ← → 鍵或滑鼠滾輪導航 · 按 Esc 返回入口
+          </div>
         </div>
 
         {/* 左右導航按鈕 */}
@@ -496,10 +528,7 @@ const Gallery: React.FC = () => {
         </button>
       </div>
 
-      {/* 底部操作提示 */}
-      <div className="absolute bottom-6 left-0 right-0 text-center text-sm text-gray-500">
-        使用 ← → 鍵或滑鼠滾輪導航 · 按 Esc 返回入口
-      </div>
+
 
       {/* CSS 動畫定義 */}
       <style>{`
