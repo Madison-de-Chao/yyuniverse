@@ -472,7 +472,7 @@ const Gallery: React.FC = () => {
         )}
 
         {/* 展品框架 */}
-        <div className="relative max-w-4xl w-full my-20">
+        <div className="relative max-w-4xl w-full my-16">
           {/* 標題 */}
           <h2 className={`text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r ${theme.primary} bg-clip-text text-transparent`}>
             {currentItem?.title || ''}
@@ -517,7 +517,7 @@ const Gallery: React.FC = () => {
           </div>
 
           {/* 底部操作提示 */}
-          <div className="mt-6 text-center text-sm text-gray-500">
+          <div className="mt-4 text-center text-sm text-gray-500">
             使用 ← → 鍵或滑鼠滾輪導航 · 按 Esc 返回入口
           </div>
         </div>
