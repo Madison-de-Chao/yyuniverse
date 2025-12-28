@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, useNavigate, useLocation } from 'react-router-dom';
-import { DualNav } from './components/DualNav';
+import { CollapsibleNav } from './components/CollapsibleNav';
 import { AppRoutes } from './router';
 import { Theme } from './types';
 import { ChevronLeft } from 'lucide-react';
@@ -66,11 +66,11 @@ function AppContent() {
         </>
       )}
 
-      {/* Dual Navigation */}
-      <DualNav theme={theme} onToggleTheme={toggleTheme} />
+      {/* Collapsible Navigation */}
+      <CollapsibleNav theme={theme} onToggleTheme={toggleTheme} />
 
-      {/* Content with top padding for dual navigation */}
-      <div className="relative z-0 pt-32">
+      {/* Content with top padding for navigation */}
+      <div className="relative z-0 pt-20">
         {/* Global Back Button (Visible on non-home pages) */}
         {!isHomePage && (
           <button
