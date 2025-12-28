@@ -486,9 +486,7 @@ const Gallery: React.FC = () => {
               alt={currentItem?.title}
               onLoad={() => setImageLoaded(true)}
               onError={() => setImageLoaded(true)}
-              className={`w-full h-auto max-h-[48vh] object-contain transition-opacity duration-300 ${
-                imageLoaded ? 'opacity-100' : 'opacity-0'
-              } ${
+              className={`w-full h-auto max-h-[48vh] object-contain ${
                 isSevenPrinciplesPage
                   ? isTransitioning
                     ? direction === 'forward'
