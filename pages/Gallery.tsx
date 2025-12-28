@@ -472,7 +472,7 @@ const Gallery: React.FC = () => {
         )}
 
         {/* 展品框架 */}
-        <div className="relative max-w-4xl w-full my-16">
+        <div className="relative max-w-4xl w-full my-8">
           {/* 標題 */}
           <h2 className={`text-3xl md:text-4xl font-bold mb-4 text-center bg-gradient-to-r ${theme.primary} bg-clip-text text-transparent`}>
             {currentItem?.title || ''}
