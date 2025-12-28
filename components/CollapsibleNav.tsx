@@ -59,19 +59,13 @@ export const CollapsibleNav: React.FC<CollapsibleNavProps> = ({ theme, onToggleT
     {
       title: '關於',
       items: [
-        { path: '/about', label: '關於墨', icon: User },
+        { path: '/about', label: '關於', icon: Info },
+        { path: '/glossary', label: '名詞邊界表', icon: BookText },
       ],
     },
   ];
 
-  // 挑戰網頁導航結構
-  const challengeItems: NavItem[] = [
-    { path: '/challenge-kit', label: 'Challenge Kit', icon: Target },
-    { path: '/system-map', label: '系統總覽', icon: Map },
-    { path: '/glossary', label: '名詞表', icon: BookText },
-    { path: '/references', label: '文獻引用', icon: FileSearch },
-    { path: '/about-system', label: '關於系統', icon: Info },
-  ];
+  // 挑戰網頁導航結構已移除
 
   const handleNavigate = (path: string) => {
     navigate(path);
@@ -158,7 +152,7 @@ export const CollapsibleNav: React.FC<CollapsibleNavProps> = ({ theme, onToggleT
               <img
                 src="/logo.png"
                 alt="元壹宇宙 YUANYI UNIVERSE"
-                className="h-16 sm:h-20 w-auto object-contain min-w-[320px] sm:min-w-[400px]"
+                className="h-12 sm:h-14 w-auto object-contain min-w-[240px] sm:min-w-[280px]"
               />
             </div>
 
@@ -271,72 +265,7 @@ export const CollapsibleNav: React.FC<CollapsibleNavProps> = ({ theme, onToggleT
                 )}
               </div>
 
-              {/* Challenge Kit 下拉菜單 */}
-              <div
-                className="relative"
-                onMouseEnter={() => handleMouseEnter('challenge')}
-                onMouseLeave={handleMouseLeave}
-              >
-                <button
-                  onClick={() => handleClick('challenge')}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg font-semibold transition-all duration-200 ${
-                    hasActiveItem(challengeItems)
-                      ? isDark
-                        ? 'bg-gold/15 text-gold'
-                        : 'bg-amber-100 text-muted-gold'
-                      : isDark
-                      ? 'text-paper/80 hover:text-paper hover:bg-gold/5'
-                      : 'text-void/80 hover:text-void hover:bg-ink/5'
-                  }`}
-                >
-                  <span className="text-sm">Challenge Kit</span>
-                  <ChevronDown
-                    size={14}
-                    className={`transition-transform duration-200 ${
-                      openDropdown === 'challenge' ? 'rotate-180' : ''
-                    }`}
-                  />
-                </button>
-
-                {/* 下拉菜單 */}
-                {openDropdown === 'challenge' && (
-                  <div
-                    className={`absolute top-full left-0 mt-2 w-56 rounded-xl shadow-2xl border animate-fade-in-up ${
-                      isDark
-                        ? 'bg-void/98 border-gold/30'
-                        : 'bg-paper/98 border-ink/20'
-                    } backdrop-blur-md`}
-                  >
-                    <div className="p-2">
-                      {challengeItems.map((item) => {
-                        const Icon = item.icon;
-                        const isActive = isActivePath(item.path);
-                        return (
-                          <button
-                            key={item.path}
-                            onClick={() => handleNavigate(item.path)}
-                            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all duration-200 group ${
-                              isActive
-                                ? isDark
-                                  ? 'bg-gold/15 text-gold'
-                                  : 'bg-amber-50 text-muted-gold'
-                                : isDark
-                                ? 'text-paper/70 hover:text-paper hover:bg-gold/10'
-                                : 'text-void/70 hover:text-void hover:bg-ink/5'
-                            }`}
-                          >
-                            <Icon
-                              size={16}
-                              className="flex-shrink-0 transition-transform duration-200 group-hover:scale-110"
-                            />
-                            <span className="text-sm font-medium">{item.label}</span>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-                )}
-              </div>
+              {/* Challenge Kit 已移除 */}
             </div>
 
             {/* 主題切換按鈕 */}
