@@ -37,6 +37,9 @@ const Gallery: React.FC = () => {
   const [particles, setParticles] = useState<Particle[]>([]);
   const [orbitalParticles, setOrbitalParticles] = useState<OrbitalParticle[]>([]);
   const [showGlowPulse, setShowGlowPulse] = useState(false);
+  const [showStargateRings, setShowStargateRings] = useState(false);
+  const [showCentralFlash, setShowCentralFlash] = useState(false);
+  const [stargateColor, setStargateColor] = useState('rgba(255, 215, 0, 1)');
 
   // 獲取當前展廳的數據
   const getCurrentWingData = (): GalleryItem[] => {
@@ -73,28 +76,45 @@ const Gallery: React.FC = () => {
     }
   }, [currentIndex, currentWing]);
 
-  // 創建普通粒子爆發
-  const createParticleBurst = (color: string) => {
+  // 創建星門開啟動畫
+  const createStargateEffect = (color: string) => {
     const newParticles: Particle[] = [];
-    const particleCount = 40;
+    const particleCount = 60; // 星塵粒子數量
     
+    // 設定星門顏色
+    setStargateColor(color);
+    
+    // 觸發中心光爆
+    setShowCentralFlash(true);
+    setTimeout(() => setShowCentralFlash(false), 400);
+    
+    // 觸發星門光環
+    setShowStargateRings(true);
+    setTimeout(() => setShowStargateRings(false), 1200);
+    
+    // 星塵軌跡：螺旋式飛散
     for (let i = 0; i < particleCount; i++) {
       const angle = (Math.PI * 2 * i) / particleCount;
-      const speed = Math.random() * 3 + 2;
+      const spiralAngle = angle * 2; // 兩圈螺旋
+      const spiralRadius = (i / particleCount) * 50; // 阿基米德螺線
+      const speed = Math.random() * 2 + 1.5;
+      const rotation = Math.random() * 360;
+      
       newParticles.push({
         id: Date.now() + i,
-        x: 50,
-        y: 50,
+        x: 50 + Math.cos(spiralAngle) * spiralRadius,
+        y: 50 + Math.sin(spiralAngle) * spiralRadius,
         vx: Math.cos(angle) * speed,
         vy: Math.sin(angle) * speed,
         size: Math.random() * 4 + 2,
         opacity: 1,
         color,
+        rotation,
       });
     }
     
     setParticles(newParticles);
-    setTimeout(() => setParticles([]), 800);
+    setTimeout(() => setParticles([]), 1200); // 持續 1200ms
   };
 
   // 粒子動畫
@@ -126,12 +146,12 @@ const Gallery: React.FC = () => {
     setDirection(dir);
     setIsTransitioning(true);
     
-    // 觸發粒子效果（非七大法則頁面）
+    // 觸發星門效果（非七大法則頁面）
     if (!isSevenPrinciplesPage) {
-      const color = currentWing === 'intro' ? 'rgba(212, 175, 55, 1)' 
+      const color = currentWing === 'intro' ? 'rgba(255, 215, 0, 1)' 
                   : currentWing === 'deep' ? 'rgba(34, 211, 238, 1)' 
                   : 'rgba(255, 255, 255, 1)';
-      createParticleBurst(color);
+      createStargateEffect(color);
     }
     
     // 觸發光暈脈衝
@@ -368,10 +388,38 @@ const Gallery: React.FC = () => {
           </div>
         )}
 
-        {/* 爆發粒子系統（非七大法則頁面） */}
-        {!isSevenPrinciplesPage && particles.length > 0 && (
-          <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            {particles.map(p => (
+        {/* 星門動畫系統（非七大法則頁面） */}
+        {!isSevenPrinciplesPage && (
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+            {/* 中心光爆 */}
+            {showCentralFlash && (
+              <div
+                className="absolute central-flash rounded-full"
+                style={{
+                  width: '200px',
+                  height: '200px',
+                  backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                  filter: 'blur(30px)',
+                }}
+              />
+            )}
+
+            {/* 星門光環 */}
+            {showStargateRings && Array.from({ length: 5 }).map((_, i) => (
+              <div
+                key={`ring-${i}`}
+                className="absolute stargate-ring rounded-full border-4"
+                style={{
+                  width: '100px',
+                  height: '100px',
+                  borderColor: stargateColor,
+                  animationDelay: `${i * 100}ms`,
+                }}
+              />
+            ))}
+
+            {/* 星塵軌跡粒子 */}
+            {particles.length > 0 && particles.map(p => (
               <div
                 key={p.id}
                 className="absolute rounded-full"
@@ -382,7 +430,8 @@ const Gallery: React.FC = () => {
                   height: p.size,
                   backgroundColor: p.color,
                   opacity: p.opacity,
-                  boxShadow: `0 0 ${p.size * 2}px ${p.color}`,
+                  boxShadow: `0 0 ${p.size * 3}px ${p.color}`,
+                  transform: `rotate(${p.rotation}deg)`,
                 }}
               />
             ))}
@@ -543,6 +592,42 @@ const Gallery: React.FC = () => {
 
         .animate-purple-swirl-pulse {
           animation: purple-swirl-pulse 500ms ease-in-out;
+        }
+
+        /* 星門光環擴散 */
+        @keyframes stargate-ring {
+          0% {
+            transform: scale(0.1);
+            opacity: 0.8;
+          }
+          100% {
+            transform: scale(6);
+            opacity: 0;
+          }
+        }
+
+        .stargate-ring {
+          animation: stargate-ring 1200ms ease-out;
+        }
+
+        /* 中心光爆 */
+        @keyframes central-flash {
+          0% {
+            transform: scale(0);
+            opacity: 0;
+          }
+          50% {
+            transform: scale(1);
+            opacity: 1;
+          }
+          100% {
+            transform: scale(0);
+            opacity: 0;
+          }
+        }
+
+        .central-flash {
+          animation: central-flash 400ms ease-in-out;
         }
       `}</style>
     </div>
