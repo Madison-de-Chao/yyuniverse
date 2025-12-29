@@ -12,7 +12,7 @@ const MuseumHome: React.FC = () => {
             <img 
               src="/logo.png" 
               alt="元壹宇宙 Logo" 
-              className="w-48 h-48 md:w-64 md:h-64 object-contain mx-auto"
+              className="w-96 h-96 md:w-[500px] md:h-[500px] object-contain mx-auto"
             />
           </div>
           <h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
