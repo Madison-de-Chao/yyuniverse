@@ -4,7 +4,7 @@ import { Theme } from '../types';
 import { 
   Sun, Moon, Home, Map, Target, BookText, FileSearch, Info, 
   Star, Sparkles, Scale, FileText, BookOpen, Shield, User, 
-  Layers, Compass, MessageSquare, Image, ChevronDown 
+  Layers, Compass, MessageSquare, Image, ChevronDown, BookMarked 
 } from 'lucide-react';
 
 interface CollapsibleNavProps {
@@ -60,7 +60,7 @@ export const CollapsibleNav: React.FC<CollapsibleNavProps> = ({ theme, onToggleT
       title: '關於',
       items: [
         { path: '/about', label: '關於', icon: Info },
-        { path: '/glossary', label: '名詞邊界表', icon: BookText },
+        { path: '/glossary', label: '名詞邊界表', icon: BookMarked },
       ],
     },
   ];
