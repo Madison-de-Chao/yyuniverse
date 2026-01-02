@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, useNavigate, useLocation } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import { CollapsibleNav } from './components/CollapsibleNav';
 import { Footer } from './components/Footer';
 import { AppRoutes } from './router';
@@ -92,6 +93,7 @@ function AppContent() {
         {/* Footer */}
         <Footer theme={theme} />
       </div>
+      <Analytics />
     </div>
   );
 }
