@@ -56,17 +56,8 @@ export const DualNav: React.FC<DualNavProps> = ({ theme, onToggleTheme }) => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between h-20">
-            {/* Logo 區域 - 增加寬度避免重疊 */}
-            <div 
-              onClick={() => navigate('/')}
-              className="flex items-center cursor-pointer flex-shrink-0"
-            >
-              <img 
-                src="/logo.png" 
-                alt="元壹宇宙 YUANYI UNIVERSE" 
-                className="h-16 sm:h-18 w-auto object-contain min-w-[280px] sm:min-w-[360px]"
-              />
-            </div>
+            {/* Logo 區域已移除，保留空間以維持布局 */}
+            <div className="flex-shrink-0 w-4"></div>
 
             {/* 學術導航項目 - 桌面版 */}
             <div className="hidden lg:flex items-center gap-1 flex-1 justify-center">

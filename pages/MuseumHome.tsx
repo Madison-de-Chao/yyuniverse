@@ -7,15 +7,8 @@ const MuseumHome: React.FC = () => {
       {/* Hero Section */}
       <section className="relative py-24 px-6 bg-gradient-to-br from-purple-900/30 via-blue-900/30 to-indigo-900/30">
         <div className="max-w-6xl mx-auto text-center">
-          {/* Logo */}
-          <div className="mb-8">
-            <img 
-              src="/logo.png" 
-              alt="元壹宇宙 Logo" 
-              className="w-96 h-96 md:w-[32rem] md:h-[32rem] object-contain mx-auto"
-            />
-          </div>
-          <h1 className="text-6xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
+          {/* Logo 已移除 */}
+          <h1 className="text-6xl font-bold mb-6 mt-12 bg-gradient-to-r from-purple-400 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
             元壹宇宙
           </h1>
           <p className="text-2xl text-gray-300 mb-4">
