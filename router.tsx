@@ -138,7 +138,7 @@ export function AppRoutes({ theme, toggleTheme }: { theme: Theme; toggleTheme: (
           path="/ai-chat" 
           element={
             <PageWrapper seoKey="aiChat">
-              <AIChat theme={theme} onNavigate={handleNavigate} />
+              <AIChat theme={theme} />
             </PageWrapper>
           }
         />
