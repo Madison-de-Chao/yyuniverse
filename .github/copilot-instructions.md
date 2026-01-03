@@ -6,7 +6,7 @@ This is **元壹宇宙** (yyuniverse.com), the official website for the 默默�
 
 ### Tech Stack
 - **Frontend**: React 19.2 with TypeScript
-- **Build Tool**: Vite 6.2
+- **Build Tool**: Vite 6.4
 - **Routing**: React Router v7
 - **Styling**: Tailwind CSS 4.1 (local build, no CDN)
 - **SEO**: react-helmet-async for dynamic meta tags
