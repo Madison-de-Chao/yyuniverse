@@ -202,7 +202,7 @@ export function AppRoutes({ theme, toggleTheme }: { theme: Theme; toggleTheme: (
           path="/nine-origins" 
           element={
             <PageWrapper seoKey="nineOrigins">
-              <NineOrigins theme={theme} onNavigate={handleNavigate} />
+              <NineOrigins theme={theme} />
             </PageWrapper>
           }
         />
