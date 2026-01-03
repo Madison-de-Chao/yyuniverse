@@ -130,7 +130,7 @@ export function AppRoutes({ theme, toggleTheme }: { theme: Theme; toggleTheme: (
           path="/logic-loop" 
           element={
             <PageWrapper seoKey="logicLoop">
-              <LogicLoop theme={theme} onNavigate={handleNavigate} />
+              <LogicLoop theme={theme} />
             </PageWrapper>
           }
         />
