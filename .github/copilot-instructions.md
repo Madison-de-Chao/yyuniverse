@@ -241,7 +241,7 @@ Check `vercel.json` for:
 ### Current Key Dependencies
 - React 19.2 (latest)
 - TypeScript ~5.8.2
-- Vite 6.2
+- Vite 6.4
 - React Router DOM 7.11
 - Tailwind CSS 4.1
 - @google/genai 1.30
