@@ -208,7 +208,7 @@ export function AppRoutes({ theme, toggleTheme }: { theme: Theme; toggleTheme: (
           path="/seven-principles" 
           element={
             <PageWrapper seoKey="sevenPrinciples">
-              <SevenPrinciples theme={theme} onNavigate={handleNavigate} />
+              <SevenPrinciples theme={theme} />
             </PageWrapper>
           }
         />
