@@ -122,7 +122,7 @@ export function AppRoutes({ theme, toggleTheme }: { theme: Theme; toggleTheme: (
           path="/about" 
           element={
             <PageWrapper seoKey="about">
-              <AboutMomo theme={theme} onNavigate={handleNavigate} />
+              <AboutMomo theme={theme} />
             </PageWrapper>
           }
         />
