@@ -226,7 +226,7 @@ export function AppRoutes({ theme, toggleTheme }: { theme: Theme; toggleTheme: (
           path="/reality-mirror" 
           element={
             <PageWrapper seoKey="realityMirror">
-              <RealityMirror theme={theme} onNavigate={handleNavigate} />
+              <RealityMirror theme={theme} />
             </PageWrapper>
           }
         />
