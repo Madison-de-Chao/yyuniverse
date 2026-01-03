@@ -1,8 +1,28 @@
-import React, { Suspense, lazy } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { Theme } from './types';
+import React, { Suspense, lazy, useCallback } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Theme, PageId } from './types';
 import { SEO } from './components/SEO';
 import { pageMeta } from './seo-config';
+
+// PageId to route path mapping
+const PAGE_ROUTES: Record<PageId, string> = {
+  home: '/',
+  logic: '/logic-loop',
+  chat: '/ai-chat',
+  guide: '/guide',
+  sanctuary: '/sanctuary',
+  about: '/about',
+  system: '/system',
+  'system-a': '/system/zone-a',
+  'system-b': '/system/zone-b',
+  'system-c': '/system/zone-c',
+  'system-05': '/system/zone-05',
+  whitepaper: '/whitepaper',
+  origins: '/nine-origins',
+  principles: '/seven-principles',
+  script: '/universe-script',
+  mirror: '/reality-mirror',
+};
 
 // 動態導入所有頁面組件 - 實現代碼分割
 const Home = lazy(() => import('./pages/Home'));
@@ -67,6 +87,16 @@ function PageWrapper({
 
 // 路由組件
 export function AppRoutes({ theme, toggleTheme }: { theme: Theme; toggleTheme: () => void }) {
+  const navigate = useNavigate();
+  
+  const handleNavigate = useCallback((page: PageId) => {
+    const path = PAGE_ROUTES[page];
+    if (path) {
+      navigate(path);
+      window.scrollTo(0, 0);
+    }
+  }, [navigate]);
+
   return (
     <Suspense fallback={<LoadingFallback />}>
       <Routes>
@@ -74,7 +104,7 @@ export function AppRoutes({ theme, toggleTheme }: { theme: Theme; toggleTheme: (
           path="/" 
           element={
             <PageWrapper seoKey="home">
-              <Home theme={theme} onNavigate={() => {}} toggleTheme={toggleTheme} />
+              <Home theme={theme} onNavigate={handleNavigate} toggleTheme={toggleTheme} />
             </PageWrapper>
           }
         />
@@ -82,7 +112,7 @@ export function AppRoutes({ theme, toggleTheme }: { theme: Theme; toggleTheme: (
           path="/whitepaper" 
           element={
             <PageWrapper seoKey="whitepaper">
-              <Whitepaper theme={theme} onNavigate={() => {}} />
+              <Whitepaper theme={theme} onNavigate={handleNavigate} />
             </PageWrapper>
           }
         />
@@ -90,7 +120,7 @@ export function AppRoutes({ theme, toggleTheme }: { theme: Theme; toggleTheme: (
           path="/about" 
           element={
             <PageWrapper seoKey="about">
-              <AboutMomo theme={theme} onNavigate={() => {}} />
+              <AboutMomo theme={theme} onNavigate={handleNavigate} />
             </PageWrapper>
           }
         />
@@ -98,7 +128,7 @@ export function AppRoutes({ theme, toggleTheme }: { theme: Theme; toggleTheme: (
           path="/logic-loop" 
           element={
             <PageWrapper seoKey="logicLoop">
-              <LogicLoop theme={theme} onNavigate={() => {}} />
+              <LogicLoop theme={theme} onNavigate={handleNavigate} />
             </PageWrapper>
           }
         />
@@ -106,7 +136,7 @@ export function AppRoutes({ theme, toggleTheme }: { theme: Theme; toggleTheme: (
           path="/ai-chat" 
           element={
             <PageWrapper seoKey="aiChat">
-              <AIChat theme={theme} onNavigate={() => {}} />
+              <AIChat theme={theme} onNavigate={handleNavigate} />
             </PageWrapper>
           }
         />
@@ -114,7 +144,7 @@ export function AppRoutes({ theme, toggleTheme }: { theme: Theme; toggleTheme: (
           path="/guide" 
           element={
             <PageWrapper seoKey="guide">
-              <LinearGuide theme={theme} onNavigate={() => {}} />
+              <LinearGuide theme={theme} onNavigate={handleNavigate} />
             </PageWrapper>
           }
         />
@@ -122,7 +152,7 @@ export function AppRoutes({ theme, toggleTheme }: { theme: Theme; toggleTheme: (
           path="/sanctuary" 
           element={
             <PageWrapper seoKey="sanctuary">
-              <Sanctuary theme={theme} onNavigate={() => {}} />
+              <Sanctuary theme={theme} onNavigate={handleNavigate} />
             </PageWrapper>
           }
         />
@@ -130,7 +160,7 @@ export function AppRoutes({ theme, toggleTheme }: { theme: Theme; toggleTheme: (
           path="/system" 
           element={
             <PageWrapper seoKey="system">
-              <SystemDetail theme={theme} onNavigate={() => {}} />
+              <SystemDetail theme={theme} onNavigate={handleNavigate} />
             </PageWrapper>
           }
         />
@@ -138,7 +168,7 @@ export function AppRoutes({ theme, toggleTheme }: { theme: Theme; toggleTheme: (
           path="/system/zone-a" 
           element={
             <PageWrapper seoKey="systemZoneA">
-              <SystemZoneA theme={theme} onNavigate={() => {}} />
+              <SystemZoneA theme={theme} onNavigate={handleNavigate} />
             </PageWrapper>
           }
         />
@@ -146,7 +176,7 @@ export function AppRoutes({ theme, toggleTheme }: { theme: Theme; toggleTheme: (
           path="/system/zone-b" 
           element={
             <PageWrapper seoKey="systemZoneB">
-              <SystemZoneB theme={theme} onNavigate={() => {}} />
+              <SystemZoneB theme={theme} onNavigate={handleNavigate} />
             </PageWrapper>
           }
         />
@@ -154,7 +184,7 @@ export function AppRoutes({ theme, toggleTheme }: { theme: Theme; toggleTheme: (
           path="/system/zone-c" 
           element={
             <PageWrapper seoKey="systemZoneC">
-              <SystemZoneC theme={theme} onNavigate={() => {}} />
+              <SystemZoneC theme={theme} onNavigate={handleNavigate} />
             </PageWrapper>
           }
         />
@@ -162,7 +192,7 @@ export function AppRoutes({ theme, toggleTheme }: { theme: Theme; toggleTheme: (
           path="/system/zone-05" 
           element={
             <PageWrapper seoKey="systemZone05">
-              <SystemZone05 theme={theme} onNavigate={() => {}} />
+              <SystemZone05 theme={theme} onNavigate={handleNavigate} />
             </PageWrapper>
           }
         />
@@ -170,7 +200,7 @@ export function AppRoutes({ theme, toggleTheme }: { theme: Theme; toggleTheme: (
           path="/nine-origins" 
           element={
             <PageWrapper seoKey="nineOrigins">
-              <NineOrigins theme={theme} onNavigate={() => {}} />
+              <NineOrigins theme={theme} onNavigate={handleNavigate} />
             </PageWrapper>
           }
         />
@@ -178,7 +208,7 @@ export function AppRoutes({ theme, toggleTheme }: { theme: Theme; toggleTheme: (
           path="/seven-principles" 
           element={
             <PageWrapper seoKey="sevenPrinciples">
-              <SevenPrinciples theme={theme} onNavigate={() => {}} />
+              <SevenPrinciples theme={theme} onNavigate={handleNavigate} />
             </PageWrapper>
           }
         />
@@ -186,7 +216,7 @@ export function AppRoutes({ theme, toggleTheme }: { theme: Theme; toggleTheme: (
           path="/universe-script" 
           element={
             <PageWrapper seoKey="universeScript">
-              <UniverseScript theme={theme} onNavigate={() => {}} />
+              <UniverseScript theme={theme} onNavigate={handleNavigate} />
             </PageWrapper>
           }
         />
@@ -194,7 +224,7 @@ export function AppRoutes({ theme, toggleTheme }: { theme: Theme; toggleTheme: (
           path="/reality-mirror" 
           element={
             <PageWrapper seoKey="realityMirror">
-              <RealityMirror theme={theme} onNavigate={() => {}} />
+              <RealityMirror theme={theme} onNavigate={handleNavigate} />
             </PageWrapper>
           }
         />
