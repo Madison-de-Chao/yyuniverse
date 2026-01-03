@@ -114,7 +114,7 @@ export function AppRoutes({ theme, toggleTheme }: { theme: Theme; toggleTheme: (
           path="/whitepaper" 
           element={
             <PageWrapper seoKey="whitepaper">
-              <Whitepaper theme={theme} onNavigate={handleNavigate} />
+              <Whitepaper theme={theme} />
             </PageWrapper>
           }
         />
