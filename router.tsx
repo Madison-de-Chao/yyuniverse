@@ -218,7 +218,7 @@ export function AppRoutes({ theme, toggleTheme }: { theme: Theme; toggleTheme: (
           path="/universe-script" 
           element={
             <PageWrapper seoKey="universeScript">
-              <UniverseScript theme={theme} onNavigate={handleNavigate} />
+              <UniverseScript theme={theme} />
             </PageWrapper>
           }
         />
