@@ -94,6 +94,8 @@ export function AppRoutes({ theme, toggleTheme }: { theme: Theme; toggleTheme: (
     if (path) {
       navigate(path);
       window.scrollTo(0, 0);
+    } else {
+      console.warn(`handleNavigate called with invalid PageId: "${String(page)}". No route found in PAGE_ROUTES.`);
     }
   }, [navigate]);
 
