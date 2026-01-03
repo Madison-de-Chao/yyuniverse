@@ -194,7 +194,7 @@ export function AppRoutes({ theme, toggleTheme }: { theme: Theme; toggleTheme: (
           path="/system/zone-05" 
           element={
             <PageWrapper seoKey="systemZone05">
-              <SystemZone05 theme={theme} onNavigate={handleNavigate} />
+              <SystemZone05 theme={theme} />
             </PageWrapper>
           }
         />
