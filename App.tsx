@@ -19,9 +19,8 @@ function AppContent() {
     if (savedTheme) {
       setTheme(savedTheme);
     } else {
-      // 檢測系統主題偏好
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      setTheme(prefersDark ? 'dark' : 'light');
+      // 默認使用深色主題
+      setTheme('dark');
     }
   }, []);
 
