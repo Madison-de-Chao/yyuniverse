@@ -122,11 +122,15 @@ export const Sanctuary: React.FC<SanctuaryProps> = ({ theme, onNavigate }) => {
             以命理、占星、塔羅為入口的閱讀與諮詢。
             當成照出結構的鏡子。
           </p>
-          <button className={`w-full py-2 rounded-lg border transition-colors font-mono text-sm cursor-not-allowed opacity-50 ${
-            isDark ? 'border-purple-500/50 text-purple-400' : 'border-purple-300 text-purple-800'
+          <a
+            href="https://main.momo-chao.com/reports"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`w-full py-2 rounded-lg border transition-colors font-mono text-sm inline-block text-center ${
+            isDark ? 'border-purple-500/50 text-purple-400 hover:bg-purple-500/10' : 'border-purple-300 text-purple-800 hover:bg-purple-50'
           }`}>
-            預約 (Coming Soon)
-          </button>
+            立即預約
+          </a>
         </div>
 
         {/* Service 2 */}
@@ -158,13 +162,15 @@ export const Sanctuary: React.FC<SanctuaryProps> = ({ theme, onNavigate }) => {
             把默默超思維系統拆成可學的工具、課程、練習。
             把 AI 納入協作流程，讓它成為夥伴。
           </p>
-          <button 
-            onClick={() => onNavigate && onNavigate('system')}
-            className={`w-full py-2 rounded-lg border transition-colors font-mono text-sm ${
+          <a
+            href="https://mmclogic.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`w-full py-2 rounded-lg border transition-colors font-mono text-sm inline-block text-center ${
             isDark ? 'border-gold/50 text-gold hover:bg-gold/10' : 'border-muted-gold text-muted-gold hover:bg-amber-50'
           }`}>
             進入訓練
-          </button>
+          </a>
         </div>
       </div>
 

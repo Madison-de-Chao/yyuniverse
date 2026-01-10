@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Theme } from '../types';
-import { Book, Download, ChevronRight, AlignLeft, FileText } from 'lucide-react';
+import { Book, Download, ChevronRight, AlignLeft, FileText, FileDown } from 'lucide-react';
 import { UnityField } from '../components/Visuals';
 
 interface WhitepaperProps {
@@ -337,8 +337,20 @@ export const Whitepaper: React.FC<WhitepaperProps> = ({ theme }) => {
                 元壹白皮書
               </h1>
               <p className={`font-mono text-xs tracking-widest opacity-60`}>
-                VERSION 2.2 (FULL)
+                VERSION 4.0 (FINAL)
               </p>
+              <a
+                href="/元壹宇宙學術白皮書_v4.0_完整版.pdf"
+                download
+                className={`mt-4 flex items-center gap-2 px-4 py-2 rounded-lg border transition-colors text-sm ${
+                  isDark 
+                    ? 'border-gold text-gold hover:bg-gold hover:text-black' 
+                    : 'border-muted-gold text-muted-gold hover:bg-muted-gold hover:text-white'
+                }`}
+              >
+                <FileDown size={16} />
+                下載完整白皮書 PDF
+              </a>
             </div>
 
             <nav className="space-y-1 border-l-2 border-gray-200 dark:border-slate-800">

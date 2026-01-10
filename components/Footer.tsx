@@ -29,7 +29,7 @@ export const Footer: React.FC<FooterProps> = ({ theme }) => {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-16">
             {/* MAISON DE CHAO Logo */}
             <a
-              href="https://www.maisondechao.com"
+              href="https://main.momo-chao.com/"
               target="_blank"
               rel="noopener noreferrer"
               className="group transition-all duration-300 hover:scale-105"
@@ -43,7 +43,9 @@ export const Footer: React.FC<FooterProps> = ({ theme }) => {
 
             {/* Rainbow Sanctuary Logo */}
             <a
-              href="#"
+              href="https://main.momo-chao.com/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group transition-all duration-300 hover:scale-105"
             >
               <img
