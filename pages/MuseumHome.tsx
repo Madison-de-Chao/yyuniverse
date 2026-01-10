@@ -59,12 +59,12 @@ const MuseumHome: React.FC = () => {
               Challenge Kit（給挑戰者）
             </a>
             <a
-              href="https://b.yyuniverse.com"
+              href="https://mmclogic.com/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm rounded-lg font-semibold hover:bg-white/20 transition-all border border-white/30"
             >
-              想直接使用 → 前往 B 站
+              思維系統訓練 → mmclogic.com
               <ArrowRight className="w-5 h-5" />
             </a>
           </div>

@@ -129,13 +129,13 @@ const About: React.FC = () => {
               這裡是學術用官網（A 站），主要用於系統檢核與理論探討。如果你想直接使用元壹宇宙的工具與服務，請前往 B 站（應用站）。
             </p>
             <a
-              href="https://b.yyuniverse.com"
+              href="https://mmclogic.com/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all"
             >
               <ExternalLink className="w-5 h-5" />
-              前往 B 站（應用站）
+              前往思維系統訓練
             </a>
           </div>
         </div>
