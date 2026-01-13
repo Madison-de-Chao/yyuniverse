@@ -40,10 +40,10 @@ export const CollapsibleNav: React.FC<CollapsibleNavProps> = ({ theme, onToggleT
       title: '探索',
       items: [
         { path: '/gallery', label: '展示大廳', icon: Image },
-        { path: '/nine-origins', label: '九大起源', icon: Star },
+        { path: '/nine-origins', label: '九源歸一', icon: Star },
         { path: '/seven-principles', label: '七大法則', icon: Sparkles },
         { path: '/logic-loop', label: '八階思維', icon: Layers },
-        { path: '/reality-mirror', label: '真實之鏡', icon: Scale },
+        { path: '/reality-mirror', label: '現實映照', icon: Scale },
         { path: '/universe-script', label: '宇宙劇本', icon: FileText },
         { path: '/system', label: '系統詳解', icon: Compass },
         { path: '/whitepaper', label: '白皮書', icon: BookOpen },
