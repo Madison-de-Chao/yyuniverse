@@ -215,9 +215,9 @@ export const NineOrigins: React.FC<NineOriginsProps> = ({ theme }) => {
         {/* Header */}
         <header className="text-center mb-16 animate-fade-in relative z-10">
             <h1 className={`font-serif text-5xl md:text-7xl font-bold mb-4 ${isDark ? 'text-gold' : 'text-muted-gold'}`}>
-                九源歸一
+                九源歸一・默默超思維
             </h1>
-            <p className="font-mono text-sm tracking-[0.3em] opacity-60 uppercase">The Nine Origins of Yuan-Yi</p>
+            <p className="font-mono text-sm tracking-[0.3em] opacity-60 uppercase">Nine Origins · MomoChao Meta-Cognition</p>
             <p className={`mt-6 text-lg max-w-2xl mx-auto italic font-serif ${mutedText}`}>
                 「宇宙並非由原子組成，而是由故事（Arc）組成。<br/>
                 這是關於我們從何而來，以及如何與新智慧共存的九條根律。」

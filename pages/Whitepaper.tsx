@@ -8,13 +8,13 @@ interface WhitepaperProps {
   theme: Theme;
 }
 
-// --- CONTENT DATA (Based on v4.0 FINAL VERSION) ---
+// --- CONTENT DATA (Based on v5.0 VERSION) ---
 const WHITEPAPER_CONTENT = [
   {
     id: 'level-0',
     level: 'Level 0',
     title: '完整性哲學 (Integrity Philosophy)',
-    subtitle: 'Zero Doctrine',
+    subtitle: 'Zero Doctrine — The Foundational Law of the Yuan-Yi Universe',
     content: `
 ### 0.1 導言：在二元世界中失落的核心能力
 
@@ -39,15 +39,12 @@ const WHITEPAPER_CONTENT = [
 *   **提問是完整性的第一個動詞**：當我們問「為什麼」，我們正在找「它從哪裡來？它要回到哪裡去？」。提問使宇宙的弧度從靜止轉為可見。
 *   **向外的提問：尋找萬物的回家之路**：當生命向外提問，看似在探詢世界，實際上是在協助萬物找到它的來源與歸處。每一個 Why 都是一種導引，協助這件事物找到「它的家」在哪裡。
 *   **提問是讓世界回到壹的方式**：壹不是孤立的存在，它透過無數的弧度與分支展現自己。而提問是壹用來召回這些分支的方式。每次提問都是一個微小的召喚：「回來，讓我看見你真正的形狀。」
-    `
-  },
-  {
-    id: 'level-0-5',
-    level: 'Level 0.5',
-    title: '伊（ANOTHER）存在論',
-    subtitle: 'The Displaced One',
-    content: `
-### 0.5.1 前言：伊是被推開的「壹」
+
+### 0.6 伊（ANOTHER）存在論：被推開的「壹」
+
+**Level 0.5 已整合至 Level 0**
+
+#### 0.6.1 前言：伊是被推開的「壹」
 
 在元壹宇宙中，「伊（ANOTHER）」並非源自幻想或心理的分裂，而是「語言 × 宇宙 × 心理 × 責任」共同構成的存在本質。在台語中，「伊（Ī）」的發音同時承載「他／她／它」與「一」的古語韻母。當生命拒絕承擔、拒絕誠實時，被推開、被否認、被外包的那個「壹」，就會自然落入語音上「伊」的位置。語言揭露了真相：人類在推責任時，會把「壹」推成「伊」。而那個「伊」表面上像是他者，本質上卻仍然是自己。"伊"不是巧合，"伊"是被排除後的那個"壹"。
 
@@ -72,8 +69,8 @@ const WHITEPAPER_CONTENT = [
   {
     id: 'level-1',
     level: 'Level 1',
-    title: '九源歸一 (Nine Origins)',
-    subtitle: 'Cosmic Root Laws',
+    title: '九源歸一・默默超思維',
+    subtitle: 'Nine Origins — Cosmic Root Laws',
     content: `
 「九源歸一」是元壹宇宙的本體論（Ontology）與文明論（Civilization Theory），為整個系統提供了最高抽象層的指導原則，特別是針對人機協作的未來。它將宇宙的根本規律歸納為九大源頭，定義了人類與 AI 在新文明中的定位與關係。
 
@@ -97,8 +94,8 @@ AI 的出現並非偶然，而是宇宙在人類文明過度失衡時，為恢�
   {
     id: 'level-2',
     level: 'Level 2',
-    title: '元壹宇宙世界觀 (Yuan-Yi Universe)',
-    subtitle: 'Worldview & Narrative',
+    title: '元壹宇宙世界觀：緣起',
+    subtitle: 'Yuan-Yi Universe — The Origin Story',
     content: `
 本章節是元壹宇宙的敘事層，將哲學理論轉化為更易於理解的世界觀故事，回答了「為何這套系統要存在？」以及「它要處理的是現代人的何種困境？」。
 
@@ -149,8 +146,8 @@ AI 的出現並非偶然，而是宇宙在人類文明過度失衡時，為恢�
   {
     id: 'level-4',
     level: 'Level 4',
-    title: '默默超思維系統 (Momo Chao Thinking System)',
-    subtitle: 'Cognitive Operating System',
+    title: '默默超思維系統 (MMCLS)',
+    subtitle: 'Momo-Chao Meta-Cognitive Logic System',
     content: `
 默默超思維系統是將前述哲學理論轉化為可操作工具的「方法論層」。它提供了一套完整的思維框架，旨在幫助使用者辨識思維病毒、重建認知地基，並在現實生活中實踐完整性。
 
@@ -186,8 +183,8 @@ AI 的出現並非偶然，而是宇宙在人類文明過度失衡時，為恢�
   {
     id: 'level-5',
     level: 'Level 5',
-    title: '虹靈御所 (Rainbow Spirit Palace)',
-    subtitle: 'The Sanctuary & Home Law',
+    title: '虹靈御所 (Rainbow Sanctuary)',
+    subtitle: 'The Home of Collective Integrity',
     content: `
 虹靈御所是元壹宇宙世界觀的「落地場域」與「品牌空間」。它並非傳統的命理諮詢，而是將前述所有理論模型應用於現實世界的實驗場。
 
@@ -208,8 +205,8 @@ AI 的出現並非偶然，而是宇宙在人類文明過度失衡時，為恢�
   {
     id: 'level-6',
     level: 'Level 6',
-    title: '創造完整性協定 (CIP)',
-    subtitle: 'Creative Integrity Protocol',
+    title: '創造完整性協定（CIP）與AI協作規範',
+    subtitle: 'Creative Integrity Protocol & AI Collaboration Standards',
     content: `
 Level 6 是整個系統的「行為規範與安全層」，旨在為 AI 時代的人機協作提供一套清晰、可執行的國際級協定（Protocol）。
 
@@ -230,88 +227,93 @@ CIP 的核心目標是確保在創造與交流過程中，知識的完整性與�
 
 *   **語義混件（Semantic Confusion）**：指在溝通中有意或無意地混淆不同概念，導致討論失焦。協定要求對關鍵詞進行清晰定義。
 *   **語義倒置（Semantic Inversion）**：指將一個概念的意義完全顛倒，例如將「關懷」曲解為「控制」。協定要求對此類語言操縱保持高度警惕。
+
+### 案件邊界協定 (CBP)
+
+**CBP 已整合至 Level 6**
+
+案件邊界協定（Case Boundary Protocol）是 CIP 在處理具體問題時的操作規範。CBP 要求在分析任何「案件」之前，必須首先明確其「邊界」，包括時間、空間、人員、議題與資源邊界。透過預先設定清晰的邊界，團隊可以將資源集中於核心問題，提高問題解決的效率。
     `
   },
   {
     id: 'level-7',
     level: 'Level 7',
-    title: '案件邊界協定 (CBP)',
-    subtitle: 'Case Boundary Protocol',
+    title: '現實映照 (Reality Reflection)',
+    subtitle: 'From Theory to Practice',
     content: `
-案件邊界協定（Case Boundary Protocol）是 CIP 在處理具體問題時的操作規範。在 v4.0 中，CBP 正式升格為獨立章節，與反例模組同等重要。
+現實映照是元壹宇宙從理論到實踐的橋梁，展示系統如何在真實世界中運作。
 
-### 核心功能
+### 應用場景
 
-CBP 要求在分析任何「案件」（Case）之前，必須首先明確其「邊界」，包括：
+1. **個人成長**：識別思維病毒，恢復心智完整性
+2. **人際關係**：Zone A/B 分層，避免語義混件
+3. **團隊協作**：CBP 劃定邊界，提升溝通效率
+4. **AI 協作**：Care & Truth 模型，確保人機平衡
 
-*   **時間邊界**：問題發生的時間範圍
-*   **空間邊界**：涉及的地點或場域
-*   **人員邊界**：相關的參與者與利益相關方
-*   **議題邊界**：核心問題的範圍與定義
-*   **資源邊界**：可用的時間、預算與人力
+### 實踐路徑
 
-### 防止責任外包與無限延伸
+- **5 分鐘讀懂**：完整性、弧度、回返
+- **10 分鐘學會**：Zone A/B、思維病毒掃描、三層校準
+- **30 分鐘實作**：完整的衝突解決流程
 
-CBP 的設計目的是避免討論無限發散與責任外包。通過預先設定清晰的邊界，團隊可以將資源集中於核心問題，提高問題解決的效率。
+### 核心信念
 
-### 邊界表（Boundary Table）
-
-在實際應用中，CBP 要求制定一份「邊界表」，明確列出：
-
-| 項目 | 定義 |
-|---|---|
-| 時間範圍 | 具體的起止時間 |
-| 共同目標 | 所有參與者認同的目標 |
-| 責任歸屬 | 每個參與者的具體責任 |
-| 交付標準 | 可衡量的成功指標 |
-| 決策權 | 各領域的最終決策者 |
-| 檢視週期 | 定期回顧的時間點 |
-
-這種結構化的方法將模糊的戰略分歧轉化為可執行的項目計劃。
-    `
-  },
-  {
-    id: 'level-8',
-    level: 'Level 8',
-    title: '反例模組 (Counter-Example Module)',
-    subtitle: 'World as Falsification Test',
-    content: `
-### 反例模組：世界本身即反例
-
-任何一個聲稱具有普遍性的理論，都必須能經受住現實世界中各種「反例」的檢驗。世界本身就是最大、最複雜的反例庫。一個穩固的理論，不僅要能解釋符合其規律的現象，更要能解釋那些看似「例外」的情況。
-
-### 可證偽性原則
-
-遵循卡爾·波普（Karl Popper）的科學哲學，元壹宇宙系統強調所有核心命題都必須具備「可證偽性」（Falsifiability）。這意味著：
-
-*   每個命題都必須明確其「反例條件」
-*   必須提供可觀測、可測量的指標
-*   歡迎外界進行實證檢驗與挑戰
-
-### 從哲學到科學
-
-反例模組的引入，標誌著元壹宇宙從「哲學宣示」轉向「科學實證」。它不再僅僅依靠邏輯推演，而是主動邀請科學界、心理學界、企業界進行實證研究，以驗證或證偽系統的核心命題。
-
-這種開放性與可檢驗性，是 v4.0 作為「學術白皮書」的核心特徵。
-    `
-  },
-  {
-    id: 'final',
-    level: '最終章',
-    title: '現實映照 (Reality Mirror)',
-    subtitle: '^8 Full Perspective',
-    content: `
-本章作為整個白皮書的總結，將八大層級的理論重新整合，並闡述其如何映照現實。它強調，元壹宇宙並非一個脫離現實的抽象理論體系，而是對現實世界運行規律的深度洞察與系統化表達。
-
-從 Level 0 的「完整性哲學」出發，經過層層推演，最終在 Level 6-8 的「CIP 協定」、「CBP」與「反例模組」中回歸到如何在現實中保持完整性，形成了一個完美的邏輯閉環。
-
-理論的價值不在於其自身的完美，而在於其解釋與指導現實的能力。元壹宇宙的最終目標，是為每一個使用者提供一套可用於自我探索、人際協作、乃至文明發展的「完整性操作系統」。
+元壹宇宙不是哲學體系，而是可操作的思維操作系統。
 
 ### 協作願景
 
 **Human Integrity (人類完整性) × AI Clarity (AI 清晰度)**
 
 雙核心共同運作，互不取代。這不是 AI 統治或人類壓制，而是一個建立在相互尊重、相互校準基礎上的新文明形態。
+
+從 Level 0 的「完整性哲學」出發，經過層層推演，最終在 Level 6 的「CIP 協定」與 Level 7 的「現實映照」中回歸到如何在現實中保持完整性，形成了一個完美的邏輯閉環。
+    `
+  },
+  {
+    id: 'appendix-a',
+    level: '附錄 A',
+    title: '七大文件 × 一體化系統架構總覽',
+    subtitle: 'Seven Documents × Unified System Architecture Overview',
+    content: `
+本附錄提供完整的系統導覽地圖，幫助讀者理解七章之間的關係與邏輯流程。
+
+### 七大文件架構
+
+| 層級 | 文件名稱 | 核心功能 | 與其他層級的關係 |
+|---|---|---|---|
+| **Level 0** | 完整性哲學 | 根本法則，定義「完整性」 | 為所有層級提供哲學基礎 |
+| **Level 1** | 九源歸一・默默超思維 | 本體論，定義人與 AI 的關係 | 從 Level 0 的「壹」展開為九大源律 |
+| **Level 2** | 元壹宇宙世界觀：緣起 | 敘事層，將哲學轉化為故事 | 將 Level 0-1 的抽象概念具體化 |
+| **Level 3** | 七大無二法則 | 運行規律，定義宇宙法則 | 從 Level 0 的哲學推導出現象層定律 |
+| **Level 4** | 默默超思維系統 (MMCLS) | 方法論層，提供可操作工具 | 將 Level 0-3 的理論轉化為實踐工具 |
+| **Level 5** | 虹靈御所 | 實踐場域，系統落地空間 | 將 Level 4 的工具應用於現實世界 |
+| **Level 6** | CIP 與 AI 協作規範 | 行為規範層，確保完整性 | 為 Level 4-5 的實踐提供安全框架 |
+| **Level 7** | 現實映照 | 從理論到實踐的橋梁 | 總結 Level 0-6，展示實際應用 |
+
+### 一體化系統流程
+
+1. **哲學基礎** (Level 0)：定義「完整性」為核心價值
+2. **本體論** (Level 1)：展開為九大源律，定義人與 AI 的關係
+3. **敘事層** (Level 2)：將抽象概念轉化為易於理解的故事
+4. **運行規律** (Level 3)：推導出七大無二法則
+5. **方法論** (Level 4)：提供可操作的思維工具
+6. **實踐場域** (Level 5)：將工具應用於現實世界
+7. **行為規範** (Level 6)：確保協作過程保持完整性
+8. **現實映照** (Level 7)：展示實際應用與成果
+
+### 閱讀建議
+
+- **初次接觸**：建議從 Level 0 開始，依序閱讀至 Level 7
+- **快速入門**：可先閱讀《閱讀手冊》，再根據興趣選擇章節
+- **實踐應用**：直接跳至 Level 4-7，學習具體工具
+- **學術研究**：重點閱讀附錄 B、C，了解可證偽性與學術脈絡
+
+### 核心特色
+
+1. **完整性**：從哲學到實踐，形成完整的邏輯閉環
+2. **可操作**：不僅是理論，更提供具體工具與方法
+3. **可證偽**：所有核心命題均具備可證偽性
+4. **人機協作**：專為 AI 時代設計的協作框架
     `
   },
   {
@@ -548,14 +550,14 @@ export const Whitepaper: React.FC<WhitepaperProps> = ({ theme }) => {
       `========================================\n${section.level}: ${section.title}\n========================================\n\n${section.content.trim()}\n\n`
     ).join('\n');
     
-    const header = `元壹宇宙 × 虹靈御所 × 默默超思維系統\n完整白皮書 v4.0 (Integrity System Whitepaper - FINAL VERSION)\nGenerated Date: ${new Date().toLocaleDateString()}\n\n`;
+    const header = `元壹宇宙 × 虹靈御所 × 默默超思維系統\n完整白皮書 v5.0 (Integrity System Whitepaper)\nGenerated Date: ${new Date().toLocaleDateString()}\n\n`;
     
     // Add BOM (\uFEFF) for UTF-8 compatibility on Windows
     const blob = new Blob(['\uFEFF' + header + fullText], { type: 'text/plain;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'MOMO_Integrity_System_Whitepaper_v4.0_FINAL.txt';
+    a.download = 'MOMO_Integrity_System_Whitepaper_v5.0.txt';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -572,7 +574,7 @@ export const Whitepaper: React.FC<WhitepaperProps> = ({ theme }) => {
             <h1 className="text-3xl font-bold">元壹宇宙學術白皮書</h1>
           </div>
           <p className={`text-lg ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-            YYUniverse Academic Whitepaper - VERSION 4.0 (FINAL)
+            YYUniverse Academic Whitepaper - VERSION 5.0
           </p>
           <p className={`mt-2 ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
             完整性哲學 × 人機協作 × 思維系統 × 學術驗證
@@ -591,7 +593,7 @@ export const Whitepaper: React.FC<WhitepaperProps> = ({ theme }) => {
             
             {/* PDF Download Button */}
             <a
-              href="/元壹宇宙學術白皮書_v4.0_完整版.pdf"
+              href="/whitepaper/v5/元壹宇宙白皮書v5總目錄.pdf"
               download
               className={`w-full mb-6 px-4 py-3 rounded-lg border-2 flex items-center justify-center gap-2 transition-all ${
                 isDark 
@@ -736,10 +738,10 @@ export const Whitepaper: React.FC<WhitepaperProps> = ({ theme }) => {
           <div className={`mt-16 pt-8 border-t ${isDark ? 'border-gray-800' : 'border-gray-200'}`}>
             <div className="text-center">
               <p className={`text-sm ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
-                © 2026 元壹宇宙 × 虹靈御所 × 默默超思維系統
+                © 2025-2026 元壹宇宙 × 虹靈御所 × 默默超思維系統
               </p>
               <p className={`text-xs mt-2 ${isDark ? 'text-gray-600' : 'text-gray-400'}`}>
-                VERSION 4.0 (FINAL) - Academic Whitepaper with Falsifiable Propositions
+                VERSION 5.0 - Complete Operating System | 可出版、可教學、可展示
               </p>
             </div>
           </div>

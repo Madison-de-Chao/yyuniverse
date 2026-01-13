@@ -120,7 +120,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, theme, toggleTheme }) =>
         <p className={`font-mono text-[10px] md:text-xs tracking-[0.2em] mb-3 uppercase z-10 transition-colors duration-500 opacity-0 animate-reveal-blur ${
           isDark ? 'text-blue-200' : 'text-stone-500'
         }`} style={{ animationDelay: '1.2s' }}>
-          Integrity Thinking System · AI Collaborative Lab
+          Complete Operating System · AI Collaborative Lab
         </p>
 
         <p className={`font-mono text-[9px] tracking-[0.3em] mb-10 uppercase z-10 transition-colors duration-500 opacity-0 animate-reveal-blur ${

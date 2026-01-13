@@ -326,9 +326,9 @@ export const RealityMirror: React.FC<RealityMirrorProps> = ({ theme }) => {
           <Scale size={48} className={isDark ? 'text-gold' : 'text-muted-gold'} />
         </div>
         <h1 className={`font-serif text-5xl md:text-7xl font-bold mb-6 ${isDark ? 'text-gold' : 'text-muted-gold'}`}>
-          真實之鏡
+          現實映照
         </h1>
-        <p className="font-mono text-sm tracking-[0.2em] opacity-60 uppercase mb-8">Reality Mirror — 7 Contrasts</p>
+        <p className="font-mono text-sm tracking-[0.2em] opacity-60 uppercase mb-8">Reality Reflection — From Theory to Practice</p>
         <div className={`max-w-2xl mx-auto text-lg italic font-serif leading-relaxed ${isDark ? 'text-slate-400' : 'text-gray-600'}`}>
           <p>「元壹宇宙不是要取代任何系統，而是提供一個更底層的視角。</p>
           <p>這裡呈現與七大既有框架的對照，看見結構層的不同。」</p>
