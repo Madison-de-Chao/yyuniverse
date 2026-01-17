@@ -151,9 +151,12 @@ const PHENOM_LAWS = [
 const EchoChamber = ({ isDark }: { isDark: boolean }) => {
     const [ripples, setRipples] = useState<{id: number, x: number, y: number}[]>([]);
     const [bounce, setBounce] = useState(false);
+    const containerRef = React.useRef<HTMLDivElement>(null);
 
-    const handleClick = (e: React.MouseEvent) => {
-        const rect = e.currentTarget.getBoundingClientRect();
+    const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (!containerRef.current) return;
+        
+        const rect = containerRef.current.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
         
@@ -162,10 +165,10 @@ const EchoChamber = ({ isDark }: { isDark: boolean }) => {
         setBounce(true);
         setTimeout(() => setBounce(false), 200);
 
-        // Auto remove ripple
+        // Auto remove ripple after animation
         setTimeout(() => {
             setRipples(prev => prev.filter(r => r.id !== newRipple.id));
-        }, 1500);
+        }, 2000);
     }
 
     return (
@@ -181,10 +184,11 @@ const EchoChamber = ({ isDark }: { isDark: boolean }) => {
             </p>
 
             <div 
+                ref={containerRef}
                 className={`relative w-full h-48 rounded-xl overflow-hidden cursor-pointer transition-all duration-200 border-2 ${
                     isDark 
-                        ? (bounce ? 'bg-blue-900/30 border-blue-400' : 'bg-slate-950 border-slate-800') 
-                        : (bounce ? 'bg-blue-50 border-blue-400' : 'bg-slate-50 border-gray-200')
+                        ? (bounce ? 'bg-blue-900/30 border-blue-400 shadow-lg shadow-blue-500/20' : 'bg-slate-950 border-slate-800 hover:border-slate-700') 
+                        : (bounce ? 'bg-blue-50 border-blue-400 shadow-lg shadow-blue-400/20' : 'bg-slate-50 border-gray-200 hover:border-gray-300')
                 }`}
                 onClick={handleClick}
             >
@@ -193,19 +197,34 @@ const EchoChamber = ({ isDark }: { isDark: boolean }) => {
                 </div>
 
                 {ripples.map(ripple => (
-                    <div 
-                        key={ripple.id}
-                        className="absolute rounded-full border-2 animate-ping opacity-0"
-                        style={{
-                            left: ripple.x,
-                            top: ripple.y,
-                            width: '40px',
-                            height: '40px',
-                            transform: 'translate(-50%, -50%)',
-                            borderColor: isDark ? '#60A5FA' : '#2563EB',
-                            animationDuration: '1.5s'
-                        }}
-                    />
+                    <React.Fragment key={ripple.id}>
+                        {/* 主波紋 */}
+                        <div 
+                            className="absolute rounded-full border-4 pointer-events-none"
+                            style={{
+                                left: `${ripple.x}px`,
+                                top: `${ripple.y}px`,
+                                width: '20px',
+                                height: '20px',
+                                transform: 'translate(-50%, -50%)',
+                                borderColor: isDark ? '#60A5FA' : '#3B82F6',
+                                animation: 'ripple-expand 2s ease-out forwards'
+                            }}
+                        />
+                        {/* 次波紋 */}
+                        <div 
+                            className="absolute rounded-full pointer-events-none"
+                            style={{
+                                left: `${ripple.x}px`,
+                                top: `${ripple.y}px`,
+                                width: '10px',
+                                height: '10px',
+                                transform: 'translate(-50%, -50%)',
+                                backgroundColor: isDark ? '#60A5FA' : '#3B82F6',
+                                animation: 'ripple-fade 2s ease-out forwards'
+                            }}
+                        />
+                    </React.Fragment>
                 ))}
             </div>
             <p className="text-xs mt-4 opacity-50 font-mono">CLICK TO TRANSMIT SIGNAL</p>
