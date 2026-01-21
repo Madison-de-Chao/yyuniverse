@@ -1,8 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { Theme } from '../types';
-import { Play, Clapperboard, User, Drama, Sparkles, Download, RefreshCw, Feather } from 'lucide-react';
+import { Play, Clapperboard, User, Drama, Sparkles, Download, RefreshCw, Feather, BookOpen, Lightbulb, HelpCircle, Link2 } from 'lucide-react';
 import { ShadowSynthesis, CognitiveCycle } from '../components/Visuals';
+import { SCRIPT_ENHANCEMENTS } from '../data/scriptEnhancements';
 
 interface UniverseScriptProps {
   theme: Theme;
@@ -39,6 +40,66 @@ const SCRIPT_TEMPLATES = {
         choiceA: "照舊演出：觀眾會滿意，但你會在掌聲中感到無比孤獨。",
         choiceB: "即興發揮：你會結巴、會冷場，但那一刻你是活著的。",
         directorNote: "不要害怕冷場。空白，是神性進入的地方。"
+    },
+    creator: {
+        role: "創造者 (The Creator)",
+        shadow: "完美主義的癱瘓 (Paralysis of Perfectionism)",
+        arc: "表達之弧 (The Arc of Expression)",
+        line1: "你的腦海裡有一幅完美的畫面，但手卻遲遲不敢動筆。",
+        line2: "每一次想要開始，內心就響起批判的聲音：『這還不夠好。』",
+        choiceA: "繼續等待：你保持了完美的幻想，但那幅畫永遠只存在於想像中。",
+        choiceB: "動手創作：你會畫出不完美的線條，但那是你靈魂第一次被看見。",
+        directorNote: "完美是創造的敵人。真正的藝術，始於你允許自己不完美。"
+    },
+    guardian: {
+        role: "守護者 (The Guardian)",
+        shadow: "過度犧牲的慣性 (Inertia of Over-Sacrifice)",
+        arc: "平衡之弧 (The Arc of Balance)",
+        line1: "你把所有人的需求都扛在肩上，卻忘了自己也需要被照顧。",
+        line2: "當你終於停下來，才發現自己的油箱早已見底。",
+        choiceA: "繼續付出：你維持了所有人的幸福，但你的圓逐漸被掏空成殼。",
+        choiceB: "設定界限：你會聽到抱怨，但那是你重新填滿自己的開始。",
+        directorNote: "照顧他人之前，先戴上自己的氧氣罩。你不是拯救者，你是引導者。"
+    },
+    explorer: {
+        role: "探索者 (The Explorer)",
+        shadow: "逃避的偽裝 (Disguise of Escapism)",
+        arc: "歸返之弧 (The Arc of Return)",
+        line1: "你一直在路上，追尋著遠方的答案。",
+        line2: "但每到一個新地方，那個空洞感依然跟著你。",
+        choiceA: "繼續逃離：你會看到更多風景，但永遠找不到家。",
+        choiceB: "面對內在：你會停下腳步，但那是你真正開始旅程的時刻。",
+        directorNote: "真正的探索不是逃離自己，而是帶著完整的自己去看世界。"
+    },
+    sage: {
+        role: "智者 (The Sage)",
+        shadow: "知識的傲慢 (Arrogance of Knowledge)",
+        arc: "謙卑之弧 (The Arc of Humility)",
+        line1: "你讀了很多書，懂了很多道理，但生活依然一團糟。",
+        line2: "你用知識築起高牆，卻把真實的情感鎖在外面。",
+        choiceA: "堅守理性：你保持了智識的優越感，但你的圓變得冰冷而孤立。",
+        choiceB: "承認無知：你會感到脆弱，但那是智慧真正開始的地方。",
+        directorNote: "知道不等於理解，理解不等於活出來。真正的智者，是能說出『我不知道』的人。"
+    },
+    warrior: {
+        role: "戰士 (The Warrior)",
+        shadow: "勝負的執著 (Obsession with Winning)",
+        arc: "和解之弧 (The Arc of Reconciliation)",
+        line1: "你把每一場對話都當成戰場，每一個異見都是敵人。",
+        line2: "你贏了很多次，但每次勝利後，卻感到更加孤獨。",
+        choiceA: "繼續戰鬥：你會累積更多勝利，但你的圓會被戰火燒成碎片。",
+        choiceB: "放下武器：你會失去一些戰役，但那是你找回和平的唯一方式。",
+        directorNote: "最強大的戰士，是那些知道何時停止戰鬥的人。真正的勝利，是與自己和解。"
+    },
+    lover: {
+        role: "愛人 (The Lover)",
+        shadow: "融合的恐懼 (Fear of Merging)",
+        arc: "獨立之弧 (The Arc of Independence)",
+        line1: "你渴望親密，但每當靠近時，就害怕失去自己。",
+        line2: "你在靠近與逃離之間反覆，像海浪拍打著岸邊。",
+        choiceA: "保持距離：你保護了自己的完整，但永遠無法體驗真正的連結。",
+        choiceB: "允許靠近：你會感到脆弱，但那是愛真正開始的地方。",
+        directorNote: "真正的愛，不是失去自己，而是在連結中找到更完整的自己。"
     }
 };
 
@@ -49,7 +110,7 @@ export const UniverseScript: React.FC<UniverseScriptProps> = ({ theme }) => {
   
   const [step, setStep] = useState<'intro' | 'input' | 'analyzing' | 'result'>('intro');
   const [userInput, setUserInput] = useState('');
-  const [scriptType, setScriptType] = useState<'career' | 'relationship' | 'identity'>('identity');
+  const [scriptType, setScriptType] = useState<'career' | 'relationship' | 'identity' | 'creator' | 'guardian' | 'explorer' | 'sage' | 'warrior' | 'lover'>('identity');
   const [hoveredChoice, setHoveredChoice] = useState<'A' | 'B' | null>(null);
   const [analyzeStep, setAnalyzeStep] = useState(0);
 
@@ -73,12 +134,43 @@ export const UniverseScript: React.FC<UniverseScriptProps> = ({ theme }) => {
     setStep('analyzing');
     // Simulate thinking time
     setTimeout(() => {
-        // Simple keyword detection to choose template
-        if (userInput.includes('工作') || userInput.includes('職') || userInput.includes('錢') || userInput.includes('業')) {
+        // Enhanced keyword detection to choose template
+        const input = userInput.toLowerCase();
+        
+        // 創造者：創作、表達、藝術
+        if (input.includes('創作') || input.includes('藝術') || input.includes('寫') || input.includes('畫') || input.includes('設計') || input.includes('作品') || input.includes('完美') || input.includes('表達')) {
+            setScriptType('creator');
+        }
+        // 守護者：家庭、責任、照顧
+        else if (input.includes('家人') || input.includes('父母') || input.includes('孩子') || input.includes('照顧') || input.includes('犧牲') || input.includes('累') || input.includes('付出')) {
+            setScriptType('guardian');
+        }
+        // 探索者：旅行、逃離、尋找
+        else if (input.includes('旅行') || input.includes('離開') || input.includes('逃') || input.includes('尋找') || input.includes('探索') || input.includes('運動') || input.includes('空虛')) {
+            setScriptType('explorer');
+        }
+        // 智者：知識、學習、理性
+        else if (input.includes('知識') || input.includes('學習') || input.includes('研究') || input.includes('理性') || input.includes('思考') || input.includes('書') || input.includes('道理')) {
+            setScriptType('sage');
+        }
+        // 戰士：衝突、競爭、勝負
+        else if (input.includes('爭執') || input.includes('衝突') || input.includes('戰鬥') || input.includes('勝') || input.includes('輸') || input.includes('比較') || input.includes('競爭')) {
+            setScriptType('warrior');
+        }
+        // 愛人：親密、連結、愛
+        else if (input.includes('愛') || input.includes('情') || input.includes('他') || input.includes('她') || input.includes('親密') || input.includes('連結') || input.includes('依附')) {
+            setScriptType('lover');
+        }
+        // 開拓者：工作、事業、職涯
+        else if (input.includes('工作') || input.includes('職') || input.includes('錢') || input.includes('業') || input.includes('創業') || input.includes('轉職')) {
             setScriptType('career');
-        } else if (userInput.includes('愛') || userInput.includes('情') || userInput.includes('他') || userInput.includes('她')) {
+        }
+        // 修復者：關係、界限
+        else if (input.includes('關係') || input.includes('朋友') || input.includes('界限') || input.includes('責任')) {
             setScriptType('relationship');
-        } else {
+        }
+        // 預設：覺醒者
+        else {
             setScriptType('identity');
         }
         setStep('result');
@@ -86,6 +178,7 @@ export const UniverseScript: React.FC<UniverseScriptProps> = ({ theme }) => {
   };
 
   const currentScript = SCRIPT_TEMPLATES[scriptType];
+  const currentEnhancement = SCRIPT_ENHANCEMENTS[scriptType];
 
   return (
     <div className={`min-h-screen pt-24 pb-32 max-w-5xl mx-auto px-6 ${isDark ? 'text-cyber-text' : 'text-ink'}`}>
@@ -208,7 +301,14 @@ export const UniverseScript: React.FC<UniverseScriptProps> = ({ theme }) => {
                             <span className="font-mono text-xs uppercase tracking-widest opacity-60">The Script</span>
                         </div>
                         <h2 className={`text-2xl md:text-3xl font-serif font-bold ${textColor}`}>
-                            {scriptType === 'career' ? '開拓者的劇本' : scriptType === 'relationship' ? '修復者的劇本' : '覺醒者的劇本'}
+                            {scriptType === 'creator' ? '創造者的劇本' : 
+                             scriptType === 'guardian' ? '守護者的劇本' :
+                             scriptType === 'explorer' ? '探索者的劇本' :
+                             scriptType === 'sage' ? '智者的劇本' :
+                             scriptType === 'warrior' ? '戰士的劇本' :
+                             scriptType === 'lover' ? '愛人的劇本' :
+                             scriptType === 'career' ? '開拓者的劇本' : 
+                             scriptType === 'relationship' ? '修復者的劇本' : '覺醒者的劇本'}
                         </h2>
                     </div>
                     <button 
@@ -337,6 +437,90 @@ export const UniverseScript: React.FC<UniverseScriptProps> = ({ theme }) => {
                                 "{currentScript.directorNote}"
                             </p>
                         </div>
+
+                        {/* 深化內容區塊 */}
+                        {currentEnhancement && (
+                            <div className="space-y-8 mt-12">
+                                {/* 案例研究 */}
+                                <div className={`p-6 rounded-2xl border ${
+                                    isDark ? 'bg-slate-900/50 border-slate-700' : 'bg-gray-50 border-gray-200'
+                                }`}>
+                                    <div className="flex items-center gap-2 mb-4">
+                                        <BookOpen size={18} className={isDark ? 'text-gold' : 'text-muted-gold'} />
+                                        <h4 className={`font-bold text-lg ${textColor}`}>案例研究 (Case Study)</h4>
+                                    </div>
+                                    <p className={`text-sm leading-relaxed ${mutedText}`}>
+                                        {currentEnhancement.caseStudy}
+                                    </p>
+                                </div>
+
+                                {/* 行動步驟 */}
+                                <div className={`p-6 rounded-2xl border ${
+                                    isDark ? 'bg-slate-900/50 border-slate-700' : 'bg-gray-50 border-gray-200'
+                                }`}>
+                                    <div className="flex items-center gap-2 mb-4">
+                                        <Lightbulb size={18} className={isDark ? 'text-gold' : 'text-muted-gold'} />
+                                        <h4 className={`font-bold text-lg ${textColor}`}>行動步驟 (Action Steps)</h4>
+                                    </div>
+                                    <ol className="space-y-3">
+                                        {currentEnhancement.actionSteps.map((step, idx) => (
+                                            <li key={idx} className={`text-sm leading-relaxed flex gap-3 ${mutedText}`}>
+                                                <span className={`font-bold ${isDark ? 'text-gold' : 'text-muted-gold'}`}>{idx + 1}.</span>
+                                                <span>{step}</span>
+                                            </li>
+                                        ))}
+                                    </ol>
+                                </div>
+
+                                {/* 反思問題 */}
+                                <div className={`p-6 rounded-2xl border ${
+                                    isDark ? 'bg-slate-900/50 border-slate-700' : 'bg-gray-50 border-gray-200'
+                                }`}>
+                                    <div className="flex items-center gap-2 mb-4">
+                                        <HelpCircle size={18} className={isDark ? 'text-gold' : 'text-muted-gold'} />
+                                        <h4 className={`font-bold text-lg ${textColor}`}>反思問題 (Reflection Questions)</h4>
+                                    </div>
+                                    <ul className="space-y-3">
+                                        {currentEnhancement.reflectionQuestions.map((q, idx) => (
+                                            <li key={idx} className={`text-sm leading-relaxed italic ${mutedText}`}>
+                                                「{q}」
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+
+                                {/* CIP 應用 */}
+                                <div className={`p-6 rounded-2xl border-l-4 ${
+                                    isDark ? 'bg-purple-900/10 border-purple-500' : 'bg-purple-50 border-purple-400'
+                                }`}>
+                                    <div className="flex items-center gap-2 mb-4">
+                                        <Link2 size={18} className={isDark ? 'text-purple-400' : 'text-purple-600'} />
+                                        <h4 className={`font-bold text-lg ${isDark ? 'text-purple-400' : 'text-purple-600'}`}>CIP 應用 (CIP Application)</h4>
+                                    </div>
+                                    <p className={`text-sm leading-relaxed ${mutedText}`}>
+                                        {currentEnhancement.cipApplication}
+                                    </p>
+                                </div>
+
+                                {/* 相關法則 */}
+                                <div className={`p-4 rounded-xl border ${
+                                    isDark ? 'bg-slate-900/30 border-slate-700' : 'bg-gray-50 border-gray-200'
+                                }`}>
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <span className="text-xs font-mono uppercase tracking-widest opacity-60">相關法則</span>
+                                    </div>
+                                    <div className="flex flex-wrap gap-2">
+                                        {currentEnhancement.relatedPrinciples.map((principle, idx) => (
+                                            <span key={idx} className={`px-3 py-1 rounded-full text-xs font-medium ${
+                                                isDark ? 'bg-slate-800 text-slate-300' : 'bg-white text-gray-700 border border-gray-200'
+                                            }`}>
+                                                {principle}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        )}
 
                         <button 
                             className={`w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all ${
