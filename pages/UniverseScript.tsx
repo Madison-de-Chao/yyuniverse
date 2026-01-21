@@ -158,7 +158,7 @@ export const UniverseScript: React.FC<UniverseScriptProps> = ({ theme }) => {
             setScriptType('warrior');
         }
         // 愛人：親密、連結、愛
-        else if (input.includes('愛') || input.includes('情') || input.includes('他') || input.includes('她') || input.includes('親密') || input.includes('連結') || input.includes('依附')) {
+        else if (input.includes('伴侣') || input.includes('男友') || input.includes('女友') || input.includes('另一半') || input.includes('黏') || input.includes('失去') || input.includes('分離') || input.includes('親密') || input.includes('連結') || input.includes('依戀') || input.includes('融合') || input.includes('獨立') || input.includes('愛情') || input.includes('戀愛')) {
             setScriptType('lover');
         }
         // 開拓者：工作、事業、職涯
