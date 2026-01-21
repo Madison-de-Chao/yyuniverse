@@ -442,12 +442,12 @@ export const UniverseScript: React.FC<UniverseScriptProps> = ({ theme }) => {
                         {currentEnhancement && (
                             <div className="space-y-8 mt-12">
                                 {/* 案例研究 */}
-                                <div className={`p-6 rounded-2xl border ${
-                                    isDark ? 'bg-slate-900/50 border-slate-700' : 'bg-gray-50 border-gray-200'
+                                <div className={`p-6 rounded-2xl border-l-4 transition-all hover:scale-[1.02] hover:shadow-lg ${
+                                    isDark ? 'bg-blue-900/20 border-blue-500' : 'bg-blue-50 border-blue-400'
                                 }`}>
-                                    <div className="flex items-center gap-2 mb-4">
-                                        <BookOpen size={18} className={isDark ? 'text-gold' : 'text-muted-gold'} />
-                                        <h4 className={`font-bold text-lg ${textColor}`}>案例研究 (Case Study)</h4>
+                                    <div className="flex items-center gap-3 mb-4">
+                                        <BookOpen size={24} className={isDark ? 'text-blue-400' : 'text-blue-600'} />
+                                        <h4 className={`font-bold text-xl ${isDark ? 'text-blue-400' : 'text-blue-600'}`}>案例研究 (Case Study)</h4>
                                     </div>
                                     <p className={`text-sm leading-relaxed ${mutedText}`}>
                                         {currentEnhancement.caseStudy}
@@ -455,12 +455,12 @@ export const UniverseScript: React.FC<UniverseScriptProps> = ({ theme }) => {
                                 </div>
 
                                 {/* 行動步驟 */}
-                                <div className={`p-6 rounded-2xl border ${
-                                    isDark ? 'bg-slate-900/50 border-slate-700' : 'bg-gray-50 border-gray-200'
+                                <div className={`p-6 rounded-2xl border-l-4 transition-all hover:scale-[1.02] hover:shadow-lg ${
+                                    isDark ? 'bg-green-900/20 border-green-500' : 'bg-green-50 border-green-400'
                                 }`}>
-                                    <div className="flex items-center gap-2 mb-4">
-                                        <Lightbulb size={18} className={isDark ? 'text-gold' : 'text-muted-gold'} />
-                                        <h4 className={`font-bold text-lg ${textColor}`}>行動步驟 (Action Steps)</h4>
+                                    <div className="flex items-center gap-3 mb-4">
+                                        <Lightbulb size={24} className={isDark ? 'text-green-400' : 'text-green-600'} />
+                                        <h4 className={`font-bold text-xl ${isDark ? 'text-green-400' : 'text-green-600'}`}>行動步驟 (Action Steps)</h4>
                                     </div>
                                     <ol className="space-y-3">
                                         {currentEnhancement.actionSteps.map((step, idx) => (
@@ -473,12 +473,12 @@ export const UniverseScript: React.FC<UniverseScriptProps> = ({ theme }) => {
                                 </div>
 
                                 {/* 反思問題 */}
-                                <div className={`p-6 rounded-2xl border ${
-                                    isDark ? 'bg-slate-900/50 border-slate-700' : 'bg-gray-50 border-gray-200'
+                                <div className={`p-6 rounded-2xl border-l-4 transition-all hover:scale-[1.02] hover:shadow-lg ${
+                                    isDark ? 'bg-orange-900/20 border-orange-500' : 'bg-orange-50 border-orange-400'
                                 }`}>
-                                    <div className="flex items-center gap-2 mb-4">
-                                        <HelpCircle size={18} className={isDark ? 'text-gold' : 'text-muted-gold'} />
-                                        <h4 className={`font-bold text-lg ${textColor}`}>反思問題 (Reflection Questions)</h4>
+                                    <div className="flex items-center gap-3 mb-4">
+                                        <HelpCircle size={24} className={isDark ? 'text-orange-400' : 'text-orange-600'} />
+                                        <h4 className={`font-bold text-xl ${isDark ? 'text-orange-400' : 'text-orange-600'}`}>反思問題 (Reflection Questions)</h4>
                                     </div>
                                     <ul className="space-y-3">
                                         {currentEnhancement.reflectionQuestions.map((q, idx) => (
@@ -490,12 +490,12 @@ export const UniverseScript: React.FC<UniverseScriptProps> = ({ theme }) => {
                                 </div>
 
                                 {/* CIP 應用 */}
-                                <div className={`p-6 rounded-2xl border-l-4 ${
-                                    isDark ? 'bg-purple-900/10 border-purple-500' : 'bg-purple-50 border-purple-400'
+                                <div className={`p-6 rounded-2xl border-l-4 transition-all hover:scale-[1.02] hover:shadow-lg ${
+                                    isDark ? 'bg-purple-900/20 border-purple-500' : 'bg-purple-50 border-purple-400'
                                 }`}>
-                                    <div className="flex items-center gap-2 mb-4">
-                                        <Link2 size={18} className={isDark ? 'text-purple-400' : 'text-purple-600'} />
-                                        <h4 className={`font-bold text-lg ${isDark ? 'text-purple-400' : 'text-purple-600'}`}>CIP 應用 (CIP Application)</h4>
+                                    <div className="flex items-center gap-3 mb-4">
+                                        <Link2 size={24} className={isDark ? 'text-purple-400' : 'text-purple-600'} />
+                                        <h4 className={`font-bold text-xl ${isDark ? 'text-purple-400' : 'text-purple-600'}`}>CIP 應用 (CIP Application)</h4>
                                     </div>
                                     <p className={`text-sm leading-relaxed ${mutedText}`}>
                                         {currentEnhancement.cipApplication}
