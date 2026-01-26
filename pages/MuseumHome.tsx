@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, ArrowRight, BookOpen, Target, Microscope, Wrench } from 'lucide-react';
+import { Shield, ArrowRight, BookOpen, Microscope, Wrench } from 'lucide-react';
 
 const MuseumHome: React.FC = () => {
   return (
@@ -51,13 +51,7 @@ const MuseumHome: React.FC = () => {
               <BookOpen className="w-5 h-5" />
               快速理解（3 分鐘）
             </a>
-            <a
-              href="/challenge-kit"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all"
-            >
-              <Target className="w-5 h-5" />
-              Challenge Kit（給挑戰者）
-            </a>
+
             <a
               href="https://mmclogic.com/"
               target="_blank"
@@ -79,7 +73,7 @@ const MuseumHome: React.FC = () => {
             根據你的目的，選擇最適合的路徑
           </p>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8">
             {/* Researcher */}
             <a
               href="/system-map?path=researcher"
@@ -116,23 +110,7 @@ const MuseumHome: React.FC = () => {
               </div>
             </a>
 
-            {/* Challenger */}
-            <a
-              href="/challenge-kit"
-              className="bg-white/5 backdrop-blur-sm rounded-lg p-8 border border-green-500/30 hover:border-green-500/60 transition-all group"
-            >
-              <div className="w-16 h-16 rounded-lg bg-gradient-to-br from-green-600 to-emerald-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <Target className="w-8 h-8" />
-              </div>
-              <h3 className="text-2xl font-semibold mb-3">挑戰者</h3>
-              <p className="text-gray-400 mb-4">
-                我想檢核、反駁或改進這套系統
-              </p>
-              <div className="flex items-center gap-2 text-green-400 font-semibold">
-                查看規格
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </a>
+
           </div>
         </div>
       </section>
@@ -157,10 +135,7 @@ const MuseumHome: React.FC = () => {
                   <span className="text-green-400">✓</span>
                   <span>CIP 協定：知識衛生的最低規格</span>
                 </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-green-400">✓</span>
-                  <span>Challenge Kit：公開的挑戰規格</span>
-                </li>
+
               </ul>
             </div>
 
@@ -235,7 +210,7 @@ const MuseumHome: React.FC = () => {
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl font-bold mb-6">準備好開始了嗎？</h2>
           <p className="text-xl text-gray-400 mb-12">
-            選擇你的路徑，或直接挑戰我們
+            選擇你的路徑，開始探索元壹宇宙
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
@@ -244,12 +219,7 @@ const MuseumHome: React.FC = () => {
             >
               進入系統總覽
             </a>
-            <a
-              href="/challenge-kit"
-              className="px-8 py-4 bg-gradient-to-r from-green-600 to-emerald-600 rounded-lg font-semibold hover:from-green-700 hover:to-emerald-700 transition-all"
-            >
-              直接挑戰
-            </a>
+
           </div>
         </div>
       </section>
