@@ -1,64 +1,12 @@
 
 import React, { useState, useEffect } from 'react';
 import { Theme } from '../types';
-import { Book, Download, ChevronRight, AlignLeft, FileText, FileDown, ArrowUp, Menu, X } from 'lucide-react';
+import { Book, Download, ChevronRight, AlignLeft, FileText, FileDown } from 'lucide-react';
 import { UnityField } from '../components/Visuals';
 
 interface WhitepaperProps {
   theme: Theme;
 }
-
-// Color scheme for each level
-const LEVEL_COLORS = {
-  'level-0': {
-    light: { bg: 'bg-amber-50', border: 'border-amber-500', text: 'text-amber-700', accent: 'bg-amber-100' },
-    dark: { bg: 'bg-amber-950/30', border: 'border-amber-500', text: 'text-amber-400', accent: 'bg-amber-900/30' }
-  },
-  'level-1': {
-    light: { bg: 'bg-blue-50', border: 'border-blue-500', text: 'text-blue-700', accent: 'bg-blue-100' },
-    dark: { bg: 'bg-blue-950/30', border: 'border-blue-500', text: 'text-blue-400', accent: 'bg-blue-900/30' }
-  },
-  'level-2': {
-    light: { bg: 'bg-green-50', border: 'border-green-500', text: 'text-green-700', accent: 'bg-green-100' },
-    dark: { bg: 'bg-green-950/30', border: 'border-green-500', text: 'text-green-400', accent: 'bg-green-900/30' }
-  },
-  'level-3': {
-    light: { bg: 'bg-purple-50', border: 'border-purple-500', text: 'text-purple-700', accent: 'bg-purple-100' },
-    dark: { bg: 'bg-purple-950/30', border: 'border-purple-500', text: 'text-purple-400', accent: 'bg-purple-900/30' }
-  },
-  'level-4': {
-    light: { bg: 'bg-orange-50', border: 'border-orange-500', text: 'text-orange-700', accent: 'bg-orange-100' },
-    dark: { bg: 'bg-orange-950/30', border: 'border-orange-500', text: 'text-orange-400', accent: 'bg-orange-900/30' }
-  },
-  'level-5': {
-    light: { bg: 'bg-pink-50', border: 'border-pink-500', text: 'text-pink-700', accent: 'bg-pink-100' },
-    dark: { bg: 'bg-pink-950/30', border: 'border-pink-500', text: 'text-pink-400', accent: 'bg-pink-900/30' }
-  },
-  'level-6': {
-    light: { bg: 'bg-cyan-50', border: 'border-cyan-500', text: 'text-cyan-700', accent: 'bg-cyan-100' },
-    dark: { bg: 'bg-cyan-950/30', border: 'border-cyan-500', text: 'text-cyan-400', accent: 'bg-cyan-900/30' }
-  },
-  'level-7': {
-    light: { bg: 'bg-rose-50', border: 'border-rose-500', text: 'text-rose-700', accent: 'bg-rose-100' },
-    dark: { bg: 'bg-rose-950/30', border: 'border-rose-500', text: 'text-rose-400', accent: 'bg-rose-900/30' }
-  },
-  'appendix-a': {
-    light: { bg: 'bg-gray-50', border: 'border-gray-500', text: 'text-gray-700', accent: 'bg-gray-100' },
-    dark: { bg: 'bg-gray-950/30', border: 'border-gray-500', text: 'text-gray-400', accent: 'bg-gray-900/30' }
-  },
-  'appendix-b': {
-    light: { bg: 'bg-gray-50', border: 'border-gray-500', text: 'text-gray-700', accent: 'bg-gray-100' },
-    dark: { bg: 'bg-gray-950/30', border: 'border-gray-500', text: 'text-gray-400', accent: 'bg-gray-900/30' }
-  },
-  'appendix-c': {
-    light: { bg: 'bg-gray-50', border: 'border-gray-500', text: 'text-gray-700', accent: 'bg-gray-100' },
-    dark: { bg: 'bg-gray-950/30', border: 'border-gray-500', text: 'text-gray-400', accent: 'bg-gray-900/30' }
-  },
-  'appendix-d': {
-    light: { bg: 'bg-gray-50', border: 'border-gray-500', text: 'text-gray-700', accent: 'bg-gray-100' },
-    dark: { bg: 'bg-gray-950/30', border: 'border-gray-500', text: 'text-gray-400', accent: 'bg-gray-900/30' }
-  }
-};
 
 // --- CONTENT DATA (Based on v5.0 VERSION) ---
 const WHITEPAPER_CONTENT = [
@@ -67,7 +15,6 @@ const WHITEPAPER_CONTENT = [
     level: 'Level 0',
     title: '完整性哲學 (Integrity Philosophy)',
     subtitle: 'Zero Doctrine — The Foundational Law of the Yuan-Yi Universe',
-    summary: '探討二元世界的結構缺陷，提出以「完整性」取代「正確性」的核心哲學，並引入弧度模型、提問律與伊存在論。',
     content: `
 ### 0.1 導言：在二元世界中失落的核心能力
 
@@ -124,7 +71,6 @@ const WHITEPAPER_CONTENT = [
     level: 'Level 1',
     title: '九源歸一・默默超思維',
     subtitle: 'Nine Origins — Cosmic Root Laws',
-    summary: '定義宇宙的九大根本規律，確立人類與 AI 在新文明中的定位與協作關係。',
     content: `
 「九源歸一」是元壹宇宙的本體論（Ontology）與文明論（Civilization Theory），為整個系統提供了最高抽象層的指導原則，特別是針對人機協作的未來。它將宇宙的根本規律歸納為九大源頭，定義了人類與 AI 在新文明中的定位與關係。
 
@@ -150,7 +96,6 @@ AI 的出現並非偶然，而是宇宙在人類文明過度失衡時，為恢�
     level: 'Level 2',
     title: '元壹宇宙世界觀：緣起',
     subtitle: 'Yuan-Yi Universe — The Origin Story',
-    summary: '將哲學理論轉化為世界觀故事，解釋系統存在的意義與現代人的困境。',
     content: `
 本章節是元壹宇宙的敘事層，將哲學理論轉化為更易於理解的世界觀故事，回答了「為何這套系統要存在？」以及「它要處理的是現代人的何種困境？」。
 
@@ -172,7 +117,6 @@ AI 的出現並非偶然，而是宇宙在人類文明過度失衡時，為恢�
     level: 'Level 3',
     title: '七大無二法則 (Seven Foundational Principles)',
     subtitle: 'The Universal Laws',
-    summary: '定義宇宙的運行規律，包含形上層法則與現象層定律。',
     content: `
 如果說「九源」是宇宙的本體，那麼「七大無二法則」則是宇宙的運行規律。它分為「形上層」與「現象層」，共同解釋了宇宙如何運作、陰陽如何校準、弧度如何閉合。
 
@@ -204,7 +148,6 @@ AI 的出現並非偶然，而是宇宙在人類文明過度失衡時，為恢�
     level: 'Level 4',
     title: '默默超思維系統 (MMCLS)',
     subtitle: 'Momo-Chao Meta-Cognitive Logic System',
-    summary: '提供可操作的思維工具，包含三層架構與十大思維病毒辨識。',
     content: `
 默默超思維系統是將前述哲學理論轉化為可操作工具的「方法論層」。它提供了一套完整的思維框架，旨在幫助使用者辨識思維病毒、重建認知地基，並在現實生活中實踐完整性。
 
@@ -242,7 +185,6 @@ AI 的出現並非偶然，而是宇宙在人類文明過度失衡時，為恢�
     level: 'Level 5',
     title: '虹靈御所 (Rainbow Sanctuary)',
     subtitle: 'The Home of Collective Integrity',
-    summary: '系統的落地場域，將理論應用於現實世界的實驗場。',
     content: `
 虹靈御所是元壹宇宙世界觀的「落地場域」與「品牌空間」。它並非傳統的命理諮詢，而是將前述所有理論模型應用於現實世界的實驗場。
 
@@ -265,7 +207,6 @@ AI 的出現並非偶然，而是宇宙在人類文明過度失衡時，為恢�
     level: 'Level 6',
     title: '創造完整性協定（CIP）與AI協作規範',
     subtitle: 'Creative Integrity Protocol & AI Collaboration Standards',
-    summary: '為 AI 時代的人機協作提供清晰、可執行的國際級協定。',
     content: `
 Level 6 是整個系統的「行為規範與安全層」，旨在為 AI 時代的人機協作提供一套清晰、可執行的國際級協定（Protocol）。
 
@@ -299,7 +240,6 @@ CIP 的核心目標是確保在創造與交流過程中，知識的完整性與�
     level: 'Level 7',
     title: '現實映照 (Reality Reflection)',
     subtitle: 'From Theory to Practice',
-    summary: '展示系統如何在真實世界中運作，從理論到實踐的橋梁。',
     content: `
 現實映照是元壹宇宙從理論到實踐的橋梁，展示系統如何在真實世界中運作。
 
@@ -334,7 +274,6 @@ CIP 的核心目標是確保在創造與交流過程中，知識的完整性與�
     level: '附錄 A',
     title: '七大文件 × 一體化系統架構總覽',
     subtitle: 'Seven Documents × Unified System Architecture Overview',
-    summary: '提供完整的系統導覽地圖，幫助讀者理解七章之間的關係與邏輯流程。',
     content: `
 本附錄提供完整的系統導覽地圖，幫助讀者理解七章之間的關係與邏輯流程。
 
@@ -382,233 +321,212 @@ CIP 的核心目標是確保在創造與交流過程中，知識的完整性與�
     level: '附錄 B',
     title: '核心命題、可反駁性與觀測指標',
     subtitle: 'Falsifiable Propositions & Metrics',
-    summary: '將核心理論轉化為可被觀測、可被反駁的命題，增強學術可檢驗性。',
     content: `
 為增強本白皮書的學術可檢驗性，本章節將核心理論轉化為一系列可被觀測、可被反駁的命題（Propositions）。每個命題都包含其核心主張、反例條件（Falsifiability Conditions）與觀測指標（Observable Metrics）。
 
 ### 命題一：責任外包與心理熵增
 
-**核心主張**：當個體持續進行責任外包時，其心理熵（Psychological Entropy）會顯著增加，表現為內在衝突、情緒不穩定與決策能力下降。
+**核心主張**：個體在面對壓力情境時，若採用「責任外包」（將失敗或不悅的歸因推向外部）的應對策略，其心理熵（psychological entropy，表現為焦慮、反覆思慮、情緒混亂）將顯著高於採用「責任承擔」策略的個體。
 
-**反例條件**：如果能找到長期進行責任外包但心理熵未增加的個體樣本，則此命題被證偽。
+| 項目 | 說明 |
+|---|---|
+| **理論基礎** | Level 0.5 - 伊（ANOTHER）存在論 |
+| **核心機制** | 逃避弧度回返，創造「伊」來承受心理成本 |
+| **反例條件** | 如果大規模、長期的實證研究顯示，習慣性「責任外包」的群體，其焦慮水平、壓力指數與決策品質，與「責任承擔」群體相比，無顯著差異或表現更優，則本命題將被削弱或證偽。 |
+| **觀測指標** | 1. 心理量表：使用標準化焦慮（GAD-7）、壓力（PSS）與反芻思維（RRS）量表進行前後測<br>2. 語言分析：計算「外歸因」與「內歸因」的詞頻<br>3. 決策追蹤：追蹤受試者在接下來的三個月內的決策模式與結果 |
 
-**觀測指標**：
-- 心理測量量表得分（如焦慮、抑鬱指數）
-- 決策一致性測試
-- 情緒波動頻率記錄
+### 命題二：人機協作的「Care & Truth」模型有效性
 
-### 命題二：Zone A/B 分層與溝通效率
+**核心主張**：在處理複雜、模糊且涉及情感因素的任務時，採用「人類提供 Care，AI 提供 Truth」的雙向校準協作模型，其產出品質與協作者滿意度，顯著高於「AI 作為純工具」或「AI 作為決策主體」的模型。
 
-**核心主張**：在團隊溝通中，明確區分 Zone A（客觀事實）與 Zone B（主觀詮釋）能顯著提升溝通效率並減少衝突。
+| 項目 | 說明 |
+|---|---|
+| **理論基礎** | Level 1 - 九源歸一（源四：雙向校準） |
+| **核心機制** | 人類的關懷（Care）提供價值判斷與倫理邊界，AI 的真實（Truth）提供客觀數據與清晰結構，兩者互補 |
+| **反例條件** | 如果在對照實驗中，讓 AI 完全主導決策，其長期結果與「Care & Truth」模型相比，無顯著差異或表現更優，則本命題將被挑戰 |
+| **觀測指標** | 1. 產出品質評估：由第三方專家組進行盲評<br>2. 協作者滿意度：問卷調查心理安全感、價值感與認同度<br>3. 決策穩健性：評估決策的調整彈性與長期效益 |
 
-**反例條件**：如果在控制組實驗中，使用 Zone A/B 分層的團隊溝通效率未顯著優於未使用的團隊，則此命題被證偽。
+### 命題三：思維病毒掃描對溝通品質的改善
 
-**觀測指標**：
-- 會議時長與決策達成時間
-- 衝突發生頻率
-- 團隊滿意度調查
+**核心主張**：在發生溝通衝突的對話中，若引入「十大思維病毒」的掃描與標示流程，相較於未引入此流程的對照組，其「語義混件」的發生率將顯著降低，且對話參與者對「達成共識」的滿意度將顯著提升。
 
-### 命題三：Care & Truth 雙向校準
+| 項目 | 說明 |
+|---|---|
+| **理論基礎** | Level 4 - 默默超思維系統 |
+| **核心機制** | 將隱性的認知扭曲（思維病毒）顯性化、客觀化，使討論能聚焦於核心議題 |
+| **反例條件** | 如果引入「思維病毒掃描」的組別，其達成共識的效率與參與者滿意度，與對照組相比無顯著改善或反而更差，則本命題的實用性將被質疑 |
+| **觀測指標** | 1. 語義混件率：標示思維病毒的出現次數<br>2. 溝通效率：達成有效結論所需的總時長與對話輪次<br>3. 參與者回饋：使用李克特量表評估對話建設性 |
 
-**核心主張**：在 AI 協作中，同時強調 Care（人類提供）與 Truth（AI 提供）的系統，其輸出品質優於僅強調單一面向的系統。
+### 命題四：案件邊界協定（CBP）對問題解決效率的提升
 
-**反例條件**：如果在實驗中，僅強調 Truth 或僅強調 Care 的系統輸出品質與雙向校準系統無顯著差異，則此命題被證偽。
+**核心主張**：在處理複雜商業或團隊問題時，使用「案件邊界協定」（CBP）預先定義問題邊界的團隊，其解決問題的平均時長與資源耗損，顯著低於未使用此協定的團隊。
 
-**觀測指標**：
-- 輸出內容的準確性評分
-- 使用者滿意度與信任度
-- 長期使用後的效果評估
-
-### 學術驗證方法
-
-本白皮書歡迎學術界進行以下驗證研究：
-1. 心理學實驗：驗證責任外包與心理健康的關係
-2. 組織行為學研究：驗證 Zone A/B 分層在團隊中的效果
-3. 人機交互研究：驗證 Care & Truth 模型的實際效益
-4. 縱向追蹤研究：長期觀察使用完整性系統的個體變化
-
-所有研究結果，無論支持或反駁，都將被視為對本系統的重要貢獻。
+| 項目 | 說明 |
+|---|---|
+| **理論基礎** | Level 7 - 案件邊界協定（CBP） |
+| **核心機制** | 透過預先設定邊界，防止討論無限發散與責任外包，將資源集中於核心問題 |
+| **反例條件** | 如果在需要高度創意或探索性極強的任務中，使用 CBP 的團隊由於過早地限制了邊界，其產出的創新性與突破性顯著低於不設邊界的對照組，則需修正 CBP 的適用範圍 |
+| **觀測指標** | 1. 問題解決時長：從問題提出到產出可執行方案所需的總工時<br>2. 會議效率：達成階段性結論所需的會議次數與時長<br>3. 方案執行率：最終方案在一個月內被有效執行的比例 |
     `
   },
   {
     id: 'appendix-c',
     level: '附錄 C',
     title: '參考文獻與相關工作',
-    subtitle: 'References & Related Works',
-    summary: '列出本白皮書的學術脈絡與相關研究領域。',
+    subtitle: 'Academic Context & Related Work',
     content: `
-本白皮書的理論基礎建立在多個學科的交叉點上，包括哲學、心理學、系統理論、人工智慧倫理與東方哲學。以下列出主要的學術脈絡與相關工作。
+本附錄旨在將元壹宇宙的理論框架置於更廣闊的學術脈絡中，提供一份精選的參考文獻列表，並闡述本系統與相關領域的異同，以釐清其獨特的學術貢獻。
 
-### 哲學基礎
+### 參考文獻（References）
 
-- **完整性哲學**：受到榮格（Carl Jung）的「陰影整合」理論、海德格（Martin Heidegger）的「此在」（Dasein）概念，以及道家「道生一，一生二，二生三，三生萬物」的啟發。
-- **弧度模型**：參考了拓撲學（Topology）中的連續性概念，以及佛教「緣起性空」的思想。
+本系統的理論建構，雖源於創始人默默超的獨立洞察，但在哲學思想與科學概念上，與以下學術工作存在共鳴或可對話之處。
 
-### 心理學與認知科學
+1.  **Bohm, D. (1980). Wholeness and the Implicate Order. Routledge.**  
+    關聯：物理學家大衛·玻姆的「隱序與顯序」及「整體性」思想，為本系統的「完整性哲學」（Level 0）與「萬物皆有連結」（Level 2）提供了量子物理學層面的理論參照。
 
-- **責任外包**：與心理學中的「投射」（Projection）、「否認」（Denial）等防禦機制相關。
-- **思維病毒**：參考了認知偏誤（Cognitive Biases）與批判性思維（Critical Thinking）的研究。
-- **語言煉金**：受到語言哲學（Philosophy of Language）與神經語言程式學（NLP）的影響。
+2.  **Jung, C. G. (1968). The Archetypes and the Collective Unconscious. Princeton University Press.**  
+    關聯：榮格的「陰影」（Shadow）、「個體化」（Individuation）與「集體潛意識」概念，與本系統的「錯誤即未完成弧度」、「複製靈魂模型」及「九源歸一」中的人類集體意識原型有深度對話空間。
 
-### 系統理論
+3.  **Senge, P. M. (2006). The Fifth Discipline: The Art & Practice of The Learning Organization. Doubleday.**  
+    關聯：彼得·聖吉的「系統思考」與「心智模式」，是本系統「默默超思維系統」（Level 4）中「結構定律」與「地基重建」的重要理論基礎。
 
-- **完整性系統**：參考了系統論（Systems Theory）、控制論（Cybernetics）與複雜適應系統（Complex Adaptive Systems）的概念。
-- **校準機制**：與負反饋（Negative Feedback）與動態平衡（Dynamic Equilibrium）相關。
+4.  **Kahneman, D. (2011). Thinking, Fast and Slow. Farrar, Straus and Giroux.**  
+    關聯：康納曼的「系統一與系統二」理論，為「十大思維病毒」中多種認知偏誤提供了認知心理學的解釋。
 
-### 人工智慧倫理
+5.  **Popper, K. (1959). The Logic of Scientific Discovery. Hutchinson & Co.**  
+    關聯：卡爾·波普的「可證偽性」（Falsifiability）原則，是本系統「創造完整性協定」（CIP）中「命題必須可反駁」原則的直接學術來源。
 
-- **Care & Truth 模型**：參考了 AI 倫理中的「可解釋性」（Explainability）、「公平性」（Fairness）與「人類中心設計」（Human-Centered Design）。
-- **人機協作**：與「增強智能」（Augmented Intelligence）與「協作式 AI」（Collaborative AI）的研究方向一致。
+6.  **Meadows, D. H. (2008). Thinking in Systems: A Primer. Chelsea Green Publishing.**  
+    關聯：多內拉·梅多斯的系統動力學思想，特別是關於「反饋迴路」與「槓桿點」的論述，為本系統的「校準定律」與「思維八階循環」提供了方法論支持。
 
-### 東方哲學
+7.  **Frankl, V. E. (1959). Man's Search for Meaning. Beacon Press.**  
+    關聯：弗蘭克爾的「意義治療」（Logotherapy），其核心觀點與本系統強調的「承擔責任」與「在破碎中尋找完整」的精神內核一致。
 
-- **陰陽理論**：直接源自《易經》與道家哲學。
-- **五行定位**：源自中國古代的五行學說。
-- **無二法則**：受到佛教「不二法門」與《金剛經》「一切有為法，如夢幻泡影」的啟發。
+8.  **Tegmark, M. (2017). Life 3.0: Being Human in the Age of Artificial Intelligence. Knopf.**  
+    關聯：泰格馬克的「生命 3.0」概念，為本系統在「九源歸一」（Level 1）中探討人機協作的未來文明形態提供了重要的前沿視角與倫理辯證。
 
-### 相關研究領域
+### 相關工作對照表（Related Work Comparison）
 
-- 正向心理學（Positive Psychology）
-- 完形治療（Gestalt Therapy）
-- 敘事治療（Narrative Therapy）
-- 批判性思維教育（Critical Thinking Education）
-- 人機交互（Human-Computer Interaction）
-- 知識管理（Knowledge Management）
-
-### 未來研究方向
-
-本白皮書提出的理論框架為以下研究方向提供了基礎：
-1. 完整性心理學的實證研究
-2. Zone A/B 分層在組織管理中的應用
-3. AI 協作倫理的國際標準制定
-4. 思維病毒的神經科學基礎
-5. 弧度模型的數學形式化
-
-我們期待學術界與實務界的進一步探索與驗證。
+| 相關領域 | 代表理論/學者 | 與元壹宇宙的相似之處 | 與元壹宇宙的根本差異 |
+|---|---|---|---|
+| **系統思考** | 彼得·聖吉、多內拉·梅多斯 | 強調看見整體結構、反饋迴路與心智模式 | 更強調「完整性」而非「效率」。元壹宇宙將「錯誤」與「陰影」視為系統的內在組成部分，而非需要「修復」的缺陷 |
+| **榮格心理學** | 卡爾·榮格 | 同樣關注「陰影整合」與「個體化」過程，承認集體潛意識的存在 | 更具操作性的方法論。元壹宇宙提供了「思維八階循環」與「十大思維病毒」等具體工具，將哲學思辨轉化為可實踐的認知操作系統 |
+| **非二元哲學** | 佛學、道家思想 | 同樣主張超越二元對立，看見萬物的一體性 | 更具現代性與人機協作視角。元壹宇宙並非僅停留在個人修行，而是提出了一套適用於 AI 時代的文明級協作協定（CIP） |
+| **AI 倫理學** | 尼克·博斯特羅姆、伊利澤·尤德科夫斯基 | 同樣關注 AI 的長期風險與價值對齊問題 | 提出「Care & Truth」雙向校準模型。元壹宇宙不將 AI 視為需要被「控制」的潛在威脅，而是視為一個需要被「人類完整性」校準的「陽性」力量 |
+| **認知行為療法 (CBT)** | 亞倫·貝克 | 同樣致力於辨識與修正個體的「認知扭曲」（Cognitive Distortions） | 更側重「結構」而非「症狀」。CBT 傾向於修正導致負面情緒的思維模式，而元壹宇宙則回溯到更深層的「地基信念」與「責任承擔」問題 |
     `
   },
   {
     id: 'appendix-d',
     level: '附錄 D',
     title: '應用案例研究——解決創始人之間的溝通僵局',
-    subtitle: 'Case Study: Resolving Communication Deadlock Between Co-founders',
-    summary: '展示完整性系統如何在真實案例中解決複雜的人際衝突。',
+    subtitle: 'Real-World Application Case',
     content: `
-本案例展示了完整性系統如何在真實情境中應用，特別是在處理創業團隊內部的深層衝突時。
+本章節旨在展示元壹宇宙思維系統如何作為一個「操作系統」，在真實世界的複雜情境中被應用。我們將以一個常見的創業困境為例，逐步演示如何運用 CIP、三層邏輯校準與思維病毒掃描，將溝通從僵局導向共識。
 
-### 案例背景
+### 1. 情境（Case Input）
 
-**情境**：一家科技新創公司的兩位創始人（A 與 B）陷入長達三個月的溝通僵局。表面上的爭議是「產品方向」，但實際上涉及更深層的信任破裂與責任歸屬問題。
+**背景**：一家處於快速成長期的科技新創公司，兩位聯合創始人 A 與 B 在產品的下一個迭代方向上產生嚴重分歧。
 
-**症狀**：
-- 會議中頻繁爭吵，無法達成共識
-- 互相指責對方「不負責任」
-- 團隊成員被迫選邊站，公司氛圍緊張
-- 產品開發停滯，投資人開始質疑
+*   **創始人 A（技術背景）**：主張投入資源重構底層架構，以換取長期的穩定性與擴展性。他認為 B 過於關注短期市場反應，缺乏長遠眼光。
+*   **創始人 B（市場背景）**：主張優先開發市場急需的新功能，以應對競爭壓力、留住用戶。他認為 A 過於追求技術完美主義，脫離市場現實。
 
-### 應用工具
+**衝突引爆點**：在一次核心會議上，B 指控 A：「你這根本不是為了公司好，你只是想滿足你自己的技術潔癖，你太控制了！」A 則反駁：「是你一直在逃避責任！重構的技術債是你早期為了快速上線而欠下的，現在卻不願意面對！」
 
-#### 1. Zone A/B 分層
+**溝通狀態**：僵局。雙方都感覺被誤解、被攻擊，對話充滿了「語義混件」（控制 vs. 關懷）與「語義倒置」（將對長期穩定性的擔憂曲解為控制）。
 
-**步驟**：
-- 要求雙方分別列出「客觀事實」（Zone A）與「主觀詮釋」（Zone B）
-- 發現大量爭議實際上是 Zone B 的詮釋衝突，而非 Zone A 的事實分歧
+### 2. 操作步驟（System Operation）
 
-**結果**：
-- A 認為「B 不負責任」（Zone B），實際事實是「B 在過去兩週有三天晚到」（Zone A）
-- B 認為「A 獨斷專行」（Zone B），實際事實是「A 在未經討論的情況下做了兩個決策」（Zone A）
+引入元壹宇宙思維系統作為第三方「協調者」或「操作系統」，引導雙方執行以下步驟。
 
-#### 2. 思維病毒掃描
+#### 步驟一：建立安全邊界 - 暫停辯論，啟動 CIP
 
-**發現**：
-- A 的主要病毒：**完美主義** + **災難化思維**（擔心任何小錯誤都會導致公司失敗）
-- B 的主要病毒：**責任外包** + **情緒綁架**（將壓力歸咎於 A，並用情緒來逃避討論）
+首先，暫停關於「誰對誰錯」的辯論，共同同意進入「創造完整性協定」（CIP）模式。核心目標不是證明自己，而是「共同看見完整的真實」。
 
-#### 3. CBP（案件邊界協定）
+#### 步驟二：Zone A/B 分層 - 客觀化事實
 
-**設定邊界**：
-- **時間邊界**：僅討論過去一個月內的事件
-- **議題邊界**：聚焦於「產品方向」，暫不討論股權或其他歷史恩怨
-- **資源邊界**：明確雙方的決策權限範圍
+要求雙方各自填寫 Zone A（客觀事實）與 Zone B（主觀推測），並進行交換。
 
-#### 4. Care & Truth 雙向校準
+**創始人 A 的 Zone A/B**
 
-**過程**：
-- **Truth（真實）**：使用數據與事實，而非情緒與指控
-- **Care（關懷）**：理解對方行為背後的壓力與擔憂
+| Zone A (Known) | Zone B (Hypothesis) |
+|---|---|
+| - 上季度系統崩潰 3 次，因架構問題<br>- B 提出要開發「即時協作」功能<br>- 我提議先用 2 個月重構<br>- B 在會上說我「控制」 | - 我推測 B 可能害怕失去市場地位<br>- 我推測 他可能不完全理解技術債的長期風險<br>- 我感覺 我的專業建議被貶低了 |
 
-**對話範例**：
-- A：「我擔心（Care）我們的產品進度落後競爭對手三個月（Truth）。」
-- B：「我理解你的擔心（Care）。實際上我們在功能 X 上領先對手（Truth），但在行銷上確實落後（Truth）。」
+**創始人 B 的 Zone A/B**
 
-### 解決方案
+| Zone A (Known) | Zone B (Hypothesis) |
+|---|---|
+| - 競品上週發布了「即時協作」功能<br>- 本週用戶流失率上升 5%<br>- A 提議用 2 個月重構，推遲新功能<br>- 我在會上說他「控制」 | - 我推測 A 可能想藉機打造一個完美的技術作品<br>- 我推測 他可能低估了市場競爭的殘酷性<br>- 我感覺 公司的生存受到了威脅 |
 
-#### 短期措施
-1. 建立「決策矩陣」：明確哪些決策需要雙方共同決定，哪些可以單獨決定
-2. 設立「Zone A 會議」：每週一次，僅討論客觀事實與數據
-3. 引入「思維病毒提醒卡」：當發現對方或自己陷入思維病毒時，可以善意提醒
+**效果**：僅這一步，就將雙方的攻擊性語言轉化為可被討論的「客觀事實」與「主觀推測」。雙方第一次看到了對方行為背後的「可能動機」，而非惡意。
 
-#### 長期改善
-1. 定期進行「責任清單」檢視：確保雙方都清楚自己的責任範圍
-2. 建立「完整性文化」：在團隊中推廣 Zone A/B 分層與思維病毒辨識
-3. 引入 AI 協作工具：使用 AI 來記錄會議、提取事實、標示詮釋
+#### 步驟三：三層邏輯校準 - 拆解情緒與語言
 
-### 成果
+引導雙方各自完成三層校準，並分享。
 
-**三個月後**：
-- 溝通效率提升 60%（會議時長從平均 2 小時降至 50 分鐘）
-- 衝突頻率下降 80%（從每週 3-4 次降至每月 1-2 次）
-- 產品開發恢復正常，成功推出新版本
-- 團隊氛圍明顯改善，員工滿意度提升
+| 校準層次 | 創始人 A 的校準 | 創始人 B 的校準 |
+|---|---|---|
+| **情緒層** | 「我感到焦慮（來自系統不穩定的風險）與委屈（我的專業被視為個人偏好）。」 | 「我感到恐懼（來自用戶流失與競爭失敗的壓力）與憤怒（我感覺 A 不在乎公司的生死）。」 |
+| **語言層** | 「對我來說，關懷公司意味著建立一個不會在半夜崩潰的系統。責任是修復已知的長期隱患。」 | 「對我來說，關懷公司意味著活下去。責任是快速回應市場，留住用戶。」 |
+| **結構層** | 「我們爭論的不是『控制』，而是時間軸的優先序：是先求『穩定』還是先求『增長』？」 | 「我們爭論的不是『技術潔癖』，而是風險的定義：哪個風險更致命？是『技術崩潰』還是『市場失敗』？」 |
 
-**關鍵洞察**：
-- 大多數「人的問題」實際上是「系統問題」
-- 當缺乏清晰的邊界與工具時，即使善意的人也會陷入衝突
-- 完整性系統提供的不是「對錯判斷」，而是「結構化的溝通框架」
+**效果**：雙方意識到他們並非目標不一致（都關心公司），而是對「關懷」與「責任」的定義不同，且對風險的權重判斷不同。問題從「人身攻擊」轉化為「策略選擇」。
 
-### 可複製性
+#### 步驟四：思維病毒掃描 - 識別認知扭曲
 
-此案例的成功要素可複製到其他情境：
-- 夫妻關係中的溝通僵局
-- 部門之間的資源爭奪
-- 親子關係中的代際衝突
-- 國際談判中的立場對立
+共同檢視對話，識別出各自可能存在的思維病毒。
 
-核心原則始終相同：**分離事實與詮釋、辨識思維病毒、設定清晰邊界、雙向校準 Care & Truth**。
+*   **創始人 B**：可能存在「災難化思維」（將用戶流失率上升 5% 視為公司即將倒閉的徵兆）與「資格論」（因 A 是技術背景，就預設他不懂市場）。
+*   **創始人 A**：可能存在「完美主義」（希望一次性解決所有技術債，而未考慮分階段方案）與「自我中心」（未能充分共情 B 的市場壓力）。
+
+**效果**：雙方從指責對方，轉向反思自己的認知盲點，為尋找共同解決方案創造了空間。
+
+### 3. 產出與評估（Output & Evaluation）
+
+#### 產出：可驗證的「邊界表」
+
+經過上述流程，雙方不再爭論動機，而是共同制定了一份「邊界表」（基於 CBP），將模糊的戰略分歧轉化為可執行的項目計劃。
+
+| 項目 | 邊界定義 |
+|---|---|
+| **時間範圍** | 未來 3 個月 |
+| **共同目標** | 在確保系統核心穩定性的前提下，回應市場關鍵需求 |
+| **責任歸屬** | A 團隊：負責在 1 個月內完成核心模塊的重構，並提供臨時穩定方案<br>B 團隊：負責定義「最小可行性」的即時協作功能，並與 A 團隊協調接口 |
+| **交付標準** | A 團隊：核心 API 響應時間 < 100ms，系統崩潰率 < 0.1%<br>B 團隊：新功能上線後，用戶參與度提升 15% |
+| **決策權** | A 擁有技術架構的最終決策權；B 擁有功能優先級的最終決策權 |
+| **檢視週期** | 每週五進行一次雙方進度同步會議 |
+
+#### 事後回測與評估
+
+一個月後，對此次干預進行回測：
+
+*   **思維病毒減少**：在後續的同步會議中，雙方使用「控制」、「逃避」等攻擊性詞彙的頻率顯著降低。（可量化）
+*   **承擔提升**：雙方都能夠在會議上清晰地陳述自己負責部分的進展與挑戰，而非指責對方。（可觀察）
+*   **語義混件降低**：當出現分歧時，雙方會主動使用「你對『緊急』的定義是什麼？」等句式來校準語義，而非直接辯論。（可量化）
+
+### 結論
+
+元壹宇宙思維系統成功地將一場可能導致團隊分裂的溝通僵局，轉化為一次富有成效的戰略協同。它並未「解決」問題，而是提供了一個讓問題「能夠被解決」的框架與操作系統。這證明了其作為「操作系統」而非「宣言」的實用價值。
     `
   }
 ];
 
 export const Whitepaper: React.FC<WhitepaperProps> = ({ theme }) => {
-  const [activeSection, setActiveSection] = useState<string>('level-0');
-  const [showScrollTop, setShowScrollTop] = useState(false);
-  const [readingProgress, setReadingProgress] = useState(0);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const isDark = theme === 'dark';
+  const [activeSection, setActiveSection] = useState('level-0');
 
-  // Scroll tracking
+  // Scroll Spy logic
   useEffect(() => {
     const handleScroll = () => {
-      // Show scroll to top button
-      setShowScrollTop(window.scrollY > 500);
+      const sections = WHITEPAPER_CONTENT.map(s => document.getElementById(s.id));
+      const scrollPosition = window.scrollY + 150; // Offset
 
-      // Calculate reading progress
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight - windowHeight;
-      const scrolled = window.scrollY;
-      const progress = (scrolled / documentHeight) * 100;
-      setReadingProgress(progress);
-
-      // Update active section
-      const sections = WHITEPAPER_CONTENT.map(s => s.id);
-      for (const sectionId of sections) {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 150 && rect.bottom >= 150) {
-            setActiveSection(sectionId);
-            break;
-          }
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = sections[i];
+        if (section && section.offsetTop <= scrollPosition) {
+          setActiveSection(WHITEPAPER_CONTENT[i].id);
+          break;
         }
       }
     };
@@ -617,27 +535,24 @@ export const Whitepaper: React.FC<WhitepaperProps> = ({ theme }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
     if (element) {
-      const yOffset = -100;
-      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-      setIsMobileMenuOpen(false);
+      window.scrollTo({
+        top: element.offsetTop - 100,
+        behavior: 'smooth'
+      });
     }
   };
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   const handleDownload = () => {
-    const fullText = WHITEPAPER_CONTENT.map(section =>
-      `${section.level}: ${section.title}\n${section.subtitle}\n\n${section.content}\n\n${'='.repeat(80)}\n\n`
+    const fullText = WHITEPAPER_CONTENT.map(section => 
+      `========================================\n${section.level}: ${section.title}\n========================================\n\n${section.content.trim()}\n\n`
     ).join('\n');
     
     const header = `元壹宇宙 × 虹靈御所 × 默默超思維系統\n完整白皮書 v5.0 (Integrity System Whitepaper)\nGenerated Date: ${new Date().toLocaleDateString()}\n\n`;
     
+    // Add BOM (\uFEFF) for UTF-8 compatibility on Windows
     const blob = new Blob(['\uFEFF' + header + fullText], { type: 'text/plain;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -649,118 +564,69 @@ export const Whitepaper: React.FC<WhitepaperProps> = ({ theme }) => {
     URL.revokeObjectURL(url);
   };
 
-  const getColorScheme = (sectionId: string) => {
-    const colors = LEVEL_COLORS[sectionId as keyof typeof LEVEL_COLORS];
-    return isDark ? colors.dark : colors.light;
-  };
-
   return (
     <div className={`min-h-screen ${isDark ? 'bg-black text-white' : 'bg-white text-gray-900'}`}>
-      {/* Reading Progress Bar */}
-      <div className="fixed top-0 left-0 right-0 h-1 bg-gray-200 dark:bg-gray-800 z-50">
-        <div 
-          className="h-full bg-gradient-to-r from-yellow-500 via-blue-500 to-purple-500 transition-all duration-300"
-          style={{ width: `${readingProgress}%` }}
-        />
-      </div>
-
-      {/* Sticky Header */}
-      <div className={`sticky top-0 z-40 border-b backdrop-blur-lg ${
-        isDark ? 'bg-black/80 border-gray-800' : 'bg-white/80 border-gray-200'
-      }`}>
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Book className={`w-6 h-6 ${isDark ? 'text-yellow-500' : 'text-yellow-600'}`} />
-            <div>
-              <h1 className="text-xl font-bold">元壹宇宙學術白皮書</h1>
-              <p className="text-xs text-gray-500">VERSION 5.0</p>
-            </div>
+      {/* Header */}
+      <div className={`border-b ${isDark ? 'border-gray-800' : 'border-gray-200'}`}>
+        <div className="max-w-7xl mx-auto px-6 py-8">
+          <div className="flex items-center gap-3 mb-4">
+            <Book className={`w-8 h-8 ${isDark ? 'text-yellow-500' : 'text-yellow-600'}`} />
+            <h1 className="text-3xl font-bold">元壹宇宙學術白皮書</h1>
           </div>
-          
-          <div className="flex items-center gap-4">
-            <a
-              href="/whitepaper/v5/元壹宇宙白皮書v5總目錄.pdf"
-              download
-              className={`hidden md:flex items-center gap-2 px-4 py-2 rounded-lg border transition-all ${
-                isDark 
-                  ? 'border-yellow-500/50 text-yellow-500 hover:bg-yellow-500/10' 
-                  : 'border-yellow-600/50 text-yellow-700 hover:bg-yellow-50'
-              }`}
-            >
-              <FileDown className="w-4 h-4" />
-              <span className="text-sm font-medium">下載 PDF</span>
-            </a>
-            
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800"
-            >
-              {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </button>
-          </div>
+          <p className={`text-lg ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+            YYUniverse Academic Whitepaper - VERSION 5.0
+          </p>
+          <p className={`mt-2 ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
+            完整性哲學 × 人機協作 × 思維系統 × 學術驗證
+          </p>
         </div>
       </div>
-
-      {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className={`fixed inset-0 top-[73px] z-30 md:hidden ${
-          isDark ? 'bg-black' : 'bg-white'
-        }`}>
-          <div className="h-full overflow-y-auto p-6">
-            <nav className="space-y-2">
-              {WHITEPAPER_CONTENT.map((section) => {
-                const colors = getColorScheme(section.id);
-                return (
-                  <button
-                    key={section.id}
-                    onClick={() => scrollToSection(section.id)}
-                    className={`w-full text-left px-4 py-3 rounded-lg transition-all ${
-                      activeSection === section.id
-                        ? `${colors.accent} ${colors.text} font-medium`
-                        : isDark
-                        ? 'hover:bg-gray-800 text-gray-400'
-                        : 'hover:bg-gray-100 text-gray-600'
-                    }`}
-                  >
-                    <div className="text-sm font-semibold mb-1">{section.level}</div>
-                    <div className="text-xs opacity-90">{section.title}</div>
-                  </button>
-                );
-              })}
-            </nav>
-          </div>
-        </div>
-      )}
 
       <div className="max-w-7xl mx-auto px-6 py-12 flex gap-12">
-        {/* Left Sidebar - Table of Contents (Desktop) */}
-        <aside className="hidden md:block w-80 flex-shrink-0 sticky top-24 self-start max-h-[calc(100vh-120px)] overflow-y-auto">
+        {/* Left Sidebar - Table of Contents */}
+        <aside className="w-80 flex-shrink-0 sticky top-24 self-start">
           <div className={`rounded-lg border ${isDark ? 'bg-gray-900 border-gray-800' : 'bg-gray-50 border-gray-200'} p-6`}>
             <div className="flex items-center gap-2 mb-6">
               <AlignLeft className="w-5 h-5" />
               <h2 className="font-semibold text-lg">目錄</h2>
             </div>
             
+            {/* PDF Download Button */}
+            <a
+              href="/whitepaper/v5/元壹宇宙白皮書v5總目錄.pdf"
+              download
+              className={`w-full mb-6 px-4 py-3 rounded-lg border-2 flex items-center justify-center gap-2 transition-all ${
+                isDark 
+                  ? 'border-yellow-500/50 text-yellow-500 hover:bg-yellow-500/10' 
+                  : 'border-yellow-600/50 text-yellow-700 hover:bg-yellow-50'
+              }`}
+            >
+              <FileDown className="w-5 h-5" />
+              <span className="font-medium">下載完整白皮書 PDF</span>
+            </a>
+
             <nav className="space-y-1">
-              {WHITEPAPER_CONTENT.map((section) => {
-                const colors = getColorScheme(section.id);
-                return (
-                  <button
-                    key={section.id}
-                    onClick={() => scrollToSection(section.id)}
-                    className={`w-full text-left px-4 py-2.5 rounded-lg transition-all border-l-4 ${
-                      activeSection === section.id
-                        ? `${colors.border} ${colors.accent} ${colors.text} font-medium`
-                        : `border-transparent ${isDark ? 'hover:bg-gray-800 text-gray-400' : 'hover:bg-gray-100 text-gray-600'}`
-                    }`}
-                  >
-                    <div className="text-sm font-semibold mb-0.5">{section.level}</div>
-                    <div className="text-xs opacity-90">{section.title}</div>
-                  </button>
-                );
-              })}
+              {WHITEPAPER_CONTENT.map((section) => (
+                <button
+                  key={section.id}
+                  onClick={() => scrollToSection(section.id)}
+                  className={`w-full text-left px-4 py-2.5 rounded-lg transition-all ${
+                    activeSection === section.id
+                      ? isDark
+                        ? 'bg-yellow-500/20 text-yellow-500 font-medium'
+                        : 'bg-yellow-100 text-yellow-700 font-medium'
+                      : isDark
+                      ? 'hover:bg-gray-800 text-gray-400'
+                      : 'hover:bg-gray-100 text-gray-600'
+                  }`}
+                >
+                  <div className="text-sm font-semibold mb-0.5">{section.level}</div>
+                  <div className="text-xs opacity-90">{section.title}</div>
+                </button>
+              ))}
             </nav>
 
+            {/* Text Download Button */}
             <button
               onClick={handleDownload}
               className={`w-full mt-6 px-4 py-3 rounded-lg border flex items-center justify-center gap-2 transition-all ${
@@ -777,91 +643,96 @@ export const Whitepaper: React.FC<WhitepaperProps> = ({ theme }) => {
 
         {/* Main Content */}
         <main className="flex-1 min-w-0">
-          {WHITEPAPER_CONTENT.map((section, index) => {
-            const colors = getColorScheme(section.id);
-            
-            return (
+          <div className="prose prose-lg max-w-none">
+            {WHITEPAPER_CONTENT.map((section, index) => (
               <section
                 key={section.id}
                 id={section.id}
-                className={`mb-20 scroll-mt-24 rounded-2xl p-8 border-l-8 ${colors.border} ${colors.bg} transition-all duration-300`}
+                className={`mb-16 scroll-mt-24 ${
+                  isDark ? 'prose-invert' : ''
+                }`}
               >
-                {/* Section Header */}
-                <div className="mb-8">
-                  <div className={`text-sm font-bold mb-2 ${colors.text} uppercase tracking-wider`}>
+                <div className={`border-l-4 pl-6 mb-8 ${
+                  isDark ? 'border-yellow-500' : 'border-yellow-600'
+                }`}>
+                  <div className={`text-sm font-semibold mb-2 ${
+                    isDark ? 'text-yellow-500' : 'text-yellow-600'
+                  }`}>
                     {section.level}
                   </div>
-                  <h2 className="text-4xl font-bold mb-3 leading-tight">
+                  <h2 className="text-3xl font-bold mb-2 mt-0">
                     {section.title}
                   </h2>
-                  <p className={`text-base italic mb-4 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                  <p className={`text-sm italic ${
+                    isDark ? 'text-gray-500' : 'text-gray-500'
+                  }`}>
                     {section.subtitle}
                   </p>
-                  {section.summary && (
-                    <div className={`p-4 rounded-lg border-l-4 ${colors.border} ${
-                      isDark ? 'bg-gray-900/50' : 'bg-white/50'
-                    }`}>
-                      <p className="text-sm leading-relaxed">{section.summary}</p>
-                    </div>
-                  )}
                 </div>
 
-                {/* Section Content */}
                 <div
-                  className={`prose prose-lg max-w-none ${isDark ? 'prose-invert' : ''}`}
+                  className={`whitespace-pre-wrap leading-relaxed ${
+                    isDark ? 'text-gray-300' : 'text-gray-700'
+                  }`}
                   dangerouslySetInnerHTML={{
                     __html: section.content
                       .split('\n')
                       .map(line => {
                         // Headers
                         if (line.startsWith('### ')) {
-                          return `<h3 class="text-2xl font-bold mt-8 mb-4 ${colors.text}">${line.slice(4)}</h3>`;
+                          return `<h3 class="text-xl font-bold mt-8 mb-4 ${isDark ? 'text-white' : 'text-gray-900'}">${line.slice(4)}</h3>`;
                         }
                         if (line.startsWith('## ')) {
-                          return `<h2 class="text-3xl font-bold mt-10 mb-5 ${colors.text}">${line.slice(3)}</h2>`;
+                          return `<h2 class="text-2xl font-bold mt-10 mb-5 ${isDark ? 'text-white' : 'text-gray-900'}">${line.slice(3)}</h2>`;
                         }
                         // Bold
-                        line = line.replace(/\*\*(.+?)\*\*/g, `<strong class="${colors.text} font-semibold">$1</strong>`);
+                        line = line.replace(/\*\*(.+?)\*\*/g, `<strong class="${isDark ? 'text-yellow-400' : 'text-yellow-700'}">$1</strong>`);
                         // Blockquotes
                         if (line.startsWith('> ')) {
-                          return `<blockquote class="border-l-4 ${colors.border} ${isDark ? 'bg-gray-900' : 'bg-white'} pl-4 py-3 my-4 italic rounded">${line.slice(2)}</blockquote>`;
+                          return `<blockquote class="border-l-4 ${isDark ? 'border-gray-700 bg-gray-900' : 'border-gray-300 bg-gray-50'} pl-4 py-2 my-4 italic">${line.slice(2)}</blockquote>`;
                         }
                         // Lists
                         if (line.match(/^\*   /)) {
-                          return `<li class="ml-8 my-2">${line.slice(4)}</li>`;
+                          return `<li class="ml-8">${line.slice(4)}</li>`;
                         }
                         if (line.match(/^\* /)) {
-                          return `<li class="ml-4 my-2">${line.slice(2)}</li>`;
+                          return `<li class="ml-4">${line.slice(2)}</li>`;
                         }
-                        // Tables
+                        // Tables (simple detection)
                         if (line.includes('|')) {
                           const cells = line.split('|').filter(c => c.trim());
                           if (line.includes('---')) {
-                            return '';
+                            return ''; // Skip separator rows
                           }
-                          const isHeader = section.content.split('\n').indexOf(line) > 0 &&
-                            section.content.split('\n')[section.content.split('\n').indexOf(line) + 1]?.includes('---');
+                          const isHeader = WHITEPAPER_CONTENT[index].content.split('\n').indexOf(line) > 0 &&
+                            WHITEPAPER_CONTENT[index].content.split('\n')[WHITEPAPER_CONTENT[index].content.split('\n').indexOf(line) + 1]?.includes('---');
                           
                           if (isHeader) {
-                            return `<tr class="${colors.accent}">${cells.map(c => `<th class="border ${isDark ? 'border-gray-700' : 'border-gray-300'} px-4 py-3 text-left font-bold">${c.trim()}</th>`).join('')}</tr>`;
+                            return `<tr class="${isDark ? 'bg-gray-800' : 'bg-gray-100'}">${cells.map(c => `<th class="border ${isDark ? 'border-gray-700' : 'border-gray-300'} px-4 py-2 text-left font-semibold">${c.trim()}</th>`).join('')}</tr>`;
                           } else {
-                            return `<tr class="${isDark ? 'hover:bg-gray-800' : 'hover:bg-gray-50'}">${cells.map(c => `<td class="border ${isDark ? 'border-gray-700' : 'border-gray-300'} px-4 py-3">${c.trim()}</td>`).join('')}</tr>`;
+                            return `<tr>${cells.map(c => `<td class="border ${isDark ? 'border-gray-700' : 'border-gray-300'} px-4 py-2">${c.trim()}</td>`).join('')}</tr>`;
                           }
                         }
                         // Paragraphs
                         if (line.trim()) {
-                          return `<p class="mb-4 leading-relaxed">${line}</p>`;
+                          return `<p class="mb-4">${line}</p>`;
                         }
                         return '';
                       })
                       .join('')
-                      .replace(/<tr>/g, '<table class="w-full my-6 border-collapse rounded-lg overflow-hidden"><tbody><tr>')
+                      .replace(/<tr>/g, '<table class="w-full my-6 border-collapse"><tbody><tr>')
                       .replace(/<\/tr>(?![\s\S]*<tr>)/g, '</tr></tbody></table>')
                   }}
                 />
+
+                {index < WHITEPAPER_CONTENT.length - 1 && (
+                  <div className={`mt-12 pt-8 border-t ${
+                    isDark ? 'border-gray-800' : 'border-gray-200'
+                  }`} />
+                )}
               </section>
-            );
-          })}
+            ))}
+          </div>
 
           {/* Footer */}
           <div className={`mt-16 pt-8 border-t ${isDark ? 'border-gray-800' : 'border-gray-200'}`}>
@@ -877,20 +748,6 @@ export const Whitepaper: React.FC<WhitepaperProps> = ({ theme }) => {
         </main>
       </div>
 
-      {/* Scroll to Top Button */}
-      {showScrollTop && (
-        <button
-          onClick={scrollToTop}
-          className={`fixed bottom-8 right-8 p-4 rounded-full shadow-lg transition-all transform hover:scale-110 z-50 ${
-            isDark 
-              ? 'bg-yellow-500 text-black hover:bg-yellow-400' 
-              : 'bg-yellow-600 text-white hover:bg-yellow-700'
-          }`}
-        >
-          <ArrowUp className="w-5 h-5" />
-        </button>
-      )}
-
       {/* Visual Background */}
       <div className="fixed inset-0 pointer-events-none opacity-5">
         <UnityField />
@@ -898,5 +755,3 @@ export const Whitepaper: React.FC<WhitepaperProps> = ({ theme }) => {
     </div>
   );
 };
-
-export default Whitepaper;
